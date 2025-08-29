@@ -68,12 +68,12 @@ function ThemeSwitch() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
+    <footer className="mt-16 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="https://github.com/ibelick/nim" target="_blank">
+        <a href="https://github.com/KOUSTAV2409" target="_blank">
           <TextLoop className="text-xs text-zinc-500">
             <span>© 2025 Koustav </span>
-            <span>Built by Koustav ❤️</span>
+            <span>Built with ❤️ by Koustav</span>
           </TextLoop>
         </a>
         <div className="text-xs text-zinc-400">

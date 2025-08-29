@@ -127,7 +127,7 @@ function MagneticSocialLink({
 export default function Personal() {
   return (
     <motion.main
-      className="space-y-24"
+      className="space-y-12"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -182,7 +182,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <div className="border-t border-zinc-100/50 dark:border-zinc-800/50 pt-24">
+        <div className="border-t border-zinc-100/50 dark:border-zinc-800/50 pt-12">
           <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -221,7 +221,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <div className="border-t border-zinc-100/50 dark:border-zinc-800/50 pt-24">
+        <div className="border-t border-zinc-100/50 dark:border-zinc-800/50 pt-12">
           <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         </div>
         <div className="flex flex-col space-y-2">

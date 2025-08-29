@@ -119,15 +119,15 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
+    link: 'https://x.com/KoustavGan39466',
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
+    link: 'https://www.linkedin.com/in/koustav-ganguly-5294151b4/',
   },
   {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    label: 'Hashnode Blog',
+    link: 'https://syntaxandsoul.hashnode.dev/'
   },
 ]
 
