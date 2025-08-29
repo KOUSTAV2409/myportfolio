@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
@@ -23,14 +23,16 @@ export const metadata: Metadata = {
   description:  'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
 };
 
-const geist = Geist({
-  variable: '--font-geist',
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta',
   subsets: ['latin'],
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 export default function RootLayout({
@@ -41,16 +43,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${plusJakarta.variable} ${jetbrainsMono.variable} bg-white text-black dark:bg-black dark:text-white tracking-tight antialiased font-sans`}
       >
         <ThemeProvider
           enableSystem={true}
           attribute="class"
           storageKey="theme"
-          defaultTheme="system"
+          defaultTheme="dark"
         >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
+          <div className="flex min-h-screen w-full flex-col">
+            <div className="relative mx-auto w-full max-w-2xl flex-1 px-6 py-16">
               <Header />
               {children}
               <Footer />

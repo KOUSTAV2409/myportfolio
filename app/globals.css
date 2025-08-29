@@ -18,6 +18,11 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  
+  :root {
+    --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+    --font-mono: var(--font-jetbrains-mono), ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
 }
 
 :root {
