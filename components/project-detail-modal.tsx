@@ -1,13 +1,8 @@
 'use client'
-import { motion } from 'motion/react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { XIcon, ExternalLinkIcon, GithubIcon } from 'lucide-react'
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
-  MorphingDialogClose,
-  MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog'
+import useClickOutside from '@/hooks/useClickOutside'
 
 type Project = {
   name: string
@@ -18,156 +13,151 @@ type Project = {
   year: string
   role: string
   tech: string
-  problem?: string
-  contributions?: string[]
-  challenges?: string
-  results?: string
+  challenge: string
+  approach: string[]
+  solution: string
+  impact: string[]
+  metrics?: string
+  clientType: string
+  timeline: string
   github?: string
 }
 
-type ProjectDetailModalProps = {
+interface ProjectDetailModalProps {
   project: Project
   children: React.ReactNode
 }
 
 export function ProjectDetailModal({ project, children }: ProjectDetailModalProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const modalRef = useClickOutside(() => setIsOpen(false))
+
   return (
-    <MorphingDialog
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.4,
-      }}
-    >
-      <MorphingDialogTrigger asChild>
+    <>
+      <div onClick={() => setIsOpen(true)} className="cursor-pointer">
         {children}
-      </MorphingDialogTrigger>
-      <MorphingDialogContainer>
-        <MorphingDialogContent className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-gray-900 p-8">
-          <div className="space-y-6">
-            {/* Header */}
-            <div className="flex items-start justify-between">
-              <div className="space-y-2">
-                <h2 className="text-2xl font-semibold text-black dark:text-white">{project.name}</h2>
-                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                  <span>{project.year}</span>
-                  <span>•</span>
-                  <span>{project.role}</span>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+                <div>
+                  <h2 className="text-xl font-medium text-black dark:text-white">{project.name}</h2>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{project.clientType} • {project.timeline}</p>
                 </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors"
+                  data-cursor-hover
+                >
+                  <XIcon className="w-5 h-5" />
+                </button>
               </div>
-              <div className="flex items-center gap-3">
-                {project.github && (
+
+              {/* Content */}
+              <div className="p-6 space-y-6">
+                {/* Challenge */}
+                <div className="space-y-2">
+                  <h3 className="text-black dark:text-white font-medium">Challenge</h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">{project.challenge}</p>
+                </div>
+
+                {/* Approach */}
+                <div className="space-y-3">
+                  <h3 className="text-black dark:text-white font-medium">Approach</h3>
+                  <div className="space-y-2">
+                    {project.approach.map((step, index) => (
+                      <div key={index} className="flex gap-3 text-sm">
+                        <span className="text-gray-500 dark:text-gray-400 font-medium">{index + 1}.</span>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{step}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Solution */}
+                <div className="space-y-2">
+                  <h3 className="text-black dark:text-white font-medium">Solution</h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">{project.solution}</p>
+                </div>
+
+                {/* Impact */}
+                <div className="space-y-3">
+                  <h3 className="text-black dark:text-white font-medium">Impact</h3>
+                  <div className="space-y-2">
+                    {project.impact.map((impact, index) => (
+                      <div key={index} className="flex gap-3 text-sm">
+                        <span className="text-gray-400 dark:text-gray-600">•</span>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{impact}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {project.metrics && (
+                    <div className="mt-3 p-3 bg-gray-100 dark:bg-gray-900 rounded-lg">
+                      <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">{project.metrics}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Tech Stack */}
+                <div className="space-y-2">
+                  <h3 className="text-black dark:text-white font-medium">Tech Stack</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.split(', ').map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded text-xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
                   <a
-                    href={project.github}
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm font-medium"
+                    data-cursor-hover
                   >
-                    <GithubIcon className="h-4 w-4" />
+                    <ExternalLinkIcon className="w-4 h-4" />
+                    View Live
                   </a>
-                )}
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                >
-                  <ExternalLinkIcon className="h-4 w-4" />
-                </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors text-sm font-medium"
+                      data-cursor-hover
+                    >
+                      <GithubIcon className="w-4 h-4" />
+                      Code
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-
-            {/* Video */}
-            <div className="rounded-xl overflow-hidden">
-              <video
-                src={project.video}
-                autoPlay
-                loop
-                muted
-                className="w-full aspect-video"
-              />
-            </div>
-
-            {/* Description */}
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              {project.description}
-            </p>
-
-            {/* Tech Stack */}
-            <div className="space-y-2">
-              <h3 className="font-medium text-black dark:text-white">Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.split(', ').map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Problem */}
-            {project.problem && (
-              <div className="space-y-2">
-                <h3 className="font-medium text-black dark:text-white">Problem</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {project.problem}
-                </p>
-              </div>
-            )}
-
-            {/* Contributions */}
-            {project.contributions && (
-              <div className="space-y-2">
-                <h3 className="font-medium text-black dark:text-white">Key Contributions</h3>
-                <ul className="space-y-2">
-                  {project.contributions.map((contribution, index) => (
-                    <li key={index} className="flex items-start gap-3 text-gray-600 dark:text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0" />
-                      {contribution}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Challenges */}
-            {project.challenges && (
-              <div className="space-y-2">
-                <h3 className="font-medium text-black dark:text-white">Challenges & Solutions</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {project.challenges}
-                </p>
-              </div>
-            )}
-
-            {/* Results */}
-            {project.results && (
-              <div className="space-y-2">
-                <h3 className="font-medium text-black dark:text-white">Results & Impact</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {project.results}
-                </p>
-              </div>
-            )}
-          </div>
-        </MorphingDialogContent>
-        <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white dark:bg-gray-900 p-2 shadow-lg"
-          variants={{
-            initial: { opacity: 0 },
-            animate: {
-              opacity: 1,
-              transition: { delay: 0.3, duration: 0.1 },
-            },
-            exit: { opacity: 0, transition: { duration: 0 } },
-          }}
-        >
-          <XIcon className="h-5 w-5 text-gray-500" />
-        </MorphingDialogClose>
-      </MorphingDialogContainer>
-    </MorphingDialog>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

@@ -5,6 +5,8 @@ import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from "@vercel/analytics/next"
+import { CustomCursor } from '@/components/ui/custom-cursor'
+import { FloatingCTA } from '@/components/ui/floating-cta'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -59,6 +61,7 @@ export default function RootLayout({
               <Analytics />
               <Footer />
             </div>
+            <FloatingCTA />
           </div>
         </ThemeProvider>
       </body>
