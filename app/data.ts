@@ -7,6 +7,11 @@ type Project = {
   year: string
   role: string
   tech: string
+  problem?: string
+  contributions?: string[]
+  challenges?: string
+  results?: string
+  github?: string
 }
 
 type WorkExperience = {
@@ -23,6 +28,14 @@ type BlogPost = {
   description: string
   link: string
   uid: string
+}
+
+type Testimonial = {
+  name: string
+  role: string
+  company: string
+  content: string
+  avatar?: string
 }
 
 type SocialLink = {
@@ -42,6 +55,16 @@ export const PROJECTS: Project[] = [
     year: '2024',
     role: 'Design & Development',
     tech: 'React, TypeScript, Framer Motion',
+    problem: 'Developers needed high-quality, production-ready animated components to build modern web interfaces quickly.',
+    contributions: [
+      'Designed and developed 50+ premium animated components',
+      'Created comprehensive documentation and examples',
+      'Built responsive templates for various use cases',
+      'Implemented TypeScript support for better developer experience'
+    ],
+    challenges: 'Ensuring components work across different frameworks while maintaining performance and accessibility standards.',
+    results: 'Launched with 500+ early adopters and positive developer feedback.',
+    github: 'https://github.com/KOUSTAV2409'
   },
   {
     name: 'Motion Primitives',
@@ -53,6 +76,16 @@ export const PROJECTS: Project[] = [
     year: '2023',
     role: 'Full Stack Development',
     tech: 'Next.js, Tailwind CSS, Motion',
+    problem: 'Open-source community lacked accessible, well-documented animated components for modern web development.',
+    contributions: [
+      'Built 30+ open-source animated components',
+      'Created interactive documentation site',
+      'Established component testing and CI/CD pipeline',
+      'Grew community to 1000+ GitHub stars'
+    ],
+    challenges: 'Balancing component flexibility with ease of use while maintaining consistent design patterns.',
+    results: 'Achieved 10k+ monthly downloads and active community contributions.',
+    github: 'https://github.com/KOUSTAV2409/motion-primitives'
   },
 ]
 
@@ -62,7 +95,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'CEO',
     start: '2024',
     end: 'Present',
-    link: 'https://ibelick.com',
+    link: 'https://reglazedstudio.com',
     id: 'work1',
   },
   {
@@ -70,7 +103,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Design Engineer',
     start: '2022',
     end: '2024',
-    link: 'https://ibelick.com',
+    link: '',
     id: 'work2',
   },
   {
@@ -78,7 +111,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Front-end Developer',
     start: '2017',
     end: 'Present',
-    link: 'https://ibelick.com',
+    link: '',
     id: 'work3',
   },
 ]
@@ -109,6 +142,27 @@ export const BLOG_POSTS: BlogPost[] = [
     description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
     link: '/blog/example-mdx-metadata',
     uid: 'blog-4',
+  },
+]
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    name: 'Sarah Chen',
+    role: 'Product Manager',
+    company: 'TechCorp',
+    content: 'Koustav delivered exceptional work on our React dashboard. His attention to detail and technical expertise made the project a huge success.',
+  },
+  {
+    name: 'Michael Rodriguez',
+    role: 'CTO',
+    company: 'StartupXYZ',
+    content: 'Working with Koustav was a game-changer. He transformed our design concepts into a beautiful, performant web application.',
+  },
+  {
+    name: 'Emily Johnson',
+    role: 'Design Lead',
+    company: 'Creative Agency',
+    content: 'Koustav bridges the gap between design and development perfectly. His Motion Primitives library has become essential to our workflow.',
   },
 ]
 

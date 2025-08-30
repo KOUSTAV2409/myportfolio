@@ -10,6 +10,7 @@ import {
   MorphingDialogClose,
   MorphingDialogContainer,
 } from '@/components/ui/morphing-dialog'
+import { ProjectDetailModal } from '@/components/project-detail-modal'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
@@ -19,6 +20,7 @@ import {
   EMAIL,
   SOCIAL_LINKS,
   SKILLS,
+  TESTIMONIALS,
 } from './data'
 
 const VARIANTS_CONTAINER = {
@@ -137,18 +139,41 @@ export default function HomePage() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <div className="space-y-4">
-          <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
-            I'm a TypeScript enthusiast and I use modern frameworks. I love building tools for 
-            developers and generally care too much about attention to detail.
-          </p>
-          <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-            <span className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-              5+ years experience
-            </span>
-            <span>•</span>
-            <span>50+ projects delivered</span>
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
+              I'm a TypeScript enthusiast and I use modern frameworks. I love building tools for 
+              developers and generally care too much about attention to detail.
+            </p>
+            <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+              <span className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                Available for new projects
+              </span>
+              <span>•</span>
+              <span>5+ years experience</span>
+              <span>•</span>
+              <span>50+ projects delivered</span>
+            </div>
+          </div>
+          
+          {/* Prominent CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+            <a 
+              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
+              href={`mailto:${EMAIL}`}
+            >
+              Let's work together
+              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+              </svg>
+            </a>
+            <a 
+              href="#projects"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 font-medium text-sm"
+            >
+              View my work
+            </a>
           </div>
         </div>
       </motion.section>
@@ -180,28 +205,38 @@ export default function HomePage() {
       >
         <h3 className="text-black dark:text-white text-lg font-medium mb-4">Work Experience</h3>
         <div className="space-y-3">
-          {WORK_EXPERIENCE.map((work) => (
-            <a
-              key={work.id}
-              className="group flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200"
-              href={work.link}
-              target="_blank"
-            >
-              <div className="flex-1">
-                <h4 className="text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-colors duration-200">
-                  {work.title}
-                </h4>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{work.company}</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-gray-500 dark:text-gray-400 text-sm">{work.start} - {work.end}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300">
-                  <path d="M7 17L17 7"/>
-                  <path d="M7 7h10v10"/>
-                </svg>
-              </div>
-            </a>
-          ))}
+          {WORK_EXPERIENCE.map((work) => {
+            const Component = work.link ? 'a' : 'div'
+            const linkProps = work.link ? {
+              href: work.link,
+              target: "_blank",
+              rel: "noopener noreferrer"
+            } : {}
+            
+            return (
+              <Component
+                key={work.id}
+                className={`group flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 ${work.link ? 'hover:bg-gray-200/50 dark:hover:bg-gray-800/50 cursor-pointer' : ''} transition-colors duration-200`}
+                {...linkProps}
+              >
+                <div className="flex-1">
+                  <h4 className={`text-black dark:text-white ${work.link ? 'group-hover:text-gray-600 dark:group-hover:text-gray-200' : ''} transition-colors duration-200`}>
+                    {work.title}
+                  </h4>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{work.company}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-gray-500 dark:text-gray-400 text-sm">{work.start} - {work.end}</span>
+                  {work.link && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300">
+                      <path d="M7 17L17 7"/>
+                      <path d="M7 7h10v10"/>
+                    </svg>
+                  )}
+                </div>
+              </Component>
+            )
+          })}
         </div>
       </motion.section>
 
@@ -236,15 +271,16 @@ export default function HomePage() {
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
+        id="projects"
       >
         <h3 className="text-black dark:text-white text-lg font-medium mb-4">Selected Projects</h3>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project) => (
-            <div key={project.name} className="space-y-3 group">
+            <div key={project.name} className="space-y-4 group">
               <div className="relative rounded-2xl bg-gray-100/40 dark:bg-gray-900/40 p-1 ring-1 ring-gray-200/50 dark:ring-gray-800/50 ring-inset hover:ring-gray-300/50 dark:hover:ring-gray-700/50 transition-all duration-300">
                 <ProjectVideo src={project.video} />
               </div>
-              <div className="px-1 space-y-2">
+              <div className="px-1 space-y-3">
                 <div className="flex items-center justify-between">
                   <a
                     className="font-base group relative inline-block font-[450] text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-black dark:focus-visible:outline-white focus-visible:outline-offset-2 rounded-sm"
@@ -252,7 +288,7 @@ export default function HomePage() {
                     target="_blank"
                   >
                     {project.name}
-                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-white transition-all duration-200 group-hover:max-w-full"></span>
+                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-black dark:bg-white transition-all duration-200 group-hover:max-w-full"></span>
                   </a>
                   <span className="text-xs text-gray-500 dark:text-gray-400">{project.year}</span>
                 </div>
@@ -263,6 +299,51 @@ export default function HomePage() {
                   <span>{project.role}</span>
                   <span>•</span>
                   <span>{project.tech}</span>
+                </div>
+                
+                {/* Learn More Button */}
+                <ProjectDetailModal project={project}>
+                  <button className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 group/btn">
+                    Learn more
+                    <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:translate-x-0.5 transition-transform duration-200">
+                      <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+                    </svg>
+                  </button>
+                </ProjectDetailModal>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Testimonials Section */}
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="text-black dark:text-white text-lg font-medium mb-4">What people say</h3>
+        <div className="space-y-3">
+          {TESTIMONIALS.map((testimonial, index) => (
+            <div
+              key={index}
+              className="group py-4 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200"
+            >
+              <div className="space-y-3">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-normal italic">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-black dark:text-white text-sm">{testimonial.name}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                      {testimonial.role} at {testimonial.company}
+                    </p>
+                  </div>
+                  <div className="w-4 h-4 text-gray-400 dark:text-gray-600 opacity-60">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,30 +357,19 @@ export default function HomePage() {
         transition={TRANSITION_SECTION}
         className="pt-12 border-t border-gray-200 dark:border-gray-800"
       >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Let's work together</h3>
+        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Connect with me</h3>
         <div className="space-y-4">
           <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
-            I'm currently accepting new projects and would love to collaborate with you.
+            Let's discuss your next project or just say hello.
           </p>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <a 
-              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
-              href={`mailto:${EMAIL}`}
-            >
-              Get in touch
-              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-            </a>
-            <div className="flex items-center gap-3">
-              <span className="text-gray-500 dark:text-gray-400 font-medium text-sm">or find me on</span>
-              <div className="flex items-center gap-2">
-                {SOCIAL_LINKS.slice(0, 3).map((link) => (
-                  <MagneticSocialLink key={link.label} link={link.link}>
-                    {link.label}
-                  </MagneticSocialLink>
-                ))}
-              </div>
+          <div className="flex items-center gap-3">
+            <span className="text-gray-500 dark:text-gray-400 font-medium text-sm">Find me on</span>
+            <div className="flex items-center gap-2">
+              {SOCIAL_LINKS.map((link) => (
+                <MagneticSocialLink key={link.label} link={link.link}>
+                  {link.label}
+                </MagneticSocialLink>
+              ))}
             </div>
           </div>
         </div>
