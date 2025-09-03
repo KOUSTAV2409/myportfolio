@@ -127,8 +127,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'Freelance',
-    title: 'Front-end Developer',
-    start: '2017',
+    title: 'Technical Content Writter',
+    start: '2021',
     end: 'Present',
     link: '',
     id: 'work3',
