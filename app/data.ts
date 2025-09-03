@@ -149,9 +149,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     ]
   },
   {
-    company: 'Various Clients',
-    title: 'Front-end Developer',
-    start: 'Jun 2017',
+
+    company: 'Freelance',
+    title: 'Technical Content Writter',
+    start: '2021',
     end: 'Present',
     location: 'Remote',
     employmentType: 'Contract',

@@ -199,7 +199,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
             <a 
               className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
-              href="https://cal.com/your-username/strategic-consultation"
+              href="https://cal.com/iamk-xyz/30min"
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-hover
