@@ -248,9 +248,9 @@ export default function HomePage() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Work Experience</h3>
-        <div className="space-y-3">
-          {WORK_EXPERIENCE.map((work) => {
+        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Experience</h3>
+        <div className="space-y-0">
+          {WORK_EXPERIENCE.map((work, index) => {
             const Component = work.link ? 'a' : 'div'
             const linkProps = work.link ? {
               href: work.link,
@@ -261,23 +261,40 @@ export default function HomePage() {
             return (
               <Component
                 key={work.id}
-                className={`group flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 ${work.link ? 'hover:bg-gray-200/50 dark:hover:bg-gray-800/50 cursor-pointer' : ''} transition-colors duration-200`}
+                className={`group flex gap-3 py-3 ${index !== WORK_EXPERIENCE.length - 1 ? 'border-b border-gray-100 dark:border-gray-800/30' : ''} ${work.link ? 'hover:bg-gray-50/80 dark:hover:bg-gray-900/20 cursor-pointer' : ''} transition-all duration-200 -mx-2 px-2 rounded-lg`}
                 {...linkProps}
               >
-                <div className="flex-1">
-                  <h4 className={`text-black dark:text-white ${work.link ? 'group-hover:text-gray-600 dark:group-hover:text-gray-200' : ''} transition-colors duration-200`}>
-                    {work.title}
-                  </h4>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">{work.company}</p>
+                {/* Company Logo */}
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium text-xs">
+                      {work.company.charAt(0)}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">{work.start} - {work.end}</span>
-                  {work.link && (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300">
-                      <path d="M7 17L17 7"/>
-                      <path d="M7 7h10v10"/>
-                    </svg>
-                  )}
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1 min-w-0">
+                      <h4 className={`font-medium text-black dark:text-white text-sm leading-tight truncate ${work.link ? 'group-hover:text-blue-600 dark:group-hover:text-blue-400' : ''} transition-colors duration-200`}>
+                        {work.title}
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm truncate">{work.company}</p>
+                      <p className="text-gray-500 dark:text-gray-500 text-xs mt-0.5">
+                        {work.start} - {work.end}
+                        {work.location && ` · ${work.location}`}
+                      </p>
+                    </div>
+                    {work.link && (
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:text-blue-500">
+                          <path d="M7 17L17 7"/>
+                          <path d="M7 7h10v10"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </Component>
             )
