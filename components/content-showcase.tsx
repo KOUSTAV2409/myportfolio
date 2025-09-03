@@ -6,10 +6,15 @@ import { CONTENT_ITEMS, CONTENT_CATEGORIES, FEATURED_CONTENT, type ContentCatego
 
 export function ContentShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all')
+  const [showAll, setShowAll] = useState(false)
   
   const filteredContent = selectedCategory === 'all' 
     ? CONTENT_ITEMS 
     : CONTENT_ITEMS.filter(item => item.category === selectedCategory)
+
+  // Show only first 4 items by default, all when showAll is true
+  const displayedContent = showAll ? filteredContent : filteredContent.slice(0, 4)
+  const hasMoreContent = filteredContent.length > 4
 
   const isInternalLink = (link: string) => link.startsWith('/')
 
@@ -92,7 +97,10 @@ export function ContentShowcase() {
         
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => setSelectedCategory('all')}
+            onClick={() => {
+              setSelectedCategory('all')
+              setShowAll(false)
+            }}
             className={`px-3 py-1.5 text-sm rounded-lg transition-colors duration-200 ${
               selectedCategory === 'all'
                 ? 'bg-black text-white dark:bg-white dark:text-black'
@@ -105,7 +113,10 @@ export function ContentShowcase() {
           {Object.entries(CONTENT_CATEGORIES).map(([key, category]) => (
             <button
               key={key}
-              onClick={() => setSelectedCategory(key as ContentCategory)}
+              onClick={() => {
+                setSelectedCategory(key as ContentCategory)
+                setShowAll(false)
+              }}
               className={`px-3 py-1.5 text-sm rounded-lg transition-colors duration-200 ${
                 selectedCategory === key
                   ? 'bg-black text-white dark:bg-white dark:text-black'
@@ -122,8 +133,14 @@ export function ContentShowcase() {
       {/* Content List */}
       <div className="space-y-3">
         <AnimatePresence mode="wait">
-          {filteredContent.map((item, index) => (
-            <motion.div key={item.id}>
+          {displayedContent.map((item, index) => (
+            <motion.div 
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ delay: index * 0.05 }}
+            >
               <LinkWrapper item={item}>
                 <div
                   className="flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200"
@@ -152,6 +169,38 @@ export function ContentShowcase() {
             </motion.div>
           ))}
         </AnimatePresence>
+        
+        {/* Show More/Less Button */}
+        {hasMoreContent && (
+          <motion.div 
+            className="pt-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="w-full py-3 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 rounded-lg transition-all duration-300 border border-gray-200/50 dark:border-gray-800/50 hover:border-gray-300/50 dark:hover:border-gray-700/50"
+              data-cursor-hover
+            >
+              {showAll ? (
+                <span className="flex items-center justify-center gap-2">
+                  Show Less
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 15l-6-6-6 6"/>
+                  </svg>
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  Show {filteredContent.length - 4} More Articles
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </span>
+              )}
+            </button>
+          </motion.div>
+        )}
       </div>
     </div>
   )
