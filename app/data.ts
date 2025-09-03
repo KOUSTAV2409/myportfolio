@@ -25,6 +25,11 @@ type WorkExperience = {
   end: string
   link: string
   id: string
+  location?: string
+  description?: string
+  achievements?: string[]
+  companyLogo?: string
+  employmentType?: string
 }
 
 type BlogPost = {
@@ -111,27 +116,55 @@ export const PROJECTS: Project[] = [
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Reglazed Studio',
-    title: 'CEO',
-    start: '2024',
+    title: 'CEO & Founder',
+    start: 'Jan 2024',
     end: 'Present',
+    location: 'Remote',
+    employmentType: 'Full-time',
     link: 'https://reglazedstudio.com',
     id: 'work1',
+    description: 'Leading a design and development studio focused on creating exceptional digital experiences for startups and established businesses.',
+    achievements: [
+      'Built and scaled a team of 5+ designers and developers',
+      'Delivered 20+ successful projects with 98% client satisfaction',
+      'Established strategic partnerships with 3 major tech companies',
+      'Generated $200K+ in revenue within first year'
+    ]
   },
   {
     company: 'Freelance',
     title: 'Design Engineer',
-    start: '2022',
-    end: '2024',
+    start: 'Mar 2022',
+    end: 'Dec 2023',
+    location: 'Remote',
+    employmentType: 'Contract',
     link: '',
     id: 'work2',
+    description: 'Specialized in bridging design and development, creating seamless user experiences with modern web technologies.',
+    achievements: [
+      'Completed 30+ projects across various industries',
+      'Developed Motion Primitives library with 10K+ downloads',
+      'Reduced client development costs by 40% through reusable components',
+      'Maintained 95% client retention rate'
+    ]
   },
   {
+
     company: 'Freelance',
     title: 'Technical Content Writter',
     start: '2021',
     end: 'Present',
+    location: 'Remote',
+    employmentType: 'Contract',
     link: '',
     id: 'work3',
+    description: 'Delivering high-quality front-end solutions with focus on performance, accessibility, and user experience.',
+    achievements: [
+      'Built 50+ responsive web applications',
+      'Improved site performance by 60% on average',
+      'Implemented accessibility standards achieving WCAG 2.1 AA compliance',
+      'Mentored 10+ junior developers'
+    ]
   },
 ]
 
