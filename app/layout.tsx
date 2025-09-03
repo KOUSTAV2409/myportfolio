@@ -7,6 +7,8 @@ import { ThemeProvider } from 'next-themes'
 import { Analytics } from "@vercel/analytics/next"
 import { CustomCursor } from '@/components/ui/custom-cursor'
 import { FloatingCTA } from '@/components/ui/floating-cta'
+import Script from 'next/script'
+import { GA_TRACKING_ID } from '@/lib/analytics'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -45,6 +47,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {GA_TRACKING_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_TRACKING_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body
         className={`${plusJakarta.variable} ${jetbrainsMono.variable} bg-white text-black dark:bg-black dark:text-white tracking-tight antialiased font-sans`}
       >

@@ -14,6 +14,8 @@ import { ProjectDetailModal } from '@/components/project-detail-modal'
 import { ContentShowcase } from '@/components/content-showcase'
 import { SocialProofShowcase } from '@/components/social-proof-showcase'
 import { AnimatedBackground } from '@/components/ui/animated-background'
+import { AnalyticsWrapper } from '@/components/analytics-wrapper'
+import { trackCTAClick, trackSocialClick, trackProjectView } from '@/lib/analytics'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
@@ -129,12 +131,13 @@ function MagneticSocialLink({
 
 export default function HomePage() {
   return (
-    <motion.main
-      className="space-y-12"
-      variants={VARIANTS_CONTAINER}
-      initial="hidden"
-      animate="visible"
-    >
+    <AnalyticsWrapper>
+      <motion.main
+        className="space-y-12"
+        variants={VARIANTS_CONTAINER}
+        initial="hidden"
+        animate="visible"
+      >
       {/* About Section */}
       <motion.section
         variants={VARIANTS_SECTION}
@@ -469,7 +472,8 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
-    </motion.main>
+      </motion.main>
+    </AnalyticsWrapper>
   )
 }
 
