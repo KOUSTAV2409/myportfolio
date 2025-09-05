@@ -138,90 +138,120 @@ export default function HomePage() {
         initial="hidden"
         animate="visible"
       >
-      {/* About Section */}
+      {/* Hero Section */}
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <div className="space-y-8 text-center">
+          {/* Main Value Proposition */}
+          <div className="space-y-4">
+            <h1 className="text-3xl sm:text-4xl font-semibold text-black dark:text-white leading-tight tracking-tight">
+              I help startups make the right 
+              <span className="text-gray-500 dark:text-gray-400"> technical decisions</span>
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto font-normal">
+              Strategic technical consulting that bridges code and business needs. 
+              From architecture to team dynamics.
+            </p>
+          </div>
+
+          {/* Availability & Social Proof */}
+          <div className="flex items-center justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2 text-green-600 dark:text-green-400 font-medium">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>Available for new projects</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+              <span>50+ projects delivered</span>
+            </div>
+          </div>
+
+          {/* Primary CTA */}
+          <div className="pt-4">
+            <a 
+              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105" 
+              href="https://cal.com/iamk-xyz/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-hover
+              onClick={() => trackCTAClick('consultation', 'hero')}
+            >
+              Let's discuss your challenges
+              <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+              </svg>
+            </a>
+          </div>
+
+          {/* Secondary Action */}
+          <div className="pt-2">
+            <button 
+              onClick={() => {
+                const projectsSection = document.getElementById('projects')
+                projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300 text-sm font-medium underline underline-offset-4 decoration-gray-300 dark:decoration-gray-600 hover:decoration-black dark:hover:decoration-white"
+              data-cursor-hover
+            >
+              or see case studies first
+            </button>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About Details Section */}
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
         <div className="space-y-6">
-          <div className="space-y-4">
-            <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
-              I help startups and businesses solve complex problems by bridging the gap between 
-              <span className="text-black dark:text-white font-medium"> technology and human needs</span>. 
-              Through deep conversations and strategic thinking, I guide teams toward decisions that work for both their code and their people.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                <span>Technical Strategy</span>
+          {/* Service Areas */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
+              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               </div>
-              <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400">
-                <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                <span>Business Analysis</span>
-              </div>
-              <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-                <span>Available for projects</span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Value Propositions */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-            <div className="space-y-2">
-              <h4 className="text-black dark:text-white font-medium text-sm">For Startups</h4>
+              <h4 className="text-black dark:text-white font-medium text-sm">Technical Strategy</h4>
               <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Navigate technical decisions with confidence. From architecture choices to team dynamics.
+                Architecture decisions that scale with your business
               </p>
             </div>
-            <div className="space-y-2">
-              <h4 className="text-black dark:text-white font-medium text-sm">For Businesses</h4>
+            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
+              <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto">
+                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+              </div>
+              <h4 className="text-black dark:text-white font-medium text-sm">Business Analysis</h4>
               <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Transform complex problems into clear solutions through strategic thinking and execution.
+                Transform complex problems into clear solutions
+              </p>
+            </div>
+            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
+              <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <h4 className="text-black dark:text-white font-medium text-sm">Team Dynamics</h4>
+              <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
+                Bridge the gap between code and people
               </p>
             </div>
           </div>
 
           {/* Trust Signals */}
-          <div className="flex items-center gap-6 py-3 text-xs text-gray-500 dark:text-gray-400">
+          <div className="flex items-center justify-center gap-8 py-4 text-xs text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
               <span>98% Client Satisfaction</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              <span>50+ Projects Delivered</span>
+              <span>10K+ Downloads</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-              <span>10K+ Downloads</span>
+              <span>Featured in 5+ Publications</span>
             </div>
-          </div>
-          
-          {/* Prominent CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
-            <a 
-              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
-              href="https://cal.com/iamk-xyz/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-hover
-            >
-              Let's discuss your challenges
-              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-            </a>
-            <button 
-              onClick={() => {
-                const projectsSection = document.getElementById('projects')
-                projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 font-medium text-sm"
-              data-cursor-hover
-            >
-              See case studies
-            </button>
           </div>
         </div>
       </motion.section>
