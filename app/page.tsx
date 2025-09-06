@@ -199,6 +199,34 @@ export default function HomePage() {
               or see case studies first
             </button>
           </div>
+
+          {/* Recent Work Highlight */}
+          <div className="pt-6 border-t border-gray-100 dark:border-gray-800/30">
+            <div className="text-center space-y-3">
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide uppercase">
+                Recent Work
+              </p>
+              <div className="flex items-center justify-center gap-4 text-sm">
+                <a 
+                  href="https://pro.motion-primitives.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
+                >
+                  Motion Primitives Pro
+                </a>
+                <span className="text-gray-300 dark:text-gray-700">•</span>
+                <a 
+                  href="https://reglazedstudio.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
+                >
+                  Reglazed Studio
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </motion.section>
 
