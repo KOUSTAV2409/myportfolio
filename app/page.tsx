@@ -24,6 +24,7 @@ import {
   SOCIAL_LINKS,
   SKILLS,
   TESTIMONIALS,
+  CURRENT_STATUS,
 } from './data'
 
 const VARIANTS_CONTAINER = {

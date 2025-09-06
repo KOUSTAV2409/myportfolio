@@ -22,10 +22,38 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: 'Koustav Ganguly - Fullstack Developer',
+    default: 'Koustav Ganguly | Strategic Technical Consulting',
     template: '%s | Koustav Ganguly'
   },
-  description:  'Fullstack Developer, UI designer & CS Explorer. TypeScript enthusiast building refined web experiences.',
+  description: 'Strategic technical consulting that bridges code and business needs. Helping startups make the right technical decisions from Kolkata, India.',
+  keywords: ['Technical Consulting', 'Fullstack Developer', 'React', 'Next.js', 'TypeScript', 'Strategic Planning', 'Kolkata'],
+  authors: [{ name: 'Koustav Ganguly' }],
+  creator: 'Koustav Ganguly',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://nim-fawn.vercel.app/',
+    title: 'Koustav Ganguly | Strategic Technical Consulting',
+    description: 'Strategic technical consulting that bridges code and business needs. Available for new projects.',
+    siteName: 'Koustav Ganguly Portfolio',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Koustav Ganguly | Strategic Technical Consulting',
+    description: 'Strategic technical consulting that bridges code and business needs. Available for new projects.',
+    creator: '@KoustavGan39466',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -80,10 +108,18 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="dark"
         >
+          <a 
+            href="#main-content" 
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded-md"
+          >
+            Skip to main content
+          </a>
           <div className="flex min-h-screen w-full flex-col">
             <div className="relative mx-auto w-full max-w-2xl flex-1 px-6 py-16">
               <Header />
-              {children}
+              <main id="main-content">
+                {children}
+              </main>
               <Analytics />
               <Footer />
             </div>

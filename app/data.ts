@@ -249,3 +249,9 @@ export const SKILLS = [
 ]
 
 export const EMAIL = 'koustavganguly24@gmail.com'
+
+export const CURRENT_STATUS = {
+  text: 'Building strategic consulting framework',
+  date: 'Sep 2025',
+  link: 'https://x.com/KoustavGan39466'
+}
