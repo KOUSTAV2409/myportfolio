@@ -170,9 +170,9 @@ export default function HomePage() {
           </div>
 
           {/* Primary CTA */}
-          <div className="pt-4">
-            <a 
-              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105" 
+          <div className="pt-1 -mt-1">
+            <a
+              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
               href="https://cal.com/iamk-xyz/30min"
               target="_blank"
               rel="noopener noreferrer"
