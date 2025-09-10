@@ -115,37 +115,69 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO & Founder',
-    start: 'Jan 2024',
+    company: 'EasyGoDocs - Open Source Project',
+    title: 'Founder and Open Source Contributor',
+    start: 'July 2025',
     end: 'Present',
     location: 'Remote',
     employmentType: 'Full-time',
-    link: 'https://reglazedstudio.com',
+    link: 'https://easygodocs.vercel.app/',
     id: 'work1',
-    description: 'Leading a design and development studio focused on creating exceptional digital experiences for startups and established businesses.',
+    description: 'Modern Solutions to Master Documentation.Documentation should be as easy as writing code. EasyGoDocs makes it possible.',
     achievements: [
-      'Built and scaled a team of 5+ designers and developers',
-      'Delivered 20+ successful projects with 98% client satisfaction',
-      'Established strategic partnerships with 3 major tech companies',
-      'Generated $200K+ in revenue within first year'
+      'Project listed on GSsoC',
+      'Got some awsome contributors for this open source project',
+      'Published some beutiful and short docs on different technical topics so that developers and learners can get it very easily '
+      
     ]
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
-    start: 'Mar 2022',
-    end: 'Dec 2023',
+    company: 'BeliefPro',
+    title: 'Fullstack Developer',
+    start: 'May 2025',
+    end: 'Present',
     location: 'Remote',
     employmentType: 'Contract',
-    link: '',
+    link: 'https://beliefpro.com/',
     id: 'work2',
-    description: 'Specialized in bridging design and development, creating seamless user experiences with modern web technologies.',
+    description: 'Working as a fullstack web developer and product designer',
     achievements: [
-      'Completed 30+ projects across various industries',
-      'Developed Motion Primitives library with 10K+ downloads',
-      'Reduced client development costs by 40% through reusable components',
-      'Maintained 95% client retention rate'
+      'Built sevaral internal tools for the organization',
+      'Handle clients of the company to and provided relevent service on behalf of belief ',
+      'Mentoring developer of the organization to polish their skills in next level.',
+      
+    ]
+  },
+  {
+    company: 'Sisyphus Infotech',
+    title: 'Fullstack Developer and Team Lead Intern',
+    start: 'March 2025',
+    end: 'May 2025',
+    location: 'Remote',
+    employmentType: 'Contract',
+    link: 'https://sisyphusinfotech.com/',
+    id: 'work3',
+    description: 'Working as a fullstack web developer and product designer',
+    achievements: [
+      'Built 1 project for the company',
+      'Lead the whole team for 3+ month to complete and deliver the project ',
+      
+      
+    ]
+  },
+  {
+
+    company: 'Syntax and Soul',
+    title: 'Technical Content Writter',
+    start: 'Jan 2025',
+    end: 'Present',
+    location: 'Remote',
+    employmentType: 'Own Hashnode Writting Platform',
+    link: 'https://syntaxandsoul.hashnode.dev/',
+    id: 'work4',
+    description: 'Writting about different contents related computer science , programming and different technologies',
+    achievements: [
+      'Started a javascript article series'
     ]
   },
   {
@@ -157,7 +189,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     location: 'Remote',
     employmentType: 'Contract',
     link: '',
-    id: 'work3',
+    id: 'work5',
     description: 'Delivering high-quality front-end solutions with focus on performance, accessibility, and user experience.',
     achievements: [
       'Built 50+ responsive web applications',
