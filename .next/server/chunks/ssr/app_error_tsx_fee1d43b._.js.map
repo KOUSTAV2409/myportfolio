@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///home/koustav/Desktop/myportfolio/app/error.tsx"],"sourcesContent":["'use client'\n\nexport default function Error({\n  error,\n  reset,\n}: {\n  error: Error & { digest?: string }\n  reset: () => void\n}) {\n  return (\n    <div className=\"flex min-h-screen items-center justify-center\">\n      <div className=\"text-center\">\n        <h2 className=\"text-2xl font-bold mb-4\">Something went wrong!</h2>\n        <button\n          className=\"px-4 py-2 bg-black text-white dark:bg-white dark:text-black rounded hover:opacity-80 transition-opacity\"\n          onClick={() => reset()}\n        >\n          Try again\n        </button>\n      </div>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;AAAA;;AAEe,SAAS,MAAM,EAC5B,KAAK,EACL,KAAK,EAIN;IACC,qBACE,6WAAC;QAAI,WAAU;kBACb,cAAA,6WAAC;YAAI,WAAU;;8BACb,6WAAC;oBAAG,WAAU;8BAA0B;;;;;;8BACxC,6WAAC;oBACC,WAAU;oBACV,SAAS,IAAM;8BAChB;;;;;;;;;;;;;;;;;AAMT","debugId":null}}]
-}
