@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void
+    gtag: (...args: unknown[]) => void
   }
 }
 
@@ -14,7 +14,7 @@ export const pageview = (url: string) => {
   }
 }
 
-export const event = (action: string, parameters?: Record<string, any>) => {
+export const event = (action: string, parameters?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, parameters)
   }

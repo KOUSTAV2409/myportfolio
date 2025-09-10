@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
 import { XIcon } from 'lucide-react'
-import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
   MorphingDialog,
@@ -13,18 +12,12 @@ import {
 import { ProjectDetailModal } from '@/components/project-detail-modal'
 import { ContentShowcase } from '@/components/content-showcase'
 import { SocialProofShowcase } from '@/components/social-proof-showcase'
-import { AnimatedBackground } from '@/components/ui/animated-background'
-import { AnalyticsWrapper } from '@/components/analytics-wrapper'
-import { trackCTAClick, trackSocialClick, trackProjectView } from '@/lib/analytics'
+import { trackCTAClick } from '@/lib/analytics'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
-  BLOG_POSTS,
-  EMAIL,
   SOCIAL_LINKS,
   SKILLS,
-  TESTIMONIALS,
-  CURRENT_STATUS,
 } from './data'
 
 const VARIANTS_CONTAINER = {
@@ -132,7 +125,6 @@ function MagneticSocialLink({
 
 export default function HomePage() {
   return (
-    <AnalyticsWrapper>
       <motion.main
         className="space-y-12"
         variants={VARIANTS_CONTAINER}
@@ -179,7 +171,7 @@ export default function HomePage() {
               data-cursor-hover
               onClick={() => trackCTAClick('consultation', 'hero')}
             >
-              Let's discuss your challenges
+              Let&apos;s discuss your challenges
               <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
               </svg>
@@ -520,7 +512,7 @@ export default function HomePage() {
         <h3 className="text-black dark:text-white text-lg font-medium mb-4">Connect with me</h3>
         <div className="space-y-4">
           <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
-            Let's discuss your next project or just say hello.
+            Let&apos;s discuss your next project or just say hello.
           </p>
           <div className="flex items-center gap-3">
             <span className="text-gray-500 dark:text-gray-400 font-medium text-sm">Find me on</span>
@@ -535,7 +527,6 @@ export default function HomePage() {
         </div>
       </motion.section>
       </motion.main>
-    </AnalyticsWrapper>
   )
 }
 

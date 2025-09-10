@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from "@vercel/analytics/next"
-import { CustomCursor } from '@/components/ui/custom-cursor'
 import { FloatingCTA } from '@/components/ui/floating-cta'
 import Script from 'next/script'
 import { GA_TRACKING_ID } from '@/lib/analytics'
@@ -56,17 +54,7 @@ export const metadata: Metadata = {
   },
 };
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: '--font-plus-jakarta',
-  subsets: ['latin'],
-  display: 'swap',
-})
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export default function RootLayout({
   children,
@@ -100,7 +88,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${plusJakarta.variable} ${jetbrainsMono.variable} bg-white text-black dark:bg-black dark:text-white tracking-tight antialiased font-sans`}
+        className="bg-white text-black dark:bg-black dark:text-white tracking-tight antialiased font-sans"
       >
         <ThemeProvider
           enableSystem={true}
