@@ -200,18 +200,19 @@ const metadata = {
         canonical: '/'
     },
     title: {
-        default: 'Koustav Ganguly | Strategic Technical Consulting',
+        default: 'Koustav Ganguly | Business Problem Solver Through Code & Consultation',
         template: '%s | Koustav Ganguly'
     },
-    description: 'Strategic technical consulting that bridges code and business needs. Helping startups make the right technical decisions from Kolkata, India.',
+    description: 'I solve business problems through strategic code and consultation. Whether you need technical guidance or custom development, I deliver solutions that drive real outcomes. Plus insights for developers.',
     keywords: [
         'Technical Consulting',
-        'Fullstack Developer',
+        'Business Solutions',
+        'Custom Development',
         'React',
         'Next.js',
         'TypeScript',
         'Strategic Planning',
-        'Kolkata'
+        'Developer Insights'
     ],
     authors: [
         {
@@ -223,8 +224,8 @@ const metadata = {
         type: 'website',
         locale: 'en_US',
         url: 'https://nim-fawn.vercel.app/',
-        title: 'Koustav Ganguly | Strategic Technical Consulting',
-        description: 'Strategic technical consulting that bridges code and business needs. Available for new projects.',
+        title: 'Koustav Ganguly | Business Problem Solver Through Code & Consultation',
+        description: 'I solve business problems through strategic code and consultation. Available for new projects and sharing developer insights.',
         siteName: 'Koustav Ganguly Portfolio'
     },
     twitter: {
