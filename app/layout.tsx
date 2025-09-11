@@ -5,13 +5,19 @@ import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from "@vercel/analytics/next"
 import { FloatingCTA } from '@/components/ui/floating-cta'
+import { ErrorBoundary } from '@/components/error-boundary'
 import Script from 'next/script'
 import { GA_TRACKING_ID } from '@/lib/analytics'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff',
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' }
+  ]
 }
 
 export const metadata: Metadata = {
@@ -64,6 +70,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Resource hints for performance */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//cdn.hashnode.com" />
+        <link rel="dns-prefetch" href="//res.cloudinary.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
         {GA_TRACKING_ID && (
           <>
             <Script
@@ -98,18 +110,20 @@ export default function RootLayout({
         >
           <a 
             href="#main-content" 
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded-md"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Skip to main content
           </a>
           <div className="flex min-h-screen w-full flex-col">
             <div className="relative mx-auto w-full max-w-2xl flex-1 px-6 py-16">
-              <Header />
-              <main id="main-content">
-                {children}
-              </main>
+              <ErrorBoundary>
+                <Header />
+                <main id="main-content">
+                  {children}
+                </main>
+                <Footer />
+              </ErrorBoundary>
               <Analytics />
-              <Footer />
             </div>
             <FloatingCTA />
           </div>

@@ -27,7 +27,7 @@ export function NewsletterSignup({
       await new Promise(resolve => setTimeout(resolve, 1000))
       setStatus('success')
       setEmail('')
-    } catch (error) {
+    } catch {
       setStatus('error')
     }
   }

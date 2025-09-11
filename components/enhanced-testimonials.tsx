@@ -73,7 +73,7 @@ export function EnhancedTestimonials() {
             <div className="relative mb-6">
               <QuoteIcon className="absolute -top-2 -left-2 w-6 h-6 text-indigo-200 dark:text-indigo-800" />
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm pl-4">
-                "{testimonial.content}"
+                "                &quot;{testimonial.content}&quot;"
               </p>
             </div>
 

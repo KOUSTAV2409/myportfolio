@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Post } from '@/lib/hashnode'
+import { ErrorBoundary } from './error-boundary'
 
 interface BlogListProps {
   posts: Post[]
@@ -7,7 +8,7 @@ interface BlogListProps {
 
 export function BlogList({ posts }: BlogListProps) {
   return (
-    <>
+    <ErrorBoundary>
       {/* Back to Home Button */}
       <div className="mb-12">
         <Link
@@ -45,7 +46,7 @@ export function BlogList({ posts }: BlogListProps) {
 
       {/* Articles */}
       <div className="space-y-12">
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <article key={post.id} className="group">
             <Link href={`/blog/${post.slug}`} className="block">
               <div className="space-y-3 py-4 -mx-4 px-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
@@ -89,6 +90,6 @@ export function BlogList({ posts }: BlogListProps) {
           <p className="text-gray-500 dark:text-gray-400">No articles published yet.</p>
         </div>
       )}
-    </>
+    </ErrorBoundary>
   )
 }
