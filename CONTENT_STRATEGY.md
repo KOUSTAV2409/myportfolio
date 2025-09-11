@@ -1,33 +1,35 @@
 # Content Strategy & Calendar
 
 ## 🎯 Content Goals
-- **Build Authority**: Establish expertise in JavaScript, React, and web development
-- **Audience Growth**: Grow email list and social media following
-- **Lead Generation**: Convert readers into potential clients/collaborators
-- **SEO**: Rank for developer-focused keywords
+- **Build Authority**: Establish expertise in solving business problems through code
+- **Client Attraction**: Attract business owners who need technical solutions
+- **Developer Community**: Share insights with fellow developers (secondary)
+- **Lead Generation**: Convert readers into consultation calls
 
-## 📝 Content Pillars
+## 📝 Content Pillars (70% Business / 30% Developer)
 
-### 1. JavaScript Mastery Series (40%)
-- **Current**: 4 articles published
+### 1. Business Problem Solving (40%)
 - **Target**: 2 articles/month
-- **Topics**: ES6+, async/await, performance, best practices
-- **Format**: Tutorial + code examples + interactive demos
+- **Topics**: "How I helped [Business Type] solve [Problem]", ROI case studies, business-tech alignment
+- **Format**: Problem → Discovery → Solution → Results
+- **Examples**: "How I increased e-commerce revenue by 35%", "The $50K mistake most SaaS founders make"
 
-### 2. Web Development Insights (30%)
+### 2. Strategic Development Insights (30%)
 - **Target**: 1-2 articles/month  
-- **Topics**: React patterns, Next.js, TypeScript, tooling
-- **Format**: Deep dives, case studies, comparisons
+- **Topics**: When to build vs buy, technical decision-making, development ROI
+- **Format**: Strategic guides, decision frameworks
+- **Examples**: "Should you build or buy your analytics?", "The real cost of technical debt"
 
-### 3. Career & Industry (20%)
+### 3. Developer Deep Dives (20%)
 - **Target**: 1 article/month
-- **Topics**: Developer career tips, industry trends, remote work
-- **Format**: Opinion pieces, guides, interviews
+- **Topics**: React patterns, Next.js, TypeScript from real projects
+- **Format**: Technical tutorials with business context
+- **Examples**: "Building scalable cart systems", "Performance optimization that saved $10K/month"
 
-### 4. Project Showcases (10%)
+### 4. Behind the Scenes (10%)
 - **Target**: 1 article/quarter
-- **Topics**: Portfolio projects, open source contributions
-- **Format**: Case studies with technical breakdowns
+- **Topics**: Client project breakdowns, lessons learned, process insights
+- **Format**: Case study narratives, process documentation
 
 ## 📅 Content Calendar Template
 
