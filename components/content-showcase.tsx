@@ -174,7 +174,7 @@ export function ContentShowcase() {
 
       {/* Content List */}
       <div className="space-y-3">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {displayedContent.map((item, index) => (
             <motion.div 
               key={item.id}
