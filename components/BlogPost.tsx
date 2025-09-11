@@ -73,9 +73,9 @@ export function BlogPost({ post }: BlogPostProps) {
         <ReactMarkdown
           rehypePlugins={[rehypeRaw]}
           components={{
-            img: ({ src, alt, ...props }) => {
-              // Don't render if src is empty
-              if (!src) return null
+            img: ({ src, alt, width, height, ...props }) => {
+              // Don't render if src is empty or not a string
+              if (!src || typeof src !== 'string') return null
               
               return (
                 <Image
@@ -85,13 +85,12 @@ export function BlogPost({ post }: BlogPostProps) {
                   height={400}
                   className="w-full h-auto rounded-lg shadow-lg my-6"
                   unoptimized={src.includes('cdn.hashnode.com')}
-                  {...props}
                 />
               )
             },
             iframe: ({ src, height, style, ...props }) => {
-              // Don't render if src is empty
-              if (!src) return null
+              // Don't render if src is empty or not a string
+              if (!src || typeof src !== 'string') return null
               
               return (
                 <div className="my-8">
