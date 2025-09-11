@@ -1,16 +1,53 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Link from 'next/link'
-import { CONTENT_ITEMS, CONTENT_CATEGORIES, FEATURED_CONTENT, type ContentCategory } from '@/app/content-data'
+import { CONTENT_ITEMS, CONTENT_CATEGORIES, type ContentCategory } from '@/app/content-data'
+import { getAllPosts, type Post } from '@/lib/hashnode'
 
 export function ContentShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all')
   const [showAll, setShowAll] = useState(false)
+  const [hashnodePosts, setHashnodePosts] = useState<Post[]>([])
+  
+  // Fetch Hashnode posts on component mount
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getAllPosts()
+        setHashnodePosts(posts)
+      } catch (error) {
+        console.error('Error fetching Hashnode posts:', error)
+      }
+    }
+    fetchPosts()
+  }, [])
+
+  // Convert Hashnode posts to content items format
+  const hashnodeContentItems = hashnodePosts.map(post => ({
+    id: `hashnode-${post.id}`,
+    title: post.title,
+    description: post.brief || post.content.markdown.slice(0, 150) + '...',
+    category: 'tech-stack' as ContentCategory,
+    readTime: '5 min',
+    publishedAt: post.publishedAt,
+    link: `/blog/${post.slug}`,
+    featured: false,
+    tags: ['Hashnode', 'Blog']
+  }))
+
+  // Get latest 2 Hashnode posts for featured section (replace static content)
+  const featuredContent = hashnodeContentItems.slice(0, 2).map(item => ({
+    ...item,
+    featured: true
+  }))
+
+  // Combine all content items
+  const allContentItems = [...CONTENT_ITEMS, ...hashnodeContentItems]
   
   const filteredContent = selectedCategory === 'all' 
-    ? CONTENT_ITEMS 
-    : CONTENT_ITEMS.filter(item => item.category === selectedCategory)
+    ? allContentItems 
+    : allContentItems.filter(item => item.category === selectedCategory)
 
   // Show only first 4 items by default, all when showAll is true
   const displayedContent = showAll ? filteredContent : filteredContent.slice(0, 4)
@@ -21,7 +58,7 @@ export function ContentShowcase() {
   const LinkWrapper = ({ item, children }: { item: any, children: React.ReactNode }) => {
     if (isInternalLink(item.link)) {
       return (
-        <Link href={item.link} target="_blank" className="group">
+        <Link href={item.link} className="group">
           {children}
         </Link>
       )
@@ -39,39 +76,44 @@ export function ContentShowcase() {
       <div className="space-y-4">
         <h4 className="text-black dark:text-white font-medium">Featured Writing</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {FEATURED_CONTENT.map((item) => (
+          {featuredContent.map((item) => (
             <motion.div key={item.id}>
               <LinkWrapper item={item}>
                 <div
-                  className="p-4 rounded-xl bg-gray-50/80 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 hover:bg-gray-100/80 dark:hover:bg-gray-900/60 hover:border-gray-300/60 dark:hover:border-gray-700/60 transition-all duration-300"
+                  className="p-4 rounded-xl bg-gray-50/80 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 hover:bg-gray-100/80 dark:hover:bg-gray-900/60 hover:border-gray-300/60 dark:hover:border-gray-700/60 transition-all duration-300 h-full flex flex-col"
                   data-cursor-hover
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="px-2 py-1 rounded-md text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-200 dark:bg-gray-800">
                         {CONTENT_CATEGORIES[item.category].icon} {CONTENT_CATEGORIES[item.category].label}
                       </span>
                       <span className="text-xs text-gray-500 dark:text-gray-400">{item.readTime}</span>
+                      {item.id.startsWith('hashnode-') && (
+                        <span className="text-xs text-blue-500 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 rounded">
+                          Latest
+                        </span>
+                      )}
                     </div>
-                    <h5 className="font-medium text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-colors">
+                    <h5 className="font-medium text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-colors line-clamp-2">
                       {item.title}
                     </h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3 flex-1">
                       {item.description}
                     </p>
-                    <div className="flex items-center justify-between pt-2">
-                      <div className="flex flex-wrap gap-1">
-                        {item.tags.slice(0, 2).map(tag => (
-                          <span key={tag} className="text-xs text-gray-500 dark:text-gray-400 bg-gray-200/50 dark:bg-gray-800/50 px-2 py-0.5 rounded">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 group-hover:translate-x-0.5 transition-all duration-200">
-                        <path d="M7 17L17 7"/>
-                        <path d="M7 7h10v10"/>
-                      </svg>
+                  </div>
+                  <div className="flex items-center justify-between pt-3 mt-auto">
+                    <div className="flex flex-wrap gap-1">
+                      {item.tags.slice(0, 2).map(tag => (
+                        <span key={tag} className="text-xs text-gray-500 dark:text-gray-400 bg-gray-200/50 dark:bg-gray-800/50 px-2 py-0.5 rounded">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 group-hover:translate-x-0.5 transition-all duration-200">
+                      <path d="M7 17L17 7"/>
+                      <path d="M7 7h10v10"/>
+                    </svg>
                   </div>
                 </div>
               </LinkWrapper>
@@ -154,6 +196,11 @@ export function ContentShowcase() {
                       <span className="px-2 py-0.5 rounded text-xs text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-800">
                         {CONTENT_CATEGORIES[item.category].icon}
                       </span>
+                      {item.id.startsWith('hashnode-') && (
+                        <span className="text-xs text-blue-500 dark:text-blue-400">
+                          📝
+                        </span>
+                      )}
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
                   </div>
