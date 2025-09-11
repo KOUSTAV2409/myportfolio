@@ -4,6 +4,7 @@ import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { Post } from '@/lib/hashnode'
+import { NewsletterSignup } from './newsletter-signup'
 
 interface BlogPostProps {
   post: Post
@@ -194,6 +195,15 @@ export function BlogPost({ post }: BlogPostProps) {
           {processedMarkdown}
         </ReactMarkdown>
       </main>
+
+      {/* Newsletter Signup */}
+      <div className="not-prose">
+        <NewsletterSignup 
+          variant="footer"
+          title="Enjoyed this article?"
+          description="Subscribe to get notified when I publish new insights on JavaScript, web development, and software engineering."
+        />
+      </div>
 
       {/* Footer */}
       <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
