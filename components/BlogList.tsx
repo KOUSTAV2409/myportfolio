@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Post } from '@/lib/hashnode'
 
 interface BlogListProps {
@@ -8,66 +7,57 @@ interface BlogListProps {
 
 export function BlogList({ posts }: BlogListProps) {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <>
+      {/* Back to Home Button */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-black dark:text-white mb-2">Blog</h1>
-        <p className="text-gray-600 dark:text-gray-400">Latest articles from my Hashnode blog</p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+          data-cursor-hover
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5"/>
+            <path d="M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back to home</span>
+        </Link>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {posts.map((post) => (
-          <article key={post.id}>
-            <Link href={`/blog/${post.slug}`} className="group block">
-              <div className="p-6 rounded-xl bg-gray-50/80 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 hover:bg-gray-100/80 dark:hover:bg-gray-900/60 hover:border-gray-300/60 dark:hover:border-gray-700/60 transition-all duration-300 h-full">
-                {post.coverImage && (
-                  <div className="mb-4 overflow-hidden rounded-lg">
-                    <Image
-                      src={post.coverImage.url}
-                      alt={post.title}
-                      width={400}
-                      height={200}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
-                
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 rounded-md text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-200 dark:bg-gray-800">
-                      📝 Article
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {new Date(post.publishedAt).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric', 
-                        year: 'numeric' 
-                      })}
-                    </span>
-                  </div>
-                  
-                  <h2 className="font-medium text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-colors line-clamp-2">
-                    {post.title}
-                  </h2>
-                  
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">
-                    {post.brief || post.content.markdown.slice(0, 150) + '...'}
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      Read on Hashnode
-                    </span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 group-hover:translate-x-0.5 transition-all duration-200">
-                      <path d="M7 17L17 7"/>
-                      <path d="M7 7h10v10"/>
-                    </svg>
-                  </div>
+
+      <div className="space-y-16">
+        {posts.map((post, index) => (
+          <article key={post.id} className="group">
+            <Link href={`/blog/${post.slug}`} className="block">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+                  <time>
+                    {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+                      year: 'numeric',
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </time>
+                  <span>•</span>
+                  <span>Article</span>
                 </div>
+                
+                <h2 className="text-xl font-medium text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors leading-tight">
+                  {post.title}
+                </h2>
+                
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {post.brief || post.content.markdown.slice(0, 200).replace(/[#*`]/g, '') + '...'}
+                </p>
               </div>
             </Link>
           </article>
         ))}
       </div>
-    </div>
+
+      {posts.length === 0 && (
+        <div className="text-center py-16">
+          <p className="text-gray-500 dark:text-gray-400">No articles yet.</p>
+        </div>
+      )}
+    </>
   )
 }

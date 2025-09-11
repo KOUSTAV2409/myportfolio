@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { Post } from '@/lib/hashnode'
@@ -24,15 +25,13 @@ export function BlogPost({ post }: BlogPostProps) {
       .replace(/%\[(https:\/\/(?:www\.)?youtube\.com\/watch\?v=([^\]&]+))\]/g, (match, url, videoId) => {
         return `\n\n<iframe src="https://www.youtube.com/embed/${videoId}" width="100%" height="315" frameborder="0"></iframe>\n\n`
       })
-      // Handle other Hashnode embeds (Twitter, etc.)
+      // Handle other Hashnode embeds
       .replace(/%\[(https:\/\/[^\]]+)\]/g, (match, url) => {
-        // For other URLs, create a link
         return `[${url}](${url})`
       })
       // Clean up Hashnode image alignment syntax
       .replace(/!\[\]\(([^)]+)\)\s*align="[^"]*"/g, '![]($1)')
       .replace(/!\[([^\]]*)\]\(([^)]+)\)\s*align="[^"]*"/g, '![$1]($2)')
-      // Remove standalone align attributes
       .replace(/align="[^"]*"/g, '')
       // Convert Hashnode image URLs to proper markdown
       .replace(/https:\/\/cdn\.hashnode\.com\/res\/hashnode\/image\/[^\s)]+/g, (url) => {
@@ -43,38 +42,68 @@ export function BlogPost({ post }: BlogPostProps) {
   const processedMarkdown = processMarkdown(post.content.markdown)
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-8">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-          {post.title}
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
-          {new Date(post.publishedAt).toLocaleDateString()}
-        </p>
+    <>
+      {/* Back to Home Button */}
+      <div className="mb-8">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+          data-cursor-hover
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5"/>
+            <path d="M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back to blog</span>
+        </Link>
+      </div>
+
+      <main className="prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
+        
+        {/* Cover Image */}
         {post.coverImage && (
-          <Image
-            src={post.coverImage.url}
-            alt={post.title}
-            width={800}
-            height={400}
-            className="w-full h-64 object-cover rounded-lg mb-8"
-          />
+          <div className="not-prose mb-12 -mt-16">
+            <Image
+              src={post.coverImage.url}
+              alt={post.title}
+              width={800}
+              height={400}
+              className="w-full h-64 object-cover rounded-lg"
+              unoptimized
+            />
+          </div>
         )}
-      </header>
-      
-      <div className="prose prose-lg prose-gray dark:prose-invert max-w-none
-                      prose-headings:text-gray-900 dark:prose-headings:text-white
-                      prose-p:text-gray-700 dark:prose-p:text-gray-300
-                      prose-a:text-blue-600 dark:prose-a:text-blue-400
-                      prose-strong:text-gray-900 dark:prose-strong:text-white
-                      prose-code:text-pink-600 dark:prose-code:text-pink-400
-                      prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
-                      prose-img:rounded-lg prose-img:shadow-lg">
+
+        {/* Title */}
+        <h1 className="mb-4">{post.title}</h1>
+        
+        {/* Meta */}
+        <div className="not-prose mb-8 text-sm text-gray-500 dark:text-gray-400">
+          <time>
+            {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+              year: 'numeric',
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </time>
+          <span className="mx-2">•</span>
+          <span>Article</span>
+        </div>
+
+        {/* Brief */}
+        {post.brief && (
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 font-normal">
+            {post.brief}
+          </p>
+        )}
+
+        <hr className="my-8" />
+
+        {/* Content */}
         <ReactMarkdown
           rehypePlugins={[rehypeRaw]}
           components={{
-            img: ({ src, alt, width, height, ...props }) => {
-              // Don't render if src is empty or not a string
+            img: ({ src, alt, width, height }) => {
               if (!src || typeof src !== 'string') return null
               
               return (
@@ -83,13 +112,12 @@ export function BlogPost({ post }: BlogPostProps) {
                   alt={alt || ''}
                   width={800}
                   height={400}
-                  className="w-full h-auto rounded-lg shadow-lg my-6"
+                  className="w-full h-auto rounded-lg my-8"
                   unoptimized={src.includes('cdn.hashnode.com')}
                 />
               )
             },
-            iframe: ({ src, height, style, ...props }) => {
-              // Don't render if src is empty or not a string
+            iframe: ({ src, height, style }) => {
               if (!src || typeof src !== 'string') return null
               
               return (
@@ -98,17 +126,15 @@ export function BlogPost({ post }: BlogPostProps) {
                     src={src}
                     height={height || "400"}
                     style={{ width: '100%', ...style }}
-                    className="rounded-lg border border-gray-200 dark:border-gray-700"
+                    className="w-full rounded-lg"
                     frameBorder="0"
                     loading="lazy"
                     allowFullScreen={true}
-                    {...props}
                   />
                 </div>
               )
             },
-            a: ({ href, children, ...props }) => {
-              // Handle image URLs that appear as links
+            a: ({ href, children }) => {
               if (href?.includes('cdn.hashnode.com') && (href.includes('.jpg') || href.includes('.png') || href.includes('.jpeg') || href.includes('.webp'))) {
                 return (
                   <Image
@@ -116,60 +142,45 @@ export function BlogPost({ post }: BlogPostProps) {
                     alt={typeof children === 'string' ? children : 'Image'}
                     width={800}
                     height={400}
-                    className="w-full h-auto rounded-lg shadow-lg my-6"
+                    className="w-full h-auto rounded-lg my-8"
                     unoptimized
                   />
                 )
               }
               
-              // Regular links
               return (
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                  {...props}
+                  className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
                   {children}
                 </a>
               )
             },
-            code: ({ className, children, ...props }) => (
-              <code
-                className={`${className} bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm`}
-                {...props}
-              >
-                {children}
-              </code>
-            ),
-            pre: ({ children, ...props }) => (
-              <pre
-                className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-6"
-                {...props}
-              >
-                {children}
-              </pre>
-            )
           }}
         >
           {processedMarkdown}
         </ReactMarkdown>
-      </div>
-      
-      <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Originally published on{' '}
-          <a 
-            href={post.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            Hashnode
-          </a>
-        </p>
-      </footer>
-    </article>
+
+        <hr className="my-12" />
+
+        {/* Footer */}
+        <div className="not-prose">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+            Originally published on{' '}
+            <a 
+              href={post.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            >
+              Hashnode
+            </a>
+          </p>
+        </div>
+      </main>
+    </>
   )
 }
