@@ -9,7 +9,6 @@ interface OptimizedVideoProps {
 
 export function OptimizedVideo({ src, className = '' }: OptimizedVideoProps) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
   const [isInView, setIsInView] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -32,14 +31,12 @@ export function OptimizedVideo({ src, className = '' }: OptimizedVideoProps) {
   const handleMouseEnter = () => {
     if (videoRef.current && isLoaded) {
       videoRef.current.play()
-      setIsPlaying(true)
     }
   }
 
   const handleMouseLeave = () => {
     if (videoRef.current) {
       videoRef.current.pause()
-      setIsPlaying(false)
     }
   }
 

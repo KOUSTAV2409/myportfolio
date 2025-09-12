@@ -1,6 +1,6 @@
 'use client'
-import { motion, AnimatePresence } from 'motion/react'
-import { useState, useEffect } from 'react'
+import { motion } from 'motion/react'
+import { useState } from 'react'
 import { PlayIcon, PauseIcon, RotateCcwIcon } from 'lucide-react'
 
 interface AlgorithmVizProps {
@@ -13,12 +13,10 @@ interface AlgorithmVizProps {
 export function AlgorithmViz({ title, description, data, algorithm }: AlgorithmVizProps) {
   const [array, setArray] = useState(data)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentStep, setCurrentStep] = useState(0)
   const [comparing, setComparing] = useState<number[]>([])
 
   const reset = () => {
     setArray([...data])
-    setCurrentStep(0)
     setIsPlaying(false)
     setComparing([])
   }

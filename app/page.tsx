@@ -1,17 +1,7 @@
 'use client'
 import { motion } from 'motion/react'
 import { XIcon } from 'lucide-react'
-import { Magnetic } from '@/components/ui/magnetic'
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
-  MorphingDialogClose,
-  MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog'
-import { ProjectDetailModal } from '@/components/project-detail-modal'
-import { ContentShowcase } from '@/components/content-showcase'
-import { SocialProofShowcase } from '@/components/social-proof-showcase'
+import { lazy, Suspense } from 'react'
 import { trackCTAClick } from '@/lib/analytics'
 import {
   PROJECTS,
@@ -19,6 +9,33 @@ import {
   SOCIAL_LINKS,
   SKILLS,
 } from './data'
+
+// Lazy load heavy components
+const Magnetic = lazy(() => import('@/components/ui/magnetic').then(mod => ({ default: mod.Magnetic })))
+const MorphingDialog = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
+  default: mod.MorphingDialog 
+})))
+const MorphingDialogTrigger = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
+  default: mod.MorphingDialogTrigger 
+})))
+const MorphingDialogContent = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
+  default: mod.MorphingDialogContent 
+})))
+const MorphingDialogClose = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
+  default: mod.MorphingDialogClose 
+})))
+const MorphingDialogContainer = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
+  default: mod.MorphingDialogContainer 
+})))
+const ProjectDetailModal = lazy(() => import('@/components/project-detail-modal').then(mod => ({ 
+  default: mod.ProjectDetailModal 
+})))
+const ContentShowcase = lazy(() => import('@/components/content-showcase').then(mod => ({ 
+  default: mod.ContentShowcase 
+})))
+const SocialProofShowcase = lazy(() => import('@/components/social-proof-showcase').then(mod => ({ 
+  default: mod.SocialProofShowcase 
+})))
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -45,20 +62,23 @@ type ProjectVideoProps = {
 
 function ProjectVideo({ src }: ProjectVideoProps) {
   return (
-    <MorphingDialog
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.3,
-      }}
-    >
+    <Suspense fallback={<div className="aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
+      <MorphingDialog
+        transition={{
+          type: 'spring',
+          bounce: 0,
+          duration: 0.3,
+        }}
+      >
       <MorphingDialogTrigger>
         <video
           src={src}
           autoPlay
           loop
           muted
-          className="aspect-video w-full cursor-zoom-in rounded-lg"
+          preload="metadata"
+          aria-label="Project demonstration video"
+          className="aspect-video w-full cursor-zoom-in rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
         />
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
@@ -68,6 +88,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
             autoPlay
             loop
             muted
+            preload="auto"
             className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
           />
         </MorphingDialogContent>
@@ -86,6 +107,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
         </MorphingDialogClose>
       </MorphingDialogContainer>
     </MorphingDialog>
+    </Suspense>
   )
 }
 
@@ -100,7 +122,10 @@ function MagneticSocialLink({
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <a
         href={link}
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-gray-200 dark:bg-gray-800 px-2.5 py-1 text-sm text-gray-800 dark:text-gray-100 transition-colors duration-200 hover:bg-gray-800 hover:text-white dark:hover:bg-white dark:hover:text-black"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${children} profile`}
+        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-gray-200 dark:bg-gray-800 px-2.5 py-1 text-sm text-gray-800 dark:text-gray-100 transition-colors duration-200 hover:bg-gray-800 hover:text-white dark:hover:bg-white dark:hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
       >
         {children}
         <svg
@@ -133,13 +158,14 @@ export default function HomePage() {
       >
       {/* Hero Section */}
       <motion.section
+        aria-labelledby="hero-heading"
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
         <div className="space-y-8 text-center">
           {/* Main Value Proposition */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-semibold text-black dark:text-white leading-tight tracking-tight">
+            <h1 id="hero-heading" className="text-3xl sm:text-4xl font-semibold text-black dark:text-white leading-tight tracking-tight">
               I solve your business problems 
               <span className="text-gray-500 dark:text-gray-400"> with code</span>
             </h1>
@@ -160,38 +186,25 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Primary CTA */}
+          {/* Single Primary CTA */}
           <div className="pt-1 -mt-1">
             <a
-              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
               href="https://cal.com/iamk-xyz/30min"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Schedule a 30-minute discovery call to discuss your challenge"
               data-cursor-hover
               onClick={() => trackCTAClick('consultation', 'hero')}
             >
-              Let&apos;s talk business
+              Discuss your challenge
               <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
               </svg>
             </a>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-              Free 30-min strategy call • No commitment required
+              30-min discovery call • We&apos;ll explore your problem together
             </p>
-          </div>
-
-          {/* Secondary Action */}
-          <div className="pt-2">
-            <button 
-              onClick={() => {
-                const projectsSection = document.getElementById('projects')
-                projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }}
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300 text-sm font-medium underline underline-offset-4 decoration-gray-300 dark:decoration-gray-600 hover:decoration-black dark:hover:decoration-white"
-              data-cursor-hover
-            >
-              or see case studies first
-            </button>
           </div>
 
           {/* Recent Work Highlight */}
@@ -306,8 +319,9 @@ export default function HomePage() {
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
+        aria-labelledby="experience-heading"
       >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Experience</h3>
+        <h3 id="experience-heading" className="text-black dark:text-white text-lg font-medium mb-4">Experience</h3>
         <div className="space-y-0">
           {WORK_EXPERIENCE.map((work, index) => {
             const Component = work.link ? 'a' : 'div'
@@ -415,7 +429,9 @@ export default function HomePage() {
         transition={TRANSITION_SECTION}
       >
         <h3 className="text-black dark:text-white text-lg font-medium mb-6">Writing & Research</h3>
-        <ContentShowcase />
+        <Suspense fallback={<div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
+          <ContentShowcase />
+        </Suspense>
       </motion.section>
 
       {/* Projects Section */}
@@ -423,8 +439,9 @@ export default function HomePage() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
         id="projects"
+        aria-labelledby="projects-heading"
       >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Strategic Case Studies</h3>
+        <h3 id="projects-heading" className="text-black dark:text-white text-lg font-medium mb-4">Strategic Case Studies</h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project, index) => (
             <motion.div 
@@ -554,7 +571,9 @@ export default function HomePage() {
         transition={TRANSITION_SECTION}
       >
         <h3 className="text-black dark:text-white text-lg font-medium mb-4">What people say</h3>
-        <SocialProofShowcase />
+        <Suspense fallback={<div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
+          <SocialProofShowcase />
+        </Suspense>
       </motion.section>
 
       {/* Connect Section */}

@@ -53,6 +53,7 @@ type SocialLink = {
 }
 
 export const PROJECTS: Project[] = [
+  
   {
     name: 'Motion Primitives Pro',
     description: 'Premium React animation library that generated $50K+ revenue in Q1. Reduced development time by 60% for 500+ developers across 20+ countries.',

@@ -1,13 +1,16 @@
 'use client'
 
 import { Component, ErrorInfo, ReactNode } from 'react'
+import { ErrorFallback } from './error-fallback'
 
 interface Props {
   children: ReactNode
+  fallback?: ReactNode
 }
 
 interface State {
   hasError: boolean
+  error?: Error
 }
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -15,8 +18,8 @@ export class ErrorBoundary extends Component<Props, State> {
     hasError: false
   }
 
-  public static getDerivedStateFromError(_: Error): State {
-    return { hasError: true }
+  public static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error }
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -25,18 +28,15 @@ export class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
+      if (this.props.fallback) {
+        return this.props.fallback
+      }
+      
       return (
-        <div className="flex min-h-screen items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
-            <button
-              className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black rounded"
-              onClick={() => this.setState({ hasError: false })}
-            >
-              Try again
-            </button>
-          </div>
-        </div>
+        <ErrorFallback 
+          error={this.state.error}
+          resetError={() => this.setState({ hasError: false, error: undefined })}
+        />
       )
     }
 

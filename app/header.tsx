@@ -7,7 +7,11 @@ export function Header() {
     <header className="mb-12 flex items-start justify-between">
       <div className="space-y-6">
         <div>
-          <Link href="/" className="text-2xl font-semibold text-black dark:text-white mb-3 block tracking-tight">
+          <Link 
+            href="/" 
+            className="text-2xl font-semibold text-black dark:text-white mb-3 block tracking-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black rounded-md"
+            aria-label="Koustav Ganguly - Home"
+          >
             Koustav Ganguly
           </Link>
           <TextEffect
