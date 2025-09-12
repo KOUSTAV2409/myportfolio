@@ -306,7 +306,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                className="px-3 py-1.5 text-sm bg-gray-200/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-300/80 dark:hover:bg-gray-700/80 transition-all duration-300 cursor-default hover:shadow-md hover:scale-105 border border-gray-300/20 dark:border-gray-700/20"
+                className="px-3 py-1.5 text-sm bg-gray-200/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg text-gray-800 dark:text-gray-200 hover:bg-[#14b8a6]/10 hover:text-[#14b8a6] hover:border-[#14b8a6]/20 transition-all duration-300 cursor-default hover:shadow-md hover:scale-105 border border-gray-300/20 dark:border-gray-700/20"
               >
                 {skill}
               </motion.span>
@@ -465,32 +465,45 @@ export default function HomePage() {
 
               {/* Project Info */}
               <div className="px-1 space-y-4">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h4 className="font-medium text-black dark:text-white text-lg">{project.name}</h4>
+                    <h4 className="font-semibold text-black dark:text-white text-lg">{project.name}</h4>
                     <span className="text-xs text-gray-500 dark:text-gray-400">{project.year}</span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm line-clamp-2">
                     {project.description}
                   </p>
+                  
                   <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
                     <span>{project.role}</span>
                     <span>•</span>
                     <span>{project.tech}</span>
                   </div>
+
+                  {/* Key Metrics */}
+                  <div className="p-3 bg-gray-50/50 dark:bg-gray-900/30 rounded-lg border border-gray-200/30 dark:border-gray-800/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-[#14b8a6] rounded-full"></div>
+                      <span className="text-xs font-medium text-[#14b8a6]">Key Impact</span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                      {project.metrics}
+                    </p>
+                  </div>
                 </div>
                 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 pt-2">
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-black dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 dark:hover:shadow-white/20 transform hover:-translate-y-0.5 hover:scale-105"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#14b8a6] rounded-lg hover:bg-[#0f9488] transition-all duration-300 hover:shadow-lg hover:shadow-teal-200/20 dark:hover:shadow-teal-900/20 transform hover:-translate-y-0.5"
                     data-cursor-hover
                   >
                     View Live
-                    <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                    <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
                     </svg>
                   </a>
@@ -501,7 +514,7 @@ export default function HomePage() {
                       data-cursor-hover
                     >
                       Case Study
-                      <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                      <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
                       </svg>
                     </button>
@@ -574,6 +587,41 @@ export default function HomePage() {
         <Suspense fallback={<div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
           <SocialProofShowcase />
         </Suspense>
+      </motion.section>
+
+      {/* Newsletter Section */}
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+        className="py-16 text-center"
+      >
+        <div className="max-w-lg mx-auto space-y-8">
+          <div className="space-y-4">
+            <h3 className="text-2xl font-semibold text-black dark:text-white tracking-tight">
+              Stay in the loop
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Get insights on development, business strategy, and computer science. 
+              <br />No spam, just valuable content when it matters.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200"
+              />
+              <button className="px-8 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium whitespace-nowrap transform hover:-translate-y-0.5 hover:shadow-lg">
+                Subscribe
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Join 500+ developers and business leaders • Unsubscribe anytime
+            </p>
+          </div>
+        </div>
       </motion.section>
 
       {/* Connect Section */}

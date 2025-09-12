@@ -23,8 +23,8 @@ export function Header() {
           >
             Fullstack Developer, UI designer & CS Explorer
           </TextEffect>
-          <div className="flex items-center gap-2 text-emerald-400 font-medium text-sm">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <div className="flex items-center gap-2 text-[#14b8a6] font-medium text-sm">
+            <div className="w-2 h-2 bg-[#14b8a6] rounded-full animate-pulse" />
             <span>Available for new projects</span>
           </div>
         </div>
@@ -55,10 +55,28 @@ export function Header() {
         </div>
       </div>
       
-      <div className="flex items-center gap-4">
-        <Link href="/blog" className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-          Blog
-        </Link>
+      <div className="flex items-center gap-6">
+        <div className="relative group">
+          <Link href="/blog" className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1">
+            Blog
+            <svg width="12" height="12" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-200 group-hover:rotate-180">
+              <path d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"/>
+            </svg>
+          </Link>
+          <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+            <div className="py-2">
+              <Link href="/blog/tech" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#14b8a6] transition-colors">
+                Tech & Development
+              </Link>
+              <Link href="/blog/cs-math" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#14b8a6] transition-colors">
+                CS & Mathematics
+              </Link>
+              <Link href="/blog/business" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#14b8a6] transition-colors">
+                Business & Strategy
+              </Link>
+            </div>
+          </div>
+        </div>
         <a href="https://x.com/KoustavGan39466" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
