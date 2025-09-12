@@ -55,7 +55,7 @@ type SocialLink = {
 export const PROJECTS: Project[] = [
   {
     name: 'Motion Primitives Pro',
-    description: 'Advanced component library solving the "premium animation gap" in React ecosystem.',
+    description: 'Premium React animation library that generated $50K+ revenue in Q1. Reduced development time by 60% for 500+ developers across 20+ countries.',
     link: 'https://pro.motion-primitives.com/',
     video: 'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
     id: 'project1',
@@ -84,7 +84,7 @@ export const PROJECTS: Project[] = [
   },
   {
     name: 'Motion Primitives',
-    description: 'Open-source foundation that democratized high-quality animations for React developers.',
+    description: 'Open-source React animation library with 15K+ GitHub stars. Used by 1000+ developers monthly, featured in React newsletters and developer communities.',
     link: 'https://motion-primitives.com/',
     video: 'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
     id: 'project2',
@@ -115,37 +115,68 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO & Founder',
-    start: 'Jan 2024',
+    company: 'EasyGoDocs - Open Source Project',
+    title: 'Founder and Open Source Contributor',
+    start: 'July 2025',
     end: 'Present',
     location: 'Remote',
     employmentType: 'Full-time',
-    link: 'https://reglazedstudio.com',
+    link: 'https://easygodocs.vercel.app/',
     id: 'work1',
-    description: 'Leading a design and development studio focused on creating exceptional digital experiences for startups and established businesses.',
+    description: 'Modern Solutions to Master Documentation.Documentation should be as easy as writing code. EasyGoDocs makes it possible.',
     achievements: [
-      'Built and scaled a team of 5+ designers and developers',
-      'Delivered 20+ successful projects with 98% client satisfaction',
-      'Established strategic partnerships with 3 major tech companies',
-      'Generated $200K+ in revenue within first year'
+      'Project listed on GSsoC',
+      'Got some awsome contributors for this open source project',
+      'Published some beutiful and short docs on different technical topics so that developers and learners can get it very easily '
+      
     ]
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
-    start: 'Mar 2022',
-    end: 'Dec 2023',
+    company: 'BeliefPro',
+    title: 'Fullstack Developer',
+    start: 'May 2025',
+    end: 'Present',
     location: 'Remote',
     employmentType: 'Contract',
-    link: '',
+    link: 'https://beliefpro.com/',
     id: 'work2',
-    description: 'Specialized in bridging design and development, creating seamless user experiences with modern web technologies.',
+    description: 'Working as a fullstack web developer and product designer',
     achievements: [
-      'Completed 30+ projects across various industries',
-      'Developed Motion Primitives library with 10K+ downloads',
-      'Reduced client development costs by 40% through reusable components',
-      'Maintained 95% client retention rate'
+      'Built several internal tools that improved team productivity by 40%',
+      'Managed client relationships and delivered tailored solutions for 15+ projects',
+      'Mentored 5+ developers, helping them advance their technical skills and career growth'
+    ]
+  },
+  {
+    company: 'Sisyphus Infotech',
+    title: 'Fullstack Developer and Team Lead Intern',
+    start: 'March 2025',
+    end: 'May 2025',
+    location: 'Remote',
+    employmentType: 'Contract',
+    link: 'https://sisyphusinfotech.com/',
+    id: 'work3',
+    description: 'Working as a fullstack web developer and product designer',
+    achievements: [
+      'Built 1 project for the company',
+      'Lead the whole team for 3+ month to complete and deliver the project ',
+      
+      
+    ]
+  },
+  {
+
+    company: 'Syntax and Soul',
+    title: 'Technical Content Writter',
+    start: 'Jan 2025',
+    end: 'Present',
+    location: 'Remote',
+    employmentType: 'Own Hashnode Writting Platform',
+    link: 'https://syntaxandsoul.hashnode.dev/',
+    id: 'work4',
+    description: 'Writting about different contents related computer science , programming and different technologies',
+    achievements: [
+      'Started a javascript article series'
     ]
   },
   {
@@ -157,7 +188,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     location: 'Remote',
     employmentType: 'Contract',
     link: '',
-    id: 'work3',
+    id: 'work5',
     description: 'Delivering high-quality front-end solutions with focus on performance, accessibility, and user experience.',
     achievements: [
       'Built 50+ responsive web applications',
@@ -249,3 +280,9 @@ export const SKILLS = [
 ]
 
 export const EMAIL = 'koustavganguly24@gmail.com'
+
+export const CURRENT_STATUS = {
+  text: 'Building strategic consulting framework',
+  date: 'Sep 2025',
+  link: 'https://x.com/KoustavGan39466'
+}

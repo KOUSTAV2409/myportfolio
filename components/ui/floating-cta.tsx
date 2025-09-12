@@ -33,7 +33,7 @@ export function FloatingCTA() {
               className="group flex items-center gap-3 px-6 py-4 bg-black text-white dark:bg-white dark:text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm"
               data-cursor-hover
             >
-              <span>Let's talk</span>
+              <span>Let&apos;s talk</span>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

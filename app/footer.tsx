@@ -1,5 +1,4 @@
 'use client'
-import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -36,33 +35,26 @@ function ThemeSwitch() {
   }
 
   return (
-    <AnimatedBackground
-      className="pointer-events-none rounded-lg bg-zinc-100 dark:bg-zinc-800"
-      defaultValue={theme}
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.2,
-      }}
-      enableHover={false}
-      onValueChange={(id) => {
-        setTheme(id as string)
-      }}
-    >
-      {THEMES_OPTIONS.map((theme) => {
+    <div className="flex rounded-lg bg-zinc-100 dark:bg-zinc-800 p-1">
+      {THEMES_OPTIONS.map((themeOption) => {
+        const isActive = theme === themeOption.id
         return (
           <button
-            key={theme.id}
-            className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
+            key={themeOption.id}
+            className={`inline-flex h-7 w-7 items-center justify-center rounded transition-colors duration-100 ${
+              isActive 
+                ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-zinc-50' 
+                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
+            }`}
             type="button"
-            aria-label={`Switch to ${theme.label} theme`}
-            data-id={theme.id}
+            aria-label={`Switch to ${themeOption.label} theme`}
+            onClick={() => setTheme(themeOption.id)}
           >
-            {theme.icon}
+            {themeOption.icon}
           </button>
         )
       })}
-    </AnimatedBackground>
+    </div>
   )
 }
 
@@ -70,7 +62,7 @@ export function Footer() {
   return (
     <footer className="mt-12 border-t border-gray-200 dark:border-gray-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="https://github.com/KOUSTAV2409" target="_blank">
+        <a href="https://github.com/KOUSTAV2409" target="_blank" rel="noopener noreferrer">
           <TextLoop className="text-sm text-gray-500 dark:text-zinc-500 font-medium">
             <span>© 2025 Koustav </span>
             <span>Built with ❤️ by Koustav</span>
