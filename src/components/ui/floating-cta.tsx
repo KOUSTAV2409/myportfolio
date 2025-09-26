@@ -27,13 +27,11 @@ export function FloatingCTA() {
         >
           <Magnetic intensity={0.4} springOptions={{ bounce: 0.2 }}>
             <a
-              href="https://cal.com/iamk-xyz/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:koustavganguly24@gmail.com?subject=Project Inquiry&body=Hi Koustav, I'd like to discuss a project with you."
               className="group flex items-center gap-3 px-6 py-4 bg-black text-white dark:bg-white dark:text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm"
               data-cursor-hover
             >
-              <span>Let&apos;s talk</span>
+              <span>Work with me</span>
               <motion.div
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

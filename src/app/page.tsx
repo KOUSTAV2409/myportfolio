@@ -166,48 +166,80 @@ export default function HomePage() {
           {/* Main Value Proposition */}
           <div className="space-y-4">
             <h1 id="hero-heading" className="text-3xl sm:text-4xl font-semibold text-black dark:text-white leading-tight tracking-tight">
-              I solve your business problems 
-              <span className="text-gray-500 dark:text-gray-400"> with code</span>
+              Frontend Developer & Technical Writer
+              <span className="text-gray-500 dark:text-gray-400"> who builds and teaches</span>
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto font-normal">
-              Strategic consulting + custom development that drives real results.
+              I build exceptional web applications and explain complex technical concepts clearly. Whether you need code or clarity, I deliver both.
             </p>
+          </div>
+
+          {/* Multi-faceted Identity */}
+          <div className="flex items-center justify-center gap-4 text-sm">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-full">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-blue-700 dark:text-blue-300 font-medium">Developer</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 rounded-full">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-purple-700 dark:text-purple-300 font-medium">Writer</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 rounded-full">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-green-700 dark:text-green-300 font-medium">Problem Solver</span>
+            </div>
           </div>
 
           {/* Availability & Social Proof */}
-          <div className="flex items-center justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-400 font-medium">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span>2 spots left this month</span>
+          <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+              <span>Available for projects</span>
             </div>
-            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
-              <span>$2M+ in client revenue generated</span>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+              <span>15K+ GitHub stars</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+              <span>5K+ monthly readers</span>
             </div>
           </div>
 
-          {/* Single Primary CTA */}
-          <div className="pt-1 -mt-1">
+          {/* Dual CTA */}
+          <div className="flex items-center justify-center gap-4 pt-1">
             <a
-              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
-              href="https://cal.com/iamk-xyz/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Book a free 30-minute strategy call"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
+              href="mailto:koustavganguly24@gmail.com?subject=Development Project Inquiry&body=Hi Koustav, I'd like to discuss a development project with you."
+              aria-label="Hire for development project"
               data-cursor-hover
-              onClick={() => trackCTAClick('consultation', 'hero')}
+              onClick={() => trackCTAClick('development', 'hero')}
             >
-              Book a free strategy call
-              <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-0.5">
+              Hire me to build
+              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
               </svg>
             </a>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-              30-min strategy session • No commitment required
-            </p>
+            <a
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 font-medium text-sm hover:shadow-md"
+              href="https://syntaxandsoul.hashnode.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read technical writing"
+              data-cursor-hover
+              onClick={() => trackCTAClick('writing', 'hero')}
+            >
+              Read my writing
+              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+              </svg>
+            </a>
           </div>
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+            Development projects • Technical writing • Educational content
+          </p>
 
-          {/* Recent Work Highlight */}
+          {/* Featured Work */}
           <div className="pt-6 border-t border-gray-100 dark:border-gray-800/30">
             <div className="text-center space-y-3">
               <p className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide uppercase">
@@ -215,21 +247,21 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-center gap-4 text-sm">
                 <a 
-                  href="https://pro.motion-primitives.com/" 
+                  href="https://motion-primitives.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
                 >
-                  Motion Primitives Pro
+                  Motion Primitives
                 </a>
                 <span className="text-gray-300 dark:text-gray-700">•</span>
                 <a 
-                  href="https://reglazedstudio.com" 
+                  href="https://syntaxandsoul.hashnode.dev/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
                 >
-                  Reglazed Studio
+                  Technical Blog
                 </a>
               </div>
             </div>
@@ -249,27 +281,27 @@ export default function HomePage() {
               <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">Revenue-First Development</h4>
+              <h4 className="text-black dark:text-white font-medium text-sm">Frontend Development</h4>
               <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Every line of code tied to business metrics and ROI
+                React, Next.js, and TypeScript applications with 90+ Lighthouse scores
               </p>
             </div>
             <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
               <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto">
                 <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
               </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">48-Hour Problem Solving</h4>
+              <h4 className="text-black dark:text-white font-medium text-sm">Technical Writing</h4>
               <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Rapid diagnosis and solution delivery when time is critical
+                Developer tutorials, documentation, and educational content
               </p>
             </div>
             <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
               <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">Zero-Fluff Consulting</h4>
+              <h4 className="text-black dark:text-white font-medium text-sm">Problem Solving</h4>
               <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Actionable solutions, not theoretical frameworks
+                CS fundamentals applied to real-world development challenges
               </p>
             </div>
           </div>
@@ -277,16 +309,16 @@ export default function HomePage() {
           {/* Trust Signals */}
           <div className="flex items-center justify-center gap-8 py-4 text-xs text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-              <span>98% Client Satisfaction</span>
-            </div>
-            <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              <span>10K+ Downloads</span>
+              <span>15K+ GitHub Stars</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-              <span>Featured in 5+ Publications</span>
+              <span>5K+ Monthly Readers</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              <span>25+ Projects Delivered</span>
             </div>
           </div>
         </div>

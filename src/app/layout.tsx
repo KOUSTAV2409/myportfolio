@@ -26,25 +26,25 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: 'Koustav Ganguly | Business Problem Solver Through Code & Consultation',
+    default: 'Koustav Ganguly | Frontend Developer & Technical Writer',
     template: '%s | Koustav Ganguly'
   },
-  description: 'I solve business problems through strategic code and consultation. Whether you need technical guidance or custom development, I deliver solutions that drive real outcomes. Plus insights for developers.',
-  keywords: ['Technical Consulting', 'Business Solutions', 'Custom Development', 'React', 'Next.js', 'TypeScript', 'Strategic Planning', 'Developer Insights'],
+  description: 'Frontend Developer & Technical Writer who builds exceptional web applications and explains complex concepts clearly. Specializing in React, Next.js, and developer education.',
+  keywords: ['Frontend Developer', 'Technical Writer', 'React Developer', 'Next.js', 'TypeScript', 'Developer Education', 'Technical Content', 'Problem Solving'],
   authors: [{ name: 'Koustav Ganguly' }],
   creator: 'Koustav Ganguly',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://nim-fawn.vercel.app/',
-    title: 'Koustav Ganguly | Business Problem Solver Through Code & Consultation',
-    description: 'I solve business problems through strategic code and consultation. Available for new projects and sharing developer insights.',
+    title: 'Koustav Ganguly | Frontend Developer & Technical Writer',
+    description: 'Building exceptional web experiences and creating educational content for developers. Available for projects and collaborations.',
     siteName: 'Koustav Ganguly Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Koustav Ganguly | Strategic Technical Consulting',
-    description: 'Strategic technical consulting that bridges code and business needs. Available for new projects.',
+    title: 'Koustav Ganguly | Frontend Developer & Technical Writer',
+    description: 'Frontend Developer & Technical Writer. Building apps and educating developers.',
     creator: '@KoustavGan39466',
   },
   robots: {
