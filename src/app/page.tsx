@@ -12,30 +12,30 @@ import {
 
 // Lazy load heavy components
 const Magnetic = lazy(() => import('@/components/ui/magnetic').then(mod => ({ default: mod.Magnetic })))
-const MorphingDialog = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
-  default: mod.MorphingDialog 
+const MorphingDialog = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
+  default: mod.MorphingDialog
 })))
-const MorphingDialogTrigger = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
-  default: mod.MorphingDialogTrigger 
+const MorphingDialogTrigger = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
+  default: mod.MorphingDialogTrigger
 })))
-const MorphingDialogContent = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
-  default: mod.MorphingDialogContent 
+const MorphingDialogContent = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
+  default: mod.MorphingDialogContent
 })))
-const MorphingDialogClose = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
-  default: mod.MorphingDialogClose 
+const MorphingDialogClose = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
+  default: mod.MorphingDialogClose
 })))
-const MorphingDialogContainer = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({ 
-  default: mod.MorphingDialogContainer 
+const MorphingDialogContainer = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
+  default: mod.MorphingDialogContainer
 })))
-const ProjectDetailModal = lazy(() => import('@/components/project-detail-modal').then(mod => ({ 
-  default: mod.ProjectDetailModal 
+const ProjectDetailModal = lazy(() => import('@/components/project-detail-modal').then(mod => ({
+  default: mod.ProjectDetailModal
 })))
-const ContentShowcase = lazy(() => import('@/components/content-showcase').then(mod => ({ 
-  default: mod.ContentShowcase 
+const ContentShowcase = lazy(() => import('@/components/content-showcase').then(mod => ({
+  default: mod.ContentShowcase
 })))
-const SocialProofShowcase = lazy(() => import('@/components/social-proof-showcase').then(mod => ({ 
-  default: mod.SocialProofShowcase 
-})))
+// const SocialProofShowcase = lazy(() => import('@/components/social-proof-showcase').then(mod => ({
+//   default: mod.SocialProofShowcase
+// })))
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -246,18 +246,18 @@ export default function HomePage() {
                 Recent Work
               </p>
               <div className="flex items-center justify-center gap-4 text-sm">
-                <a 
-                  href="https://motion-primitives.com/" 
-                  target="_blank" 
+                <a
+                  href="https://motion-primitives.com/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
                 >
                   Motion Primitives
                 </a>
                 <span className="text-gray-300 dark:text-gray-700">•</span>
-                <a 
-                  href="https://syntaxandsoul.hashnode.dev/" 
-                  target="_blank" 
+                <a
+                  href="https://syntaxandsoul.hashnode.dev/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
                 >
@@ -362,7 +362,7 @@ export default function HomePage() {
               target: "_blank",
               rel: "noopener noreferrer"
             } : {}
-            
+
             return (
               <Component
                 key={work.id}
@@ -476,8 +476,8 @@ export default function HomePage() {
         <h3 id="projects-heading" className="text-black dark:text-white text-lg font-medium mb-4">Strategic Case Studies</h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project, index) => (
-            <motion.div 
-              key={project.name} 
+            <motion.div
+              key={project.name}
               className="space-y-4 group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -502,11 +502,11 @@ export default function HomePage() {
                     <h4 className="font-semibold text-black dark:text-white text-lg">{project.name}</h4>
                     <span className="text-xs text-gray-500 dark:text-gray-400">{project.year}</span>
                   </div>
-                  
+
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm line-clamp-2">
                     {project.description}
                   </p>
-                  
+
                   <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
                     <span>{project.role}</span>
                     <span>•</span>
@@ -524,7 +524,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Action Buttons */}
                 <div className="flex items-center gap-3 pt-2">
                   <a
@@ -539,9 +539,9 @@ export default function HomePage() {
                       <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
                     </svg>
                   </a>
-                  
+
                   <ProjectDetailModal project={project}>
-                    <button 
+                    <button
                       className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 hover:shadow-md hover:border-gray-400 dark:hover:border-gray-600 transform hover:-translate-y-0.5"
                       data-cursor-hover
                     >
@@ -559,14 +559,14 @@ export default function HomePage() {
       </motion.section>
 
       {/* Pricing & Process Section */}
-      <motion.section
+      {/* <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
         <h3 className="text-black dark:text-white text-lg font-medium mb-6">How we work together</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
           {/* Process */}
-          <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
+          {/* <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
             <h4 className="text-black dark:text-white font-medium">Simple 3-Step Process</h4>
             <div className="space-y-3 text-sm">
               <div className="flex gap-3">
@@ -582,10 +582,10 @@ export default function HomePage() {
                 <span className="text-gray-600 dark:text-gray-300">Deliver results with weekly progress updates</span>
               </div>
             </div>
-          </div>
-          
+          </div> */}
+
           {/* Pricing */}
-          <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
+          {/* <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
             <h4 className="text-black dark:text-white font-medium">Investment Options</h4>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between items-center">
@@ -608,10 +608,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </motion.section> */}
 
       {/* Social Proof Section */}
-      <motion.section
+      {/* <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
@@ -619,7 +619,7 @@ export default function HomePage() {
         <Suspense fallback={<div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
           <SocialProofShowcase />
         </Suspense>
-      </motion.section>
+      </motion.section> */}
 
       {/* Newsletter Section */}
       <motion.section
@@ -633,11 +633,11 @@ export default function HomePage() {
               Stay in the loop
             </h3>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              Get insights on development, business strategy, and computer science. 
+              Get insights on development, business strategy, and computer science.
               <br />No spam, just valuable content when it matters.
             </p>
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
               <input
