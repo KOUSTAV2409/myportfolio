@@ -1,82 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { ArrowUpRight, Calendar, Clock, Heart, MessageCircle, Bookmark, ExternalLink } from 'lucide-react'
-import { PageLayout } from '@/components/page-layout'
-
-interface HashNodePost {
-  id: string
-  title: string
-  brief: string
-  slug: string
-  url: string
-  publishedAt: string
-  readTimeInMinutes: number
-  reactionCount: number
-  responseCount: number
-  tags: Array<{
-    name: string
-    slug: string
-  }>
-  coverImage?: {
-    url: string
-  }
-}
-
-const HASHNODE_QUERY = `
-  query GetUserPosts($username: String!) {
-    user(username: $username) {
-      posts(page: 1, pageSize: 10) {
-        nodes {
-          id
-          title
-          brief
-          slug
-          url
-          publishedAt
-          readTimeInMinutes
-          reactionCount
-          responseCount
-          tags {
-            name
-            slug
-          }
-          coverImage {
-            url
-          }
-        }
-      }
-    }
-  }
-`
+import { ArrowUpRight, Calendar, Clock, Heart, MessageCircle, ExternalLink } from 'lucide-react'
+import { getAllPosts, Post } from '@/lib/hashnode'
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<HashNodePost[]>([])
+  const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://gql.hashnode.com/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query: HASHNODE_QUERY,
-            variables: {
-              username: 'ganguly607'
-            }
-          })
-        })
-
-        const data = await response.json()
-        
-        if (data.errors) {
-          throw new Error(data.errors[0].message)
-        }
-
-        setPosts(data.data.user.posts.nodes || [])
+        const fetchedPosts = await getAllPosts()
+        setPosts(fetchedPosts)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch posts')
       } finally {
@@ -93,6 +29,10 @@ export default function BlogPage() {
       day: 'numeric',
       year: 'numeric'
     })
+  }
+
+  const calculateReadTime = (content: string) => {
+    return Math.ceil(content.length / 1000) + ' min read'
   }
 
   if (loading) {
@@ -191,7 +131,7 @@ export default function BlogPage() {
                             {formatDate(post.publishedAt)}
                           </time>
                           <span>·</span>
-                          <span>{post.readTimeInMinutes} min read</span>
+                          <span>{calculateReadTime(post.content.markdown)}</span>
                         </div>
                       </div>
                     </div>
@@ -200,7 +140,7 @@ export default function BlogPage() {
                       <h3 className={`font-bold leading-tight group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors ${
                         index === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'
                       }`}>
-                        <a href={post.url} target="_blank" rel="noopener noreferrer">
+                        <a href={`/blog/${post.slug}`}>
                           {post.title}
                         </a>
                       </h3>
@@ -212,33 +152,12 @@ export default function BlogPage() {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag.slug}
-                            className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded text-xs hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
-                          >
-                            {tag.name}
-                          </span>
-                        ))}
-                      </div>
-                      
                       <div className="flex items-center gap-4 text-gray-500 text-sm">
-                        <div className="flex items-center gap-1 hover:text-red-500 transition-colors">
-                          <Heart className="w-4 h-4" />
-                          <span>{post.reactionCount}</span>
-                        </div>
-                        <div className="flex items-center gap-1 hover:text-blue-500 transition-colors">
-                          <MessageCircle className="w-4 h-4" />
-                          <span>{post.responseCount}</span>
-                        </div>
                         <a 
-                          href={post.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
+                          href={`/blog/${post.slug}`}
                           className="hover:text-blue-500 transition-colors"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <ArrowUpRight className="w-4 h-4" />
                         </a>
                       </div>
                     </div>
@@ -247,11 +166,13 @@ export default function BlogPage() {
                   {/* Cover Image */}
                   {post.coverImage && (
                     <div className="w-32 h-20 flex-shrink-0 hidden sm:block">
-                      <img 
-                        src={post.coverImage.url} 
-                        alt={post.title}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                      <a href={`/blog/${post.slug}`}>
+                        <img 
+                          src={post.coverImage.url} 
+                          alt={post.title}
+                          className="w-full h-full object-cover rounded-lg hover:opacity-80 transition-opacity"
+                        />
+                      </a>
                     </div>
                   )}
                 </div>
