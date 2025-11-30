@@ -1,687 +1,203 @@
 'use client'
-import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
+import { ArrowUpRight, Mail, Github, Linkedin } from 'lucide-react'
 import { lazy, Suspense } from 'react'
-import { trackCTAClick } from '@/lib/analytics'
+import { PageLayout, PageSection, SectionHeader, JobTitle } from '@/components/page-layout'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
   SOCIAL_LINKS,
-  SKILLS,
+  EMAIL
 } from './data'
 
-// Lazy load heavy components
 const Magnetic = lazy(() => import('@/components/ui/magnetic').then(mod => ({ default: mod.Magnetic })))
-const MorphingDialog = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
-  default: mod.MorphingDialog
-})))
-const MorphingDialogTrigger = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
-  default: mod.MorphingDialogTrigger
-})))
-const MorphingDialogContent = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
-  default: mod.MorphingDialogContent
-})))
-const MorphingDialogClose = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
-  default: mod.MorphingDialogClose
-})))
-const MorphingDialogContainer = lazy(() => import('@/components/ui/morphing-dialog').then(mod => ({
-  default: mod.MorphingDialogContainer
-})))
-const ProjectDetailModal = lazy(() => import('@/components/project-detail-modal').then(mod => ({
-  default: mod.ProjectDetailModal
-})))
-const ContentShowcase = lazy(() => import('@/components/content-showcase').then(mod => ({
-  default: mod.ContentShowcase
-})))
-// const SocialProofShowcase = lazy(() => import('@/components/social-proof-showcase').then(mod => ({
-//   default: mod.SocialProofShowcase
-// })))
-
-const VARIANTS_CONTAINER = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const VARIANTS_SECTION = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-}
-
-const TRANSITION_SECTION = {
-  duration: 0.4,
-}
-
-type ProjectVideoProps = {
-  src: string
-}
-
-function ProjectVideo({ src }: ProjectVideoProps) {
-  return (
-    <Suspense fallback={<div className="aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
-      <MorphingDialog
-        transition={{
-          type: 'spring',
-          bounce: 0,
-          duration: 0.3,
-        }}
-      >
-      <MorphingDialogTrigger>
-        <video
-          src={src}
-          autoPlay
-          loop
-          muted
-          preload="metadata"
-          aria-label="Project demonstration video"
-          className="aspect-video w-full cursor-zoom-in rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
-        />
-      </MorphingDialogTrigger>
-      <MorphingDialogContainer>
-        <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-900 p-1">
-          <video
-            src={src}
-            autoPlay
-            loop
-            muted
-            preload="auto"
-            className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
-          />
-        </MorphingDialogContent>
-        <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
-          variants={{
-            initial: { opacity: 0 },
-            animate: {
-              opacity: 1,
-              transition: { delay: 0.3, duration: 0.1 },
-            },
-            exit: { opacity: 0, transition: { duration: 0 } },
-          }}
-        >
-          <XIcon className="h-5 w-5 text-zinc-500" />
-        </MorphingDialogClose>
-      </MorphingDialogContainer>
-    </MorphingDialog>
-    </Suspense>
-  )
-}
-
-function MagneticSocialLink({
-  children,
-  link,
-}: {
-  children: React.ReactNode
-  link: string
-}) {
-  return (
-    <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Visit ${children} profile`}
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-gray-200 dark:bg-gray-800 px-2.5 py-1 text-sm text-gray-800 dark:text-gray-100 transition-colors duration-200 hover:bg-gray-800 hover:text-white dark:hover:bg-white dark:hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
-      >
-        {children}
-        <svg
-          width="15"
-          height="15"
-          viewBox="0 0 15 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-3 w-3"
-        >
-          <path
-            d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z"
-            fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      </a>
-    </Magnetic>
-  )
-}
 
 export default function HomePage() {
   return (
-      <motion.main
-        className="space-y-12"
-        variants={VARIANTS_CONTAINER}
-        initial="hidden"
-        animate="visible"
-      >
-      {/* Hero Section */}
-      <motion.section
-        aria-labelledby="hero-heading"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <div className="space-y-8 text-center">
-          {/* Main Value Proposition */}
+    <PageLayout>
+      {/* Enhanced Hero */}
+      <PageSection>
+        <div className="space-y-8">
           <div className="space-y-4">
-            <h1 id="hero-heading" className="text-3xl sm:text-4xl font-semibold text-black dark:text-white leading-tight tracking-tight">
-              Frontend Developer & Technical Writer
-              <span className="text-gray-500 dark:text-gray-400"> who builds and teaches</span>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight leading-[1.1]">
+              I build tools that developers love and write guides that actually help
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto font-normal">
-              I build exceptional web applications and explain complex technical concepts clearly. Whether you need code or clarity, I deliver both.
+            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+              Full-Stack Developer specializing in React ecosystems and developer education. 
+              Currently building internal tools at EdTech platforms while contributing to open-source projects.
             </p>
+            <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
+              <span className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                Available for projects
+              </span>
+              <span>•</span>
+              <span>Bongaon, India</span>
+            </div>
           </div>
+          
+          <div className="flex items-center gap-6">
+            <Suspense fallback={<div className="w-8 h-8" />}>
+              <Magnetic>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:opacity-80 transition-opacity"
+                >
+                  <Mail className="w-4 h-4" />
+                  Let's build something together
+                </a>
+              </Magnetic>
+            </Suspense>
+            
+            <div className="flex items-center gap-4">
+              {SOCIAL_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                  title={link.label}
+                >
+                  {link.label === 'GitHub' && <Github className="w-5 h-5" />}
+                  {link.label === 'LinkedIn' && <Linkedin className="w-5 h-5" />}
+                  {!['GitHub', 'LinkedIn'].includes(link.label) && (
+                    <ArrowUpRight className="w-5 h-5" />
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </PageSection>
 
-          {/* Multi-faceted Identity */}
-          <div className="flex items-center justify-center gap-4 text-sm">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-full">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className="text-blue-700 dark:text-blue-300 font-medium">Developer</span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 rounded-full">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-purple-700 dark:text-purple-300 font-medium">Writer</span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 rounded-full">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-green-700 dark:text-green-300 font-medium">Problem Solver</span>
-            </div>
-          </div>
-
-          {/* Availability & Social Proof */}
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-              <span>Available for projects</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              <span>15K+ GitHub stars</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-              <span>5K+ monthly readers</span>
-            </div>
-          </div>
-
-          {/* Dual CTA */}
-          <div className="flex items-center justify-center gap-4 pt-1">
-            <a
-              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white dark:bg-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-black"
-              href="mailto:koustavganguly24@gmail.com?subject=Development Project Inquiry&body=Hi Koustav, I'd like to discuss a development project with you."
-              aria-label="Hire for development project"
-              data-cursor-hover
-              onClick={() => trackCTAClick('development', 'hero')}
-            >
-              Hire me to build
-              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 font-medium text-sm hover:shadow-md"
-              href="https://syntaxandsoul.hashnode.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Read technical writing"
-              data-cursor-hover
-              onClick={() => trackCTAClick('writing', 'hero')}
-            >
-              Read my writing
-              <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-            </a>
-          </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-            Development projects • Technical writing • Educational content
+      {/* Currently Working */}
+      <PageSection>
+        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6 space-y-3">
+          <h2 className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-[0.15em]">Currently</h2>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Building automation workflows at BiswasCompany • Contributing to EasyGoDocs (documentation tool) • 
+            Learning Ruby on Rails • Writing about JavaScript fundamentals
           </p>
-
-          {/* Featured Work */}
-          <div className="pt-6 border-t border-gray-100 dark:border-gray-800/30">
-            <div className="text-center space-y-3">
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide uppercase">
-                Recent Work
-              </p>
-              <div className="flex items-center justify-center gap-4 text-sm">
-                <a
-                  href="https://motion-primitives.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
-                >
-                  Motion Primitives
-                </a>
-                <span className="text-gray-300 dark:text-gray-700">•</span>
-                <a
-                  href="https://syntaxandsoul.hashnode.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-300"
-                >
-                  Technical Blog
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-      </motion.section>
+      </PageSection>
 
-      {/* About Details Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
+      {/* Experience with Achievements */}
+      <PageSection>
         <div className="space-y-6">
-          {/* Service Areas */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
-              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+          <SectionHeader>Experience</SectionHeader>
+          <div className="space-y-6">
+            {WORK_EXPERIENCE.slice(0, 2).map((job) => (
+              <div key={job.id}>
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <JobTitle>{job.title}</JobTitle>
+                    <p className="text-gray-600 dark:text-gray-400 font-medium">{job.company}</p>
+                  </div>
+                  <div className="text-sm text-gray-500 font-medium">
+                    {job.start} – {job.end}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {job.id === 'biswas-company' && "Building React dashboards • Optimizing team workflows"}
+                  {job.id === 'sisyphus-infotech' && "Full-stack features • Production git workflows"}
+                </p>
               </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">Frontend Development</h4>
-              <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                React, Next.js, and TypeScript applications with 90+ Lighthouse scores
-              </p>
-            </div>
-            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
-              <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto">
-                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-              </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">Technical Writing</h4>
-              <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                Developer tutorials, documentation, and educational content
-              </p>
-            </div>
-            <div className="space-y-2 p-4 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
-              <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <h4 className="text-black dark:text-white font-medium text-sm">Problem Solving</h4>
-              <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
-                CS fundamentals applied to real-world development challenges
-              </p>
-            </div>
-          </div>
-
-          {/* Trust Signals */}
-          <div className="flex items-center justify-center gap-8 py-4 text-xs text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              <span>15K+ GitHub Stars</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-              <span>5K+ Monthly Readers</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-              <span>25+ Projects Delivered</span>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Technologies Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <div className="space-y-4">
-          <h3 className="text-black dark:text-white text-lg font-medium">Technologies</h3>
-          <div className="flex flex-wrap gap-2">
-            {SKILLS.map((skill, index) => (
-              <motion.span
-                key={skill}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
-                className="px-3 py-1.5 text-sm bg-gray-200/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg text-gray-800 dark:text-gray-200 hover:bg-[#14b8a6]/10 hover:text-[#14b8a6] hover:border-[#14b8a6]/20 transition-all duration-300 cursor-default hover:shadow-md hover:scale-105 border border-gray-300/20 dark:border-gray-700/20"
-              >
-                {skill}
-              </motion.span>
             ))}
           </div>
         </div>
-      </motion.section>
+      </PageSection>
 
-      {/* Work Experience Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-        aria-labelledby="experience-heading"
-      >
-        <h3 id="experience-heading" className="text-black dark:text-white text-lg font-medium mb-4">Experience</h3>
-        <div className="space-y-0">
-          {WORK_EXPERIENCE.map((work, index) => {
-            const Component = work.link ? 'a' : 'div'
-            const linkProps = work.link ? {
-              href: work.link,
-              target: "_blank",
-              rel: "noopener noreferrer"
-            } : {}
-
-            return (
-              <Component
-                key={work.id}
-                className={`group flex gap-3 py-4 ${index !== WORK_EXPERIENCE.length - 1 ? 'border-b border-gray-100 dark:border-gray-800/30' : ''} ${work.link ? 'hover:bg-gray-50/80 dark:hover:bg-gray-900/20 cursor-pointer' : ''} transition-all duration-300 -mx-2 px-2 rounded-lg hover:shadow-sm`}
-                {...linkProps}
-              >
-                {/* Company Logo */}
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg flex items-center justify-center shadow-sm ring-1 ring-gray-200/20 dark:ring-gray-700/20 group-hover:shadow-md transition-all duration-300">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium text-xs group-hover:scale-110 transition-transform duration-300">
-                      {work.company.charAt(0)}
-                    </span>
-                  </div>
+      {/* Projects with Metrics */}
+      <PageSection>
+        <div className="space-y-8">
+          {/* Projects */}
+          <div className="space-y-6">
+            <SectionHeader>Selected Projects</SectionHeader>
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-lg font-bold tracking-tight">EasyGoDocs</h3>
+                  <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-full font-semibold">Open Source</span>
+                  <a
+                    href="https://github.com/EasyGoDocs/easygodocs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
                 </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1 min-w-0">
-                      <h4 className={`font-medium text-black dark:text-white text-sm leading-tight truncate ${work.link ? 'group-hover:text-blue-600 dark:group-hover:text-blue-400' : ''} transition-colors duration-300`}>
-                        {work.title}
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm truncate group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">{work.company}</p>
-                      <p className="text-gray-500 dark:text-gray-500 text-xs mt-0.5 group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors duration-300">
-                        {work.start} - {work.end}
-                        {work.location && ` · ${work.location}`}
-                      </p>
-                    </div>
-                    {work.link && (
-                      <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 ml-2 transform group-hover:translate-x-1">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:text-blue-500">
-                          <path d="M7 17L17 7"/>
-                          <path d="M7 7h10v10"/>
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Component>
-            )
-          })}
-        </div>
-      </motion.section>
-
-      {/* Content Expertise Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <div className="space-y-4">
-          <h3 className="text-black dark:text-white text-lg font-medium">Content Expertise</h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200">
-              <div className="flex items-center gap-3">
-                <span className="text-lg">🧠</span>
-                <div>
-                  <div className="text-black dark:text-white font-medium text-sm">CS Theory</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-xs">Algorithms & Data Structures</div>
-                </div>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
+                  Lightweight documentation template with search and dark mode. Used by multiple projects for technical documentation.
+                </p>
+                <p className="text-sm text-gray-500 font-medium">React • Markdown • Search • Community-driven</p>
               </div>
-            </div>
-            <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200">
-              <div className="flex items-center gap-3">
-                <span className="text-lg">📐</span>
-                <div>
-                  <div className="text-black dark:text-white font-medium text-sm">Mathematics</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-xs">Applied Math & Logic</div>
+
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-lg font-bold tracking-tight">sstocode</h3>
+                  <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded-full font-semibold">AI Tool</span>
+                  <a
+                    href="https://github.com/KOUSTAV2409/sstocode"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
                 </div>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
+                  Screenshot to React code generator. Accelerates frontend development workflow for UI components.
+                </p>
+                <p className="text-sm text-gray-500 font-medium">React • Tailwind • AI/ML • Developer Tools</p>
               </div>
-            </div>
-            <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200">
-              <div className="flex items-center gap-3">
-                <span className="text-lg">📊</span>
-                <div>
-                  <div className="text-black dark:text-white font-medium text-sm">Business Analysis</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-xs">Strategy & Decision Making</div>
+
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-lg font-bold tracking-tight">Portfolio Template</h3>
+                  <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-2.5 py-1 rounded-full font-semibold">Template</span>
                 </div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between py-3 px-4 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200">
-              <div className="flex items-center gap-3">
-                <span className="text-lg">⚡</span>
-                <div>
-                  <div className="text-black dark:text-white font-medium text-sm">Tech Insights</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-xs">Frameworks & Tools</div>
-                </div>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
+                  Modern Next.js portfolio with blog. Reusable template for developers to showcase their work.
+                </p>
+                <p className="text-sm text-gray-500 font-medium">Next.js • TypeScript • MDX • Performance Optimized</p>
               </div>
             </div>
           </div>
-        </div>
-      </motion.section>
 
-      {/* Writing & Research Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-6">Writing & Research</h3>
-        <Suspense fallback={<div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
-          <ContentShowcase />
-        </Suspense>
-      </motion.section>
-
-      {/* Projects Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-        id="projects"
-        aria-labelledby="projects-heading"
-      >
-        <h3 id="projects-heading" className="text-black dark:text-white text-lg font-medium mb-4">Strategic Case Studies</h3>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.map((project, index) => (
-            <motion.div
-              key={project.name}
-              className="space-y-4 group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {/* Video Preview */}
-              <div className="relative rounded-2xl bg-gray-100/40 dark:bg-gray-900/40 p-1 ring-1 ring-gray-200/50 dark:ring-gray-800/50 ring-inset hover:ring-gray-300/50 dark:hover:ring-gray-700/50 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-gray-200/20 dark:group-hover:shadow-gray-900/20 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative" data-cursor-hover>
-                  <ProjectVideo src={project.video} />
-                </div>
-                {/* Video Preview Label */}
-                <div className="absolute top-3 left-3 px-2 py-1 bg-black/70 backdrop-blur-md text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105">
-                  Preview
-                </div>
+          {/* Skills with Specialization */}
+          <div className="space-y-6">
+            <SectionHeader>Specializing In</SectionHeader>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-base font-bold text-gray-700 dark:text-gray-300 mb-2 tracking-tight">Frontend Excellence</h3>
+                <p className="text-gray-600 dark:text-gray-400 font-medium">
+                  React • Next.js • TypeScript • Tailwind CSS • Component Architecture
+                </p>
               </div>
-
-              {/* Project Info */}
-              <div className="px-1 space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-semibold text-black dark:text-white text-lg">{project.name}</h4>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">{project.year}</span>
-                  </div>
-
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
-                    <span>{project.role}</span>
-                    <span>•</span>
-                    <span>{project.tech}</span>
-                  </div>
-
-                  {/* Key Metrics */}
-                  <div className="p-3 bg-gray-50/50 dark:bg-gray-900/30 rounded-lg border border-gray-200/30 dark:border-gray-800/30">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 bg-[#14b8a6] rounded-full"></div>
-                      <span className="text-xs font-medium text-[#14b8a6]">Key Impact</span>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                      {project.metrics}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex items-center gap-3 pt-2">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#14b8a6] rounded-lg hover:bg-[#0f9488] transition-all duration-300 hover:shadow-lg hover:shadow-teal-200/20 dark:hover:shadow-teal-900/20 transform hover:-translate-y-0.5"
-                    data-cursor-hover
-                  >
-                    View Live
-                    <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-                    </svg>
-                  </a>
-
-                  <ProjectDetailModal project={project}>
-                    <button
-                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 hover:shadow-md hover:border-gray-400 dark:hover:border-gray-600 transform hover:-translate-y-0.5"
-                      data-cursor-hover
-                    >
-                      Case Study
-                      <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </ProjectDetailModal>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Pricing & Process Section */}
-      {/* <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-6">How we work together</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-          {/* Process */}
-          {/* <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
-            <h4 className="text-black dark:text-white font-medium">Simple 3-Step Process</h4>
-            <div className="space-y-3 text-sm">
-              <div className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-xs font-medium text-blue-600 dark:text-blue-400">1</span>
-                <span className="text-gray-600 dark:text-gray-300">Free 30-min strategy call to understand your challenge</span>
-              </div>
-              <div className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-xs font-medium text-blue-600 dark:text-blue-400">2</span>
-                <span className="text-gray-600 dark:text-gray-300">Custom proposal with timeline and fixed pricing</span>
-              </div>
-              <div className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-xs font-medium text-blue-600 dark:text-blue-400">3</span>
-                <span className="text-gray-600 dark:text-gray-300">Deliver results with weekly progress updates</span>
-              </div>
-            </div>
-          </div> */}
-
-          {/* Pricing */}
-          {/* <div className="space-y-4 p-6 rounded-xl bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200/30 dark:border-gray-800/30">
-            <h4 className="text-black dark:text-white font-medium">Investment Options</h4>
-            <div className="space-y-3 text-sm">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Strategy Session</span>
-                <span className="font-medium text-black dark:text-white">Free</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Technical Audit</span>
-                <span className="font-medium text-black dark:text-white">$2,500</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Custom Development</span>
-                <span className="font-medium text-black dark:text-white">$15K+</span>
-              </div>
-              <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  All projects include 30-day support guarantee
+              <div>
+                <h3 className="text-base font-bold text-gray-700 dark:text-gray-300 mb-2 tracking-tight">Developer Experience</h3>
+                <p className="text-gray-600 dark:text-gray-400 font-medium">
+                  Documentation • Developer Tools • Performance Optimization • Technical Writing
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </motion.section> */}
+      </PageSection>
 
-      {/* Social Proof Section */}
-      {/* <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">What people say</h3>
-        <Suspense fallback={<div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />}>
-          <SocialProofShowcase />
-        </Suspense>
-      </motion.section> */}
-
-      {/* Newsletter Section */}
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-        className="py-16 text-center"
-      >
-        <div className="max-w-lg mx-auto space-y-8">
-          <div className="space-y-4">
-            <h3 className="text-2xl font-semibold text-black dark:text-white tracking-tight">
-              Stay in the loop
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              Get insights on development, business strategy, and computer science.
-              <br />No spam, just valuable content when it matters.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200"
-              />
-              <button className="px-8 py-3 bg-black text-white dark:bg-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 font-medium whitespace-nowrap transform hover:-translate-y-0.5 hover:shadow-lg">
-                Subscribe
-              </button>
+      {/* Enhanced Footer */}
+      <PageSection>
+        <div className="pt-8 border-t border-gray-200 dark:border-gray-800 space-y-3">
+          <div className="flex justify-between items-center text-sm text-gray-500">
+            <div className="space-y-1">
+              <div className="font-medium">Bongaon, India • Open to remote opportunities</div>
+              <div>Writing at <a href="https://syntaxandsoul.hashnode.dev/" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors font-medium underline decoration-1 underline-offset-2">Syntax & Soul</a></div>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Join 500+ developers and business leaders • Unsubscribe anytime
-            </p>
+            <span className="font-medium">© 2024</span>
           </div>
         </div>
-      </motion.section>
-
-      {/* Connect Section */}
-      <motion.section
-        id="connect"
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-        className="pt-12 border-t border-gray-200 dark:border-gray-800"
-      >
-        <h3 className="text-black dark:text-white text-lg font-medium mb-4">Ready to work together?</h3>
-        <div className="space-y-4">
-          <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed font-normal">
-            <strong>For Business Leaders:</strong> Need strategic technical guidance or custom development? Let&apos;s discuss how I can solve your specific challenges.<br/><br/>
-            <strong>For Developers:</strong> Follow my insights on building better products and growing your technical career.
-          </p>
-          <div className="flex items-center gap-3">
-            <span className="text-gray-500 dark:text-gray-400 font-medium text-sm">Connect with me</span>
-            <div className="flex items-center gap-2">
-              {SOCIAL_LINKS.map((link) => (
-                <MagneticSocialLink key={link.label} link={link.link}>
-                  {link.label}
-                </MagneticSocialLink>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.section>
-      </motion.main>
+      </PageSection>
+    </PageLayout>
   )
 }
-

@@ -53,100 +53,166 @@ type SocialLink = {
 }
 
 export const PROJECTS: Project[] = [
-  
   {
-    name: 'Motion Primitives Pro',
-    description: 'Premium React animation library that generated $50K+ revenue in Q1. Reduced development time by 60% for 500+ developers across 20+ countries.',
-    link: 'https://pro.motion-primitives.com/',
-    video: 'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
-    id: 'project1',
+    name: 'EasyGoDocs',
+    description: 'A lightweight, searchable documentation template for clearing any doubt about programming and related topics. Added features like dark mode, full-text search, and Markdown enhancements.',
+    link: 'https://github.com/EasyGoDocs/easygodocs',
+    video: '/videos/easygodocs.mp4',
+    id: 'easygodocs',
     year: '2024',
-    role: 'Product Strategy & Development',
-    tech: 'React, TypeScript, Framer Motion',
-    clientType: 'Product Business',
-    timeline: '6 months',
-    challenge: 'Developers needed production-ready animated components but existing solutions were either too basic or too complex. The market had a gap between free basic components and expensive custom development.',
+    role: 'Contributor & Maintainer',
+    tech: 'React, Markdown, Search, Dark Mode',
+    clientType: 'Open Source Community',
+    timeline: 'Ongoing',
+    challenge: 'Developers needed a simple, searchable documentation template for programming concepts and tutorials.',
     approach: [
-      'Market research with 200+ developers to identify pain points',
-      'Competitive analysis of existing animation libraries',
-      'MVP development with 10 core components',
-      'Beta testing with select development teams',
-      'Iterative improvement based on user feedback'
+      'Built lightweight documentation framework',
+      'Implemented full-text search functionality',
+      'Added dark mode support for better user experience',
+      'Enhanced Markdown rendering capabilities'
     ],
-    solution: 'Created a premium component library with 50+ production-ready animated components, comprehensive documentation, TypeScript support, and framework-agnostic design patterns.',
+    solution: 'Created EasyGoDocs - an open-source documentation template with search, dark mode, and enhanced Markdown support.',
     impact: [
-      'Reduced development time by 60% for teams building animated interfaces',
-      'Generated $50K+ in first quarter through premium subscriptions',
-      'Built community of 500+ developers across 20+ countries',
+      'Used by multiple open-source projects',
+      'Improved documentation accessibility',
+      'Enhanced developer learning experience',
       'Featured in 5+ major developer publications'
     ],
     metrics: '500+ subscribers, $50K+ revenue, 95% satisfaction rate',
     github: 'https://github.com/KOUSTAV2409'
   },
   {
-    name: 'Motion Primitives',
-    description: 'Open-source React animation library with 15K+ GitHub stars. Used by 1000+ developers monthly, featured in React newsletters and developer communities.',
-    link: 'https://motion-primitives.com/',
-    video: 'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
-    id: 'project2',
-    year: '2023',
-    role: 'Open Source Strategy & Development',
-    tech: 'Next.js, Tailwind CSS, Motion',
+    name: 'sstocode',
+    description: 'Upload a UI screenshot → generate React + Tailwind component code. An open source tool for converting designs to code.',
+    link: 'https://github.com/KOUSTAV2409/sstocode',
+    video: '/videos/sstocode.mp4',
+    id: 'sstocode',
+    year: '2024',
+    role: 'Contributor & Maintainer',
+    tech: 'React, Tailwind CSS, AI/ML, Image Processing',
     clientType: 'Developer Community',
-    timeline: '4 months',
-    challenge: 'React developers struggled with implementing smooth animations due to lack of accessible, well-documented components. Existing solutions were either too complex or poorly maintained.',
+    timeline: 'Ongoing',
+    challenge: 'Developers needed a tool to quickly convert UI screenshots into working React components.',
     approach: [
-      'Community research through developer surveys and forums',
-      'Built MVP with 15 essential animated components',
-      'Created comprehensive documentation with live examples',
-      'Established contribution guidelines and community standards',
-      'Implemented automated testing and CI/CD pipeline'
+      'Implemented image processing algorithms',
+      'Built React component generation logic',
+      'Integrated Tailwind CSS class mapping',
+      'Created user-friendly interface'
     ],
-    solution: 'Launched open-source library with 30+ animated components, interactive documentation site, and active community contribution system.',
+    solution: 'Developed sstocode - a tool that converts UI screenshots into React + Tailwind component code automatically.',
     impact: [
-      'Achieved 10K+ monthly downloads within 6 months',
-      'Gained 1000+ GitHub stars and 50+ contributors',
-      'Reduced animation implementation time by 80% for developers',
-      'Became foundation for premium product line'
+      'Accelerated frontend development workflow',
+      'Reduced manual coding time for UI components',
+      'Open source tool for developer community',
+      'Continuous improvements and feature additions'
     ],
-    metrics: '10K+ downloads/month, 1K+ GitHub stars, 50+ contributors',
-    github: 'https://github.com/KOUSTAV2409/motion-primitives'
+    metrics: 'Open source tool',
+    github: 'https://github.com/KOUSTAV2409/sstocode'
+  },
+  {
+    name: 'iamk.xyz Portfolio',
+    description: 'Full-stack Next.js + Tailwind site (self-designed and deployed). Serves as my main showcase and blog platform where I publish in-depth technical articles. Anyone can use this template to create their portfolio as well.',
+    link: 'https://www.iamk.xyz',
+    video: '/videos/portfolio.mp4',
+    id: 'portfolio',
+    year: '2024',
+    role: 'Designer & Developer',
+    tech: 'Next.js, Tailwind CSS, TypeScript, MDX',
+    clientType: 'Personal Project',
+    timeline: '3 months',
+    challenge: 'Needed a modern, performant portfolio site that could serve as both showcase and blog platform.',
+    approach: [
+      'Designed clean, professional interface',
+      'Implemented Next.js for optimal performance',
+      'Added MDX support for technical blog posts',
+      'Created reusable template for others'
+    ],
+    solution: 'Built a full-stack portfolio site with blog functionality, optimized for performance and SEO.',
+    impact: [
+      'Serves as main professional showcase',
+      'Platform for technical writing and education',
+      'Template available for community use',
+      'Excellent performance and SEO scores'
+    ],
+    metrics: 'Personal portfolio & blog',
+    github: 'https://github.com/KOUSTAV2409/myportfolio'
+  },
+  {
+    name: 'Component Library',
+    description: 'Contributed reusable UI components, refactored existing logic, and improved documentation for a community-driven React + Tailwind library.',
+    link: '#',
+    video: '/videos/component-library.mp4',
+    id: 'component-library',
+    year: '2024',
+    role: 'Open-Source Contributor',
+    tech: 'React, Tailwind CSS, TypeScript, Documentation',
+    clientType: 'Open Source Community',
+    timeline: 'Ongoing',
+    challenge: 'Community-driven React library needed better components and documentation.',
+    approach: [
+      'Contributed reusable UI components',
+      'Refactored existing logic for better performance',
+      'Improved documentation and examples',
+      'Enhanced TypeScript support'
+    ],
+    solution: 'Enhanced community library with better components, documentation, and developer experience.',
+    impact: [
+      'Improved component quality and reusability',
+      'Better documentation for community adoption',
+      'Enhanced developer experience',
+      'Active community contribution'
+    ],
+    metrics: 'Open source contribution'
   },
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'EasyGoDocs - Open Source Project',
-    title: 'Founder & Lead Developer',
-    start: 'July 2025',
+    company: 'BiswasCompany (EdTech Platform)',
+    title: 'Full-Stack Developer',
+    start: 'May 2025',
     end: 'Present',
-    location: 'Remote',
+    location: 'Remote / Internal Engineering Team',
     employmentType: 'Full-time',
-    link: 'https://easygodocs.vercel.app/',
-    id: 'work1',
-    description: 'Building modern documentation solutions that make technical writing as simple as coding. Leading open-source initiative to democratize developer documentation.',
+    link: '#',
+    id: 'biswas-company',
+    description: 'Building internal tools, dashboards, and automation workflows using React, Node.js, and REST APIs.',
     achievements: [
-      'Project accepted into Google Summer of Code (GSoC) program',
-      'Attracted 20+ active contributors from global developer community',
-      'Published comprehensive documentation covering 15+ technical topics',
-      'Achieved 95% user satisfaction rate from developer feedback surveys'
+      'Building internal tools, dashboards, and automation workflows using React, Node.js, and REST APIs',
+      'Collaborating with content, product, and engineering teams to optimize internal operations',
+      'Handling feature development, refactoring, and debugging in a fast-paced environment'
     ]
   },
   {
-    company: 'BeliefPro',
-    title: 'Fullstack Developer',
-    start: 'May 2025',
+    company: 'Sisyphus Infotech',
+    title: 'Full-Stack Developer Intern',
+    start: 'March 2025',
+    end: 'May 2025',
+    location: 'Remote',
+    employmentType: 'Internship',
+    link: '#',
+    id: 'sisyphus-infotech',
+    description: 'Worked on both frontend (React) and backend (Node.js) modules.',
+    achievements: [
+      'Worked on both frontend (React) and backend (Node.js) modules',
+      'Built reusable components, API integrations, and small full-stack features',
+      'Practiced production git workflows, code reviews, and collaborative development'
+    ]
+  },
+  {
+    company: 'Freelance',
+    title: 'Full Stack Developer',
+    start: '2022',
     end: 'Present',
     location: 'Remote',
-    employmentType: 'Contract',
-    link: 'https://beliefpro.com/',
-    id: 'work2',
-    description: 'Developing scalable web applications and user interfaces for enterprise clients. Focus on React, Node.js, and modern development practices.',
+    employmentType: 'Freelance',
+    link: '#',
+    id: 'freelance',
+    description: 'Developing custom web applications for various clients.',
     achievements: [
-      'Built 5+ internal tools that improved team productivity by 40%',
-      'Delivered custom solutions for 15+ client projects on time and within budget',
-      'Mentored 5+ junior developers in React best practices and code architecture',
-      'Implemented automated testing that reduced bugs by 60%'
+      'Developing custom web applications for various clients',
+      'Building responsive frontends with React and Next.js',
+      'Creating backend APIs and database solutions'
     ]
   },
   {
@@ -199,7 +265,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       'Achieved WCAG 2.1 AA accessibility compliance on all projects',
       'Maintained 98% client satisfaction rate with 100% project completion'
     ]
-  },
+  }
 ]
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -254,12 +320,8 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
+    label: 'GitHub',
     link: 'https://github.com/KOUSTAV2409',
-  },
-  {
-    label: 'Twitter',
-    link: 'https://x.com/KoustavGan39466',
   },
   {
     label: 'LinkedIn',
@@ -269,18 +331,37 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'Hashnode Blog',
     link: 'https://syntaxandsoul.hashnode.dev/'
   },
+  {
+    label: 'Portfolio Blog',
+    link: 'https://www.iamk.xyz/blog'
+  }
 ]
 
 export const SKILLS = [
+  'JavaScript',
   'React',
   'Next.js',
-  'TypeScript',
   'Node.js',
-  'PostgreSQL',
   'Tailwind CSS',
-  'Framer Motion',
-    'Docker'
+  'shadcn/ui',
+  'Git',
+  'Markdown',
+  'Excalidraw',
+  'VS Code',
+  'REST APIs',
+  'Component design',
+  'State management',
+  'API integration',
+  'Performance optimization',
+  'Ruby & Ruby on Rails (learning)'
 ]
+
+export const EDUCATION = {
+  institution: 'West Bengal State University (WBSU)',
+  degree: 'Bachelor of science in computer science',
+  duration: '2019-2022',
+  cgpa: '8.87 / 10'
+}
 
 export const EMAIL = 'koustavganguly24@gmail.com'
 
