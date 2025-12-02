@@ -143,7 +143,7 @@ export const PROJECTS: Project[] = [
     link: '#',
     video: '/videos/component-library.mp4',
     id: 'component-library',
-    year: '2024',
+    year: '2025',
     role: 'Open-Source Contributor',
     tech: 'React, Tailwind CSS, TypeScript, Documentation',
     clientType: 'Open Source Community',
