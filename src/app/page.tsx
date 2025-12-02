@@ -22,7 +22,7 @@ export default function HomePage() {
               I build tools that developers love and write guides that actually help
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-              Full-Stack Developer specializing in React ecosystems and developer education. 
+              Full-Stack Developer specializing in React ecosystems and developer education.
               Currently building internal tools at EdTech platforms while contributing to open-source projects.
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
@@ -34,7 +34,7 @@ export default function HomePage() {
               <span>Bongaon, India</span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-6">
             <Suspense fallback={<div className="w-8 h-8" />}>
               <Magnetic>
@@ -47,7 +47,7 @@ export default function HomePage() {
                 </a>
               </Magnetic>
             </Suspense>
-            
+
             <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map((link) => (
                 <a
@@ -75,7 +75,7 @@ export default function HomePage() {
         <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6 space-y-3">
           <h2 className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-[0.15em]">Currently</h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            Building automation workflows at BiswasCompany • Contributing to EasyGoDocs (documentation tool) • 
+            Building automation workflows at BiswasCompany • Contributing to EasyGoDocs (documentation tool) •
             Learning Ruby on Rails • Writing about JavaScript fundamentals
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
               <div className="font-medium">Bongaon, India • Open to remote opportunities</div>
               <div>Writing at <a href="https://syntaxandsoul.hashnode.dev/" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors font-medium underline decoration-1 underline-offset-2">Syntax & Soul</a></div>
             </div>
-            <span className="font-medium">© 2024</span>
+            <span className="font-medium">© 2025</span>
           </div>
         </div>
       </PageSection>
