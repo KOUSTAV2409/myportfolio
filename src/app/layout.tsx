@@ -40,12 +40,21 @@ export const metadata: Metadata = {
     title: 'Koustav Ganguly | Frontend Developer & Technical Writer',
     description: 'Building exceptional web experiences and creating educational content for developers. Available for projects and collaborations.',
     siteName: 'Koustav Ganguly Portfolio',
+    images: [
+      {
+        url: '/og-image',
+        width: 1200,
+        height: 630,
+        alt: 'Koustav Ganguly - Frontend Developer & Technical Writer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Koustav Ganguly | Frontend Developer & Technical Writer',
     description: 'Frontend Developer & Technical Writer. Building apps and educating developers.',
     creator: '@KoustavGan39466',
+    images: ['/og-image'],
   },
   robots: {
     index: true,
