@@ -2,11 +2,11 @@
 
 ## 🎯 Project Overview
 
-This is a **modern portfolio website** built with Next.js 15, React 19, and Tailwind CSS v4. It's based on the "Nim" template but heavily customized for a developer portfolio with blog functionality.
+This is a **modern portfolio website** built with Next.js 16, React 19, and Tailwind CSS v4. A fully custom-designed developer portfolio with blog functionality and unique Hashnode integration.
 
 ### Key Features
 - **Personal Portfolio**: Showcases projects, experience, and skills
-- **Blog Integration**: Fetches posts from Hashnode API
+- **Blog Integration**: Fetches posts from Hashnode API (no Headless CMS needed)
 - **Modern UI**: Clean, minimal design with dark/light theme
 - **Performance Optimized**: Next.js 15 with Turbopack
 - **Responsive Design**: Mobile-first approach

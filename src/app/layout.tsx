@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nim-fawn.vercel.app/'),
+  metadataBase: new URL('https://iamk.xyz/'),
   alternates: {
     canonical: '/'
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://nim-fawn.vercel.app/',
+    url: 'https://iamk.xyz/',
     title: 'Koustav Ganguly | Frontend Developer & Technical Writer',
     description: 'Building exceptional web experiences and creating educational content for developers. Available for projects and collaborations.',
     siteName: 'Koustav Ganguly Portfolio',
