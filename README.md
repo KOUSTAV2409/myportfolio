@@ -9,11 +9,28 @@ A modern, performant portfolio website built with Next.js, TypeScript, and Tailw
 - ⚡ Built with Next.js 16 and React 19
 - 🎨 Styled with Tailwind CSS 4
 - 📝 MDX blog support with syntax highlighting
+- 📰 **Custom Hashnode Integration** - Fetch and display Hashnode articles with full UI control (no Headless CMS needed!)
 - 🌙 Dark mode support
 - 📱 Fully responsive design
 - 🚀 Optimized for performance and SEO
 - 📊 Analytics integration (Google Analytics, Vercel Analytics)
 - ♿ Accessibility compliant
+
+## 🌟 Unique Features
+
+### Hashnode Blog Integration (No Headless CMS Required!)
+
+This portfolio includes a **custom Hashnode blog integration** that lets you:
+- ✅ Write on Hashnode, display on your portfolio
+- ✅ Full control over blog UI/UX
+- ✅ No Hashnode Pro subscription needed
+- ✅ Direct GraphQL API integration
+- ✅ Custom styling with your design system
+- ✅ Free and simple setup
+
+**How it works:** Direct GraphQL API calls to Hashnode → Custom rendering on your site → Full design control
+
+👉 **[See detailed setup guide](./HASHNODE_INTEGRATION.md)**
 
 ## Tech Stack
 
