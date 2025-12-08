@@ -1,5 +1,7 @@
 # Quick Customization Guide
 
+⚠️ **IMPORTANT:** This code is MIT licensed (free to use), but all personal content (text, images, videos, project descriptions) is protected. You MUST replace it with your own content.
+
 This guide will help you customize this portfolio for your own use in under 30 minutes.
 
 ## Step 1: Clone & Install (5 minutes)

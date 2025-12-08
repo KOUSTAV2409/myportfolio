@@ -1,0 +1,55 @@
+MIT License
+
+Copyright (c) 2025 Koustav Ganguly
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+CONTENT LICENSE
+
+The following content is NOT covered by the MIT License above and remains 
+the exclusive property of Koustav Ganguly. All rights reserved:
+
+1. Personal Information:
+   - Name, biography, contact information
+   - Personal photographs, videos, and images
+   - Resume/CV content
+   - Personal project descriptions and case studies
+   - Work experience details
+   - Testimonials and client feedback
+   - Blog posts and written content
+
+2. Brand Assets:
+   - Personal branding elements
+   - Logo and design marks
+   - Domain name (iamk.xyz)
+
+3. Media Files:
+   - All files in /public/videos/ (project demos)
+   - All files in /public/images/ (personal photos)
+   - All files in /public/blog/ (blog images)
+
+USAGE TERMS FOR CONTENT:
+- You MAY view this content as examples
+- You MUST replace all personal content with your own before deployment
+- You MAY NOT use, copy, or redistribute the personal content listed above
+- You MAY NOT impersonate or misrepresent yourself as the original author
+
+For questions about content usage, contact: koustavganguly24@gmail.com
