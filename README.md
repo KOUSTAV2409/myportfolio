@@ -367,7 +367,28 @@ Feel free to fork this project and customize it for your own use. If you find bu
 
 ## License
 
-This project is open source and available under the MIT License.
+### Code License
+This project's code is open source and available under the **MIT License**.
+
+You are free to:
+- ✅ Use the code for personal or commercial projects
+- ✅ Modify and customize the code
+- ✅ Distribute and share the code
+
+### Content License
+**All personal content is protected and NOT covered by the MIT License:**
+
+This includes:
+- ❌ Personal information, biography, contact details
+- ❌ Personal photographs, videos, and images
+- ❌ Project descriptions and case studies (as examples of my work)
+- ❌ Work experience details
+- ❌ Blog posts and written content
+- ❌ Testimonials
+
+**You MUST replace all personal content with your own before using this template.**
+
+See [LICENSE](./LICENSE) for full details.
 
 ## Credits
 
