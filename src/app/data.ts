@@ -164,6 +164,29 @@ export const PROJECTS: Project[] = [
     ],
     metrics: 'Open source contribution'
   },
+  {
+    name: 'Weather app',
+    description: 'Created a fun weather app with the use of openweather api key along with a minimalist , classy frontend to navigate daily weather of any places along with 5 days forecast and detail weather navigation.',
+    link: 'https://kyweather.vercel.app/',
+    video: '/videos/weatherapp.mp4',
+    id: 'weather-app',
+    year: '2025',
+    role: 'Open-Source Contributor',
+    tech: 'React, Tailwind CSS, TypeScript, open weather api',
+    clientType: 'Open Source Community',
+    timeline: 'Ongoing',
+    challenge: 'Understanding and optimizing the api key along with proper loading state effectively.',
+    approach: [
+      'understand openweather api',
+      'build proper user experience while navigating weather'
+    ],
+    solution: 'better user experience while navigating weather.',
+    impact: [
+      'navigate weather in a clean and intuitive interface'
+    ],
+    metrics: 'Open source contribution',
+    github: 'https://github.com/KOUSTAV2409/weather_app'
+  },
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
