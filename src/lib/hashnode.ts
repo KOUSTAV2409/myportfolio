@@ -1,5 +1,5 @@
 const HASHNODE_API = 'https://gql.hashnode.com'
-const USERNAME = 'ganguly607'
+const USERNAME = 'iamkxyz'
 
 export interface Post {
   id: string
