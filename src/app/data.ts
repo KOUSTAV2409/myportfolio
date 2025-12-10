@@ -47,6 +47,25 @@ type Testimonial = {
   avatar?: string
 }
 
+type Challenge = {
+  id: string
+  title: string
+  description: string
+  type: 'coding' | 'reading' | 'learning' | 'project'
+  status: 'active' | 'completed'
+  startDate: string
+  endDate?: string
+  progress?: number
+  githubRepo?: string
+  tags: string[]
+  totalDays?: number
+  currentDay?: number
+  // Actual vs planned tracking
+  plannedDays?: number
+  actualDaysSpent?: number
+  challengeProgress?: number // Progress in challenge content (0-100)
+}
+
 type SocialLink = {
   label: string
   link: string
@@ -288,6 +307,23 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       'Achieved WCAG 2.1 AA accessibility compliance on all projects',
       'Maintained 98% client satisfaction rate with 100% project completion'
     ]
+  }
+]
+
+export const CHALLENGES: Challenge[] = [
+  {
+    id: 'js-30-days',
+    title: '30 Days of JavaScript',
+    description: 'Building 30 different JavaScript projects to master core concepts and modern ES6+ features.',
+    type: 'coding',
+    status: 'active',
+    startDate: '2025-12-10',
+    githubRepo: 'https://github.com/KOUSTAV2409/30DaysOfJS_Koustav',
+    tags: ['JavaScript', 'ES6+', 'DOM', 'Projects'],
+    plannedDays: 30,
+    actualDaysSpent: 0,
+    challengeProgress: 0,
+    currentDay: 0
   }
 ]
 
