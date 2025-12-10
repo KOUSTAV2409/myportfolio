@@ -321,9 +321,9 @@ export const CHALLENGES: Challenge[] = [
     githubRepo: 'https://github.com/KOUSTAV2409/30DaysOfJS_Koustav',
     tags: ['JavaScript', 'ES6+', 'DOM', 'Projects'],
     plannedDays: 30,
-    actualDaysSpent: 0, // kotodin nije kaj korle
-    challengeProgress: 0, // (currentday / 30)*100 
-    currentDay: 0 // kotodiner kaj complete holo
+    actualDaysSpent: 1, // kotodin nije kaj korle
+    challengeProgress: (1/30)*100, // (currentday / 30)*100 
+    currentDay: 1 // kotodiner kaj complete holo
   }
 ]
 
