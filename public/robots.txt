@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nim-fawn.vercel.app/sitemap.xml
+Sitemap: https://iamk.xyz/sitemap.xml
