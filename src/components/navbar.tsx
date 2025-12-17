@@ -10,7 +10,7 @@ export function Navbar() {
     { href: '/projects', label: 'Projects' },
     { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About' },
-    { href: '/challenges', label: 'Challenges' }
+    { href: '/news', label: 'News' }
   ]
   
   return (

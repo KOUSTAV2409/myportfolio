@@ -71,6 +71,15 @@ type SocialLink = {
   link: string
 }
 
+type NewsUpdate = {
+  id: string
+  title: string
+  description: string
+  date: string
+  type: 'project' | 'achievement' | 'article' | 'milestone'
+  link?: string
+}
+
 export const PROJECTS: Project[] = [
   {
     name: 'EasyGoDocs',
@@ -429,3 +438,15 @@ export const CURRENT_STATUS = {
   date: 'Sep 2025',
   link: 'mailto:koustavganguly24@gmail.com'
 }
+
+export const NEWS_UPDATES: NewsUpdate[] = [
+  // Example structure - currently empty
+  // {
+  //   id: 'news-1',
+  //   title: 'Launched EasyGoDocs v2.0',
+  //   description: 'Released major update with improved search functionality and new dark mode theme.',
+  //   date: 'Dec 15, 2025',
+  //   type: 'project',
+  //   link: 'https://easygodocs.vercel.app/'
+  // },
+]
