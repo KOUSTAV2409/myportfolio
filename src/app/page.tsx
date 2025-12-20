@@ -40,10 +40,11 @@ export default function HomePage() {
               <Magnetic>
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:opacity-80 transition-opacity"
+                  className="inline-flex items-center gap-2 px-3 py-2.5 sm:px-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base"
                 >
                   <Mail className="w-4 h-4" />
-                  Let's build something together
+                  <span className="hidden sm:inline">Let's build something together</span>
+                  <span className="sm:hidden">Let's work together</span>
                 </a>
               </Magnetic>
             </Suspense>
