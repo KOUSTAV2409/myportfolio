@@ -1,5 +1,6 @@
 const HASHNODE_API = 'https://gql.hashnode.com'
 const USERNAME = 'iamkxyz'
+const RSS_URL = 'https://syntaxandsoul.hashnode.dev/rss.xml'
 
 export interface Post {
   id: string
@@ -80,6 +81,38 @@ export async function getAllPosts(): Promise<Post[]> {
     return posts
   } catch (error) {
     console.error('Error in getAllPosts:', error)
+    return []
+  }
+}
+
+// RSS fallback method
+export async function getAllPostsFromRSS(): Promise<Post[]> {
+  try {
+    const response = await fetch(RSS_URL)
+    const xmlText = await response.text()
+    
+    // Simple XML parsing for RSS
+    const items = xmlText.match(/<item>(.*?)<\/item>/gs) || []
+    
+    return items.map((item, index) => {
+      const title = item.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1] || ''
+      const link = item.match(/<link>(.*?)<\/link>/)?.[1] || ''
+      const description = item.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/)?.[1] || ''
+      const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || ''
+      const slug = link.split('/').pop() || `post-${index}`
+      
+      return {
+        id: slug,
+        title,
+        slug,
+        brief: description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+        publishedAt: new Date(pubDate).toISOString(),
+        url: link,
+        content: { markdown: description }
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching RSS:', error)
     return []
   }
 }
