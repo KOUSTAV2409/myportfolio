@@ -58,7 +58,7 @@ export default function ProjectsPage() {
           </p>
         </div>
         
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 mb-8 sm:mb-12">
           {PROJECTS.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
