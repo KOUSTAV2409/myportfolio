@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm">
@@ -12,7 +14,7 @@ export default function Header() {
         <div className="flex items-center">
           {/* Logo */}
           <Link 
-            className="flex-none rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" 
+            className="flex-none rounded-md text-2xl inline-block font-bold focus:outline-hidden focus:opacity-80 text-gray-800 dark:text-white" 
             href="/" 
             aria-label="Koustav Ganguly"
             style={{ fontFamily: 'Fasthin Regular, sans-serif' }}
@@ -52,11 +54,11 @@ export default function Header() {
 
         <div className={`${isMenuOpen ? 'block' : 'hidden'} hs-collapse overflow-hidden transition-all duration-300 basis-full grow md:block`}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7">
-            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-gray-800 font-medium text-gray-800 hover:text-gray-800 focus:outline-hidden dark:border-neutral-200 dark:text-neutral-200 dark:hover:text-neutral-200" href="/" aria-current="page">Home</Link>
-            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200" href="/projects">Projects</Link>
-            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200" href="/blog">Blog</Link>
-            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200" href="/about">About</Link>
-            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200" href="/news">News</Link>
+            <Link className={`py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 ${pathname === '/' ? 'border-gray-800 font-medium text-gray-800 dark:border-neutral-200 dark:text-neutral-200' : 'border-transparent text-gray-500 dark:text-neutral-400'} hover:text-gray-800 focus:outline-hidden dark:hover:text-neutral-200`} href="/">Home</Link>
+            <Link className={`py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 ${pathname === '/projects' ? 'border-gray-800 font-medium text-gray-800 dark:border-neutral-200 dark:text-neutral-200' : 'border-transparent text-gray-500 dark:text-neutral-400'} hover:text-gray-800 focus:outline-hidden dark:hover:text-neutral-200`} href="/projects">Projects</Link>
+            <Link className={`py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 ${pathname === '/blog' ? 'border-gray-800 font-medium text-gray-800 dark:border-neutral-200 dark:text-neutral-200' : 'border-transparent text-gray-500 dark:text-neutral-400'} hover:text-gray-800 focus:outline-hidden dark:hover:text-neutral-200`} href="/blog">Blog</Link>
+            <Link className={`py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 ${pathname === '/about' ? 'border-gray-800 font-medium text-gray-800 dark:border-neutral-200 dark:text-neutral-200' : 'border-transparent text-gray-500 dark:text-neutral-400'} hover:text-gray-800 focus:outline-hidden dark:hover:text-neutral-200`} href="/about">About</Link>
+            <Link className={`py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 ${pathname === '/news' ? 'border-gray-800 font-medium text-gray-800 dark:border-neutral-200 dark:text-neutral-200' : 'border-transparent text-gray-500 dark:text-neutral-400'} hover:text-gray-800 focus:outline-hidden dark:hover:text-neutral-200`} href="/news">News</Link>
           </div>
         </div>
       </nav>
