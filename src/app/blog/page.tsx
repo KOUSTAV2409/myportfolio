@@ -121,12 +121,14 @@ export default function BlogPage() {
                     {post.brief}
                   </p>
                   <p className="mt-1">
-                    <Link 
+                    <a 
                       className="text-sm text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
-                      href={`/blog/${post.slug}`}
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Continue reading
-                    </Link>
+                    </a>
                   </p>
                 </li>
               ))}
