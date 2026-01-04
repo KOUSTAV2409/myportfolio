@@ -7,7 +7,7 @@ import { getAllPosts, Post } from '@/lib/hashnode'
 
 function BlogProfileSection() {
   return (
-    <div className="w-full max-w-2xl mx-auto pt-10 px-4 sm:px-6 lg:px-8">
+    <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
       {/* Profile */}
       <div className="flex items-center gap-x-3">
         <div className="shrink-0">
@@ -85,7 +85,7 @@ export default function BlogPage() {
   return (
     <div className="dark:bg-neutral-900">
       <BlogProfileSection />
-      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
         {/* Articles section */}
         <div className="mt-10 sm:mt-14">
           <h2 className="mb-5 font-medium text-gray-800 dark:text-neutral-200">

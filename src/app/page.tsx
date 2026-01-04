@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="dark:bg-neutral-900">
       <ProfileSection />
-      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
         <ProjectsSection />
         <TestimonialsSection />
         <SkillsSection />

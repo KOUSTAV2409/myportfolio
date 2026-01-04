@@ -12,7 +12,7 @@ export function BlogPost({ post }: BlogPostProps) {
 
   return (
     <div className="dark:bg-neutral-900">
-      <div className="w-full max-w-2xl mx-auto pt-10 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
         {/* Back Button */}
         <div className="mb-10">
           <Link
@@ -36,7 +36,7 @@ export function BlogPost({ post }: BlogPostProps) {
             })}
           </p>
           
-          <h1 className="font-medium text-gray-800 dark:text-neutral-200 mb-4 text-xl leading-tight">
+          <h1 className="font-medium text-gray-800 dark:text-neutral-200 mb-4 text-lg sm:text-xl leading-tight">
             {post.title}
           </h1>
           

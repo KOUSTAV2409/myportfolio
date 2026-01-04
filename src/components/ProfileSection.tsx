@@ -3,12 +3,12 @@ import { EMAIL, SOCIAL_LINKS } from '@/app/data'
 
 export default function ProfileSection() {
   return (
-    <div className="w-full max-w-2xl mx-auto pt-10 px-4 sm:px-6 lg:px-8">
+    <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
       {/* Profile */}
       <div className="flex items-center gap-x-3">
         <div className="shrink-0">
           <Image 
-            className="shrink-0 size-16 rounded-full" 
+            className="shrink-0 size-12 sm:size-16 rounded-full" 
             src="https://images.unsplash.com/photo-1510706019500-d23a509eecd4?q=80&w=2667&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
             alt="Avatar"
             width={64}
@@ -17,7 +17,7 @@ export default function ProfileSection() {
         </div>
 
         <div className="grow">
-          <h1 className="text-lg font-medium text-gray-800 dark:text-neutral-200">
+          <h1 className="text-base sm:text-lg font-medium text-gray-800 dark:text-neutral-200">
             Koustav Ganguly
           </h1>
           <p className="text-sm text-gray-600 dark:text-neutral-400">
