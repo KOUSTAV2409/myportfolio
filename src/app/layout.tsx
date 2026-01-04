@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ErrorBoundary } from '@/components/error-boundary'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { FloatingCTA } from '@/components/ui/floating-cta'
 import Script from 'next/script'
 import { GA_TRACKING_ID } from '@/lib/analytics'
 
@@ -121,6 +122,7 @@ export default function RootLayout({
             <Footer />
           </ErrorBoundary>
           <Analytics />
+          <FloatingCTA />
         </ThemeProvider>
       </body>
     </html>
