@@ -1,244 +1,126 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
 import { Post } from '@/lib/hashnode'
-import { NewsletterSignup } from './newsletter-signup'
-import { ErrorBoundary } from './error-boundary'
 
 interface BlogPostProps {
   post: Post
 }
 
 export function BlogPost({ post }: BlogPostProps) {
-  // Enhanced markdown processing for Hashnode content
-  const processMarkdown = (markdown: string) => {
-    return markdown
-      // Handle Hashnode embed syntax %[URL]
-      .replace(/%\[(https:\/\/codepen\.io\/[^\]]+)\]/g, (match, url) => {
-        const penMatch = url.match(/codepen\.io\/([^\/]+)\/pen\/([^\/?]+)/)
-        if (penMatch) {
-          const [, user, penId] = penMatch
-          return `\n\n<iframe src="https://codepen.io/${user}/embed/${penId}?default-tab=result" height="400" style="width: 100%;" scrolling="no" title="CodePen Embed" frameborder="0" loading="lazy"></iframe>\n\n`
-        }
-        return match
-      })
-      // Handle Hashnode YouTube embeds
-      .replace(/%\[(https:\/\/(?:www\.)?youtube\.com\/watch\?v=([^\]&]+))\]/g, (match, url, videoId) => {
-        return `\n\n<iframe src="https://www.youtube.com/embed/${videoId}" width="100%" height="315" frameborder="0"></iframe>\n\n`
-      })
-      // Handle other Hashnode embeds
-      .replace(/%\[(https:\/\/[^\]]+)\]/g, (match, url) => {
-        return `[${url}](${url})`
-      })
-      // Clean up Hashnode image alignment syntax
-      .replace(/!\[\]\(([^)]+)\)\s*align="[^"]*"/g, '![]($1)')
-      .replace(/!\[([^\]]*)\]\(([^)]+)\)\s*align="[^"]*"/g, '![$1]($2)')
-      .replace(/align="[^"]*"/g, '')
-      // Convert Hashnode image URLs to proper markdown
-      .replace(/https:\/\/cdn\.hashnode\.com\/res\/hashnode\/image\/[^\s)]+/g, (url) => {
-        return `![Image](${url})`
-      })
-  }
-
-  const processedMarkdown = processMarkdown(post.content.markdown)
   const readingTime = Math.ceil(post.content.markdown.length / 1000)
 
   return (
-    <>
-      {/* Back to Blog Button */}
-      <div className="mb-12">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors group"
-          data-cursor-hover
-        >
-          <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5"/>
-            <path d="M12 19l-7-7 7-7"/>
-          </svg>
-          <span>Back to writing</span>
-        </Link>
-      </div>
+    <div className="dark:bg-neutral-900">
+      <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
+        {/* Back Button */}
+        <div className="mb-10">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7-7l-7 7 7 7" />
+            </svg>
+            Back
+          </Link>
+        </div>
 
-      {/* Article Header */}
-      <header className="mb-16 pb-8 border-b border-gray-200 dark:border-gray-800">
-        <div className="space-y-6">
-          <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-            <time>
-              {new Date(post.publishedAt).toLocaleDateString('en-US', { 
-                year: 'numeric',
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </time>
-            <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
-            <span>{readingTime} min read</span>
-            <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
-            <span className="text-xs uppercase tracking-wide font-medium">Article</span>
-          </div>
+        {/* Article Header */}
+        <div className="mb-10">
+          <p className="mb-2 text-sm text-gray-500 dark:text-neutral-500">
+            {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            })}
+          </p>
           
-          <h1 className="text-2xl font-medium text-black dark:text-white leading-tight">
+          <h1 className="font-medium text-gray-800 dark:text-neutral-200 mb-4 text-lg sm:text-xl leading-tight">
             {post.title}
           </h1>
           
           {post.brief && (
-            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed font-light max-w-2xl">
+            <p className="text-sm text-gray-500 dark:text-neutral-500 leading-relaxed">
               {post.brief}
             </p>
           )}
         </div>
-      </header>
 
-      {/* Cover Image */}
-      {post.coverImage && (
-        <div className="not-prose mb-12">
-          <Image
-            src={post.coverImage.url}
-            alt={post.title}
-            width={800}
-            height={400}
-            className="w-full h-80 object-cover rounded-lg"
-            priority
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Rj9v/2Q=="
-            unoptimized
+        {/* Cover Image */}
+        {post.coverImage && (
+          <div className="mb-10">
+            <Image
+              src={post.coverImage.url}
+              alt={post.title}
+              width={800}
+              height={400}
+              className="w-full h-auto rounded-lg"
+              priority
+              unoptimized
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="space-y-6 text-sm text-gray-600 dark:text-neutral-400 leading-relaxed">
+          <div 
+            dangerouslySetInnerHTML={{
+              __html: post.content.markdown
+                // Convert images
+                .replace(/!\[\]\((https:\/\/cdn\.hashnode\.com[^)]+)\)\s*align="[^"]*"/g, '<img src="$1" alt="" class="w-full h-auto rounded-lg my-6" loading="lazy" />')
+                .replace(/!\[([^\]]*)\]\((https:\/\/[^)]+)\)/g, '<img src="$2" alt="$1" class="w-full h-auto rounded-lg my-6" loading="lazy" />')
+                // Convert headers
+                .replace(/^### (.*$)/gim, '<h3 class="font-medium text-gray-800 dark:text-neutral-200 mb-3 mt-8 text-base">$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2 class="font-medium text-gray-800 dark:text-neutral-200 mb-4 mt-10 text-lg">$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1 class="font-medium text-gray-800 dark:text-neutral-200 mb-4 mt-8 text-xl">$1</h1>')
+                // Convert bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium text-gray-800 dark:text-neutral-200">$1</strong>')
+                // Convert links
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-gray-800 dark:text-neutral-200 underline hover:no-underline">$1</a>')
+                // Convert code blocks
+                .replace(/```([^`]+)```/g, '<pre class="bg-gray-50 dark:bg-neutral-800 rounded-lg p-4 overflow-x-auto my-6 text-sm"><code>$1</code></pre>')
+                // Convert inline code
+                .replace(/`([^`]+)`/g, '<code class="bg-gray-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-sm font-mono">$1</code>')
+                // Convert CodePen embeds
+                .replace(/%\[(https:\/\/codepen\.io\/[^\]]+)\]/g, (match, url) => {
+                  const penMatch = url.match(/codepen\.io\/([^\/]+)\/pen\/([^\/?]+)/)
+                  if (penMatch) {
+                    const [, user, penId] = penMatch
+                    return `<div class="my-8 rounded-lg overflow-hidden"><iframe src="https://codepen.io/${user}/embed/${penId}?default-tab=result" height="400" style="width: 100%; border: none;" loading="lazy"></iframe></div>`
+                  }
+                  return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-gray-800 dark:text-neutral-200 underline">${url}</a>`
+                })
+                // Convert paragraphs
+                .split('\n\n')
+                .map(paragraph => {
+                  if (paragraph.trim() === '') return ''
+                  if (paragraph.includes('<h1>') || paragraph.includes('<h2>') || paragraph.includes('<h3>') || 
+                      paragraph.includes('<img') || paragraph.includes('<iframe') || paragraph.includes('<pre>')) {
+                    return paragraph
+                  }
+                  return `<p class="mb-4">${paragraph.trim()}</p>`
+                })
+                .join('')
+            }}
           />
         </div>
-      )}
 
-      {/* Content */}
-      <main className="prose prose-gray dark:prose-invert prose-h4:prose-base prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium prose-a:text-black dark:prose-a:text-white prose-a:no-underline hover:prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-code:text-sm prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-800 prose-pre:rounded-lg prose-blockquote:border-l-2 prose-blockquote:border-gray-300 dark:prose-blockquote:border-gray-600 prose-blockquote:pl-6 prose-blockquote:italic">
-        
-        <ErrorBoundary>
-          <ReactMarkdown
-            rehypePlugins={[rehypeRaw]}
-            components={{
-            img: ({ src, alt }) => {
-              if (!src || typeof src !== 'string') return null
-              
-              return (
-                <div className="my-8">
-                  <Image
-                    src={src}
-                    alt={alt || ''}
-                    width={800}
-                    height={400}
-                    className="w-full h-auto rounded-lg"
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Rj9v/2Q=="
-                    unoptimized={src.includes('cdn.hashnode.com')}
-                  />
-                </div>
-              )
-            },
-            iframe: ({ src, height, style }) => {
-              if (!src || typeof src !== 'string') return null
-              
-              return (
-                <div className="my-8 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800">
-                  <iframe
-                    src={src}
-                    height={height || "400"}
-                    style={{ width: '100%', ...style }}
-                    className="w-full"
-                    frameBorder="0"
-                    loading="lazy"
-                    allowFullScreen={true}
-                  />
-                </div>
-              )
-            },
-            a: ({ href, children }) => {
-              if (href?.includes('cdn.hashnode.com') && (href.includes('.jpg') || href.includes('.png') || href.includes('.jpeg') || href.includes('.webp'))) {
-                return (
-                  <div className="my-8">
-                    <Image
-                      src={href}
-                      alt={typeof children === 'string' ? children : 'Image'}
-                      width={800}
-                      height={400}
-                      className="w-full h-auto rounded-lg"
-                      unoptimized
-                    />
-                  </div>
-                )
-              }
-              
-              return (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors no-underline hover:underline decoration-1 underline-offset-2"
-                >
-                  {children}
-                </a>
-              )
-            },
-            h2: ({ children }) => (
-              <h2 className="text-lg font-medium text-black dark:text-white mt-12 mb-4 scroll-m-20">
-                {children}
-              </h2>
-            ),
-            h3: ({ children }) => (
-              <h3 className="text-base font-medium text-black dark:text-white mt-8 mb-3">
-                {children}
-              </h3>
-            ),
-            p: ({ children }) => (
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                {children}
-              </p>
-            ),
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-2 border-gray-300 dark:border-gray-600 pl-6 italic text-gray-600 dark:text-gray-400 my-6">
-                {children}
-              </blockquote>
-            ),
-          }}
-        >
-          {processedMarkdown}
-        </ReactMarkdown>
-        </ErrorBoundary>
-      </main>
-
-      {/* Newsletter Signup */}
-      <div className="not-prose">
-        <NewsletterSignup 
-          variant="footer"
-          title="Enjoyed this article?"
-          description="Subscribe to get notified when I publish new insights on JavaScript, web development, and software engineering."
-        />
-      </div>
-
-      {/* Footer */}
-      <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            <span>Originally published on </span>
+        {/* Footer */}
+        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-neutral-700">
+          <p className="text-xs text-gray-500 dark:text-neutral-500">
+            Originally published on{' '}
             <a 
-              href={post.url} 
+              href="https://syntaxandsoul.hashnode.dev/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="underline hover:text-gray-800 hover:decoration-2 dark:hover:text-neutral-400"
             >
               Hashnode
             </a>
-          </div>
-          
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(window.location.href)
-            }}
-            className="text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-          >
-            Copy URL
-          </button>
+          </p>
         </div>
-      </footer>
-    </>
+      </div>
+    </div>
   )
 }

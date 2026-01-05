@@ -1,7 +1,64 @@
 'use client'
+
 import { useState, useEffect } from 'react'
-import { ArrowUpRight, Calendar, Clock, Heart, MessageCircle, ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { getAllPosts, Post } from '@/lib/hashnode'
+
+function BlogProfileSection() {
+  return (
+    <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
+      {/* Profile */}
+      <div className="flex items-center gap-x-4">
+        <div className="shrink-0">
+          <Image 
+            className="shrink-0 size-14 sm:size-20 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-700" 
+            src="/profile.png" 
+            alt="Koustav Ganguly Profile Picture"
+            width={80}
+            height={80}
+            priority
+            quality={95}
+          />
+        </div>
+
+        <div className="grow">
+          <h1 className="text-lg font-medium text-gray-800 dark:text-neutral-200">
+            Technical Writing
+          </h1>
+          <p className="text-sm text-gray-600 dark:text-neutral-400">
+            JavaScript, React & System Design Articles
+          </p>
+        </div>
+      </div>
+
+      {/* About */}
+      <div className="mt-8">
+        <p className="text-sm text-gray-600 dark:text-neutral-400">
+          I write in-depth technical articles about JavaScript fundamentals, React patterns, and system design concepts. 
+          My goal is to explain complex topics in a clear, practical way that helps developers build better applications.
+        </p>
+
+        <p className="mt-3 text-sm text-gray-600 dark:text-neutral-400">
+          All articles are published on my Hashnode blog where I share insights from real-world development experience, 
+          code examples, and best practices for modern web development.
+        </p>
+
+        <ul className="mt-5 flex flex-col gap-y-3">
+          <li className="flex items-center gap-x-2.5">
+            <svg className="shrink-0 size-3.5 text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+            <a className="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href="https://syntaxandsoul.hashnode.dev/" target="_blank" rel="noopener noreferrer">
+              syntaxandsoul.hashnode.dev
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([])
@@ -31,193 +88,97 @@ export default function BlogPage() {
     })
   }
 
-  const calculateReadTime = (content: string) => {
-    return Math.ceil(content.length / 1000) + ' min read'
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-black">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Technical Writing</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400">Loading articles...</p>
-          </div>
-          <div className="mt-16 space-y-8">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="flex gap-8">
-                  <div className="flex-1 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
-                      <div className="space-y-2">
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
-                    </div>
-                  </div>
-                  <div className="w-32 h-20 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-black">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Technical Writing</h1>
-            <p className="text-xl text-red-500">Error loading articles: {error}</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        {/* Header */}
-        <div className="mb-16 text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Technical Writing
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            In-depth articles on JavaScript, React, system design, and software development
-          </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-            <span>Published on</span>
-            <a 
-              href="https://syntaxandsoul.hashnode.dev/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
-            >
-              Hashnode
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
-        </div>
+    <div className="dark:bg-neutral-900">
+      <BlogProfileSection />
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
+        {/* Articles section */}
+        <div className="mt-10 sm:mt-14">
+          <h2 className="mb-5 font-medium text-gray-800 dark:text-neutral-200">
+            Latest Articles
+          </h2>
 
-        {/* Articles */}
-        {posts.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-gray-600 dark:text-gray-400">No articles found.</p>
-          </div>
-        ) : (
-          <div className="space-y-12">
-            {posts.map((post, index) => (
-              <article key={post.id} className="group">
-                <div className="flex gap-8">
-                  <div className="flex-1 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                        KG
-                      </div>
-                      <div>
-                        <div className="font-medium text-sm">Koustav Ganguly</div>
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <time dateTime={post.publishedAt}>
-                            {formatDate(post.publishedAt)}
-                          </time>
-                          <span>·</span>
-                          <span>{calculateReadTime(post.content.markdown)}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h3 className={`font-bold leading-tight group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors ${
-                        index === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'
-                      }`}>
-                        <a href={`/blog/${post.slug}`}>
-                          {post.title}
-                        </a>
-                      </h3>
-                      <p className={`text-gray-600 dark:text-gray-400 leading-relaxed ${
-                        index === 0 ? 'text-lg' : 'line-clamp-2'
-                      }`}>
-                        {post.brief}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-gray-500 text-sm">
-                        <a 
-                          href={`/blog/${post.slug}`}
-                          className="hover:text-blue-500 transition-colors"
-                        >
-                          <ArrowUpRight className="w-4 h-4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Cover Image */}
-                  {post.coverImage && (
-                    <div className="w-32 h-20 flex-shrink-0 hidden sm:block">
-                      <a href={`/blog/${post.slug}`}>
-                        <img 
-                          src={post.coverImage.url} 
-                          alt={post.title}
-                          className="w-full h-full object-cover rounded-lg hover:opacity-80 transition-opacity"
-                        />
-                      </a>
-                    </div>
-                  )}
+          {loading ? (
+            <div className="space-y-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16 mb-2"></div>
+                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
                 </div>
-              </article>
-            ))}
-          </div>
-        )}
-
-        {/* View More on Hashnode */}
-        <div className="mt-16 text-center">
-          <a
-            href="https://syntaxandsoul.hashnode.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-600 transition-colors"
-          >
-            View all articles on Hashnode
-            <ExternalLink className="w-4 h-4" />
-          </a>
+              ))}
+            </div>
+          ) : error ? (
+            <p className="text-red-500 text-sm">Error loading articles: {error}</p>
+          ) : posts.length === 0 ? (
+            <p className="text-gray-500 text-sm">No articles found.</p>
+          ) : (
+            <ul className="space-y-10">
+              {posts.map((post) => (
+                <li key={post.id}>
+                  <p className="mb-2 text-sm text-gray-500 dark:text-neutral-500">
+                    {formatDate(post.publishedAt)}
+                  </p>
+                  <h5 className="font-medium text-sm text-gray-800 dark:text-neutral-200">
+                    {post.title}
+                  </h5>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-neutral-500">
+                    {post.brief}
+                  </p>
+                  <p className="mt-1">
+                    <a 
+                      className="text-sm text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Continue reading
+                    </a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {/* Newsletter */}
-        <div className="mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
-          <div className="text-center space-y-6 max-w-2xl mx-auto">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto">
-              KG
+        {/* Subscribe section */}
+        <div className="my-10 sm:my-14">
+          <h2 className="mb-5 font-medium text-gray-800 dark:text-neutral-200">
+            Follow My Writing
+          </h2>
+
+          <div className="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg dark:border-neutral-700">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+                <svg className="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                  <path d="M9 18c-4.51 2-5-2-7-2" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                className="py-1.5 sm:py-2 ps-9 pe-3 block w-full border-transparent rounded-lg sm:text-sm focus:border-transparent focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500" 
+                placeholder="Visit my Hashnode blog"
+                readOnly
+              />
             </div>
-            <div className="space-y-3">
-              <h2 className="text-2xl font-bold">Get my latest articles</h2>
-              <p className="text-gray-600 dark:text-gray-400">
-                Follow me on Hashnode or subscribe to get notified when I publish new technical articles.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="https://syntaxandsoul.hashnode.dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-              >
-                Follow on Hashnode
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
+            <Link 
+              href="https://syntaxandsoul.hashnode.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto whitespace-nowrap py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-md border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800 dark:hover:bg-neutral-200"
+            >
+              Visit Blog
+              <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
           </div>
+          <p className="mt-2 text-xs text-gray-500 dark:text-neutral-500">
+            Follow me on Hashnode for regular updates and new articles.
+          </p>
         </div>
       </div>
     </div>

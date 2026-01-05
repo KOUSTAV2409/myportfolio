@@ -23,12 +23,12 @@ export function FloatingCTA() {
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed bottom-8 right-8 z-40"
+          className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-40"
         >
           <Magnetic intensity={0.4} springOptions={{ bounce: 0.2 }}>
             <a
               href="mailto:koustavganguly24@gmail.com?subject=Project Inquiry&body=Hi Koustav, I'd like to discuss a project with you."
-              className="group flex items-center gap-3 px-6 py-4 bg-black text-white dark:bg-white dark:text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm"
+              className="group flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-black text-white dark:bg-white dark:text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-xs sm:text-sm"
               data-cursor-hover
             >
               <span>Work with me</span>

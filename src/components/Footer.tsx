@@ -1,8 +1,11 @@
 'use client'
+
 import { TextLoop } from '@/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { SOCIAL_LINKS } from '@/app/data'
 
 const THEMES_OPTIONS = [
   {
@@ -58,18 +61,35 @@ function ThemeSwitch() {
   )
 }
 
-export function Footer() {
+export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-gray-200 dark:border-gray-100 px-0 py-4 dark:border-zinc-800">
-      <div className="flex items-center justify-between">
-        <a href="https://github.com/KOUSTAV2409" target="_blank" rel="noopener noreferrer">
-          <TextLoop className="text-sm text-gray-500 dark:text-zinc-500 font-medium">
-            <span>© 2025 Koustav </span>
-            <span>Built with ❤️ by Koustav</span>
-          </TextLoop>
-        </a>
-        <div className="text-xs text-zinc-400">
-          <ThemeSwitch />
+    <footer className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="py-6 border-t border-gray-200 dark:border-neutral-700">
+        <div className="flex flex-wrap justify-between items-center gap-2">
+          <div className="flex items-center gap-4">
+            <a href="https://github.com/KOUSTAV2409" target="_blank" rel="noopener noreferrer">
+              <TextLoop className="text-xs text-gray-600 dark:text-neutral-400">
+                <span>© 2025 Koustav</span>
+                <span>Built with ❤️ by Koustav</span>
+              </TextLoop>
+            </a>
+          </div>
+
+          <ul className="flex flex-wrap items-center">
+            {SOCIAL_LINKS.map((social, index) => (
+              <li key={index} className="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600">
+                <Link 
+                  className="text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
+                  href={social.link}
+                >
+                  {social.label}
+                </Link>
+              </li>
+            ))}
+            <li className="inline-block">
+              <ThemeSwitch />
+            </li>
+          </ul>
         </div>
       </div>
     </footer>
