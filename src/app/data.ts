@@ -3,6 +3,7 @@ type Project = {
   description: string;
   link: string;
   video: string;
+  image?: string;
   id: string;
   year: string;
   role: string;
