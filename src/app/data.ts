@@ -408,13 +408,50 @@ export const CURRENT_STATUS = {
 };
 
 export const NEWS_UPDATES: NewsUpdate[] = [
-  // Example structure - currently empty
-  // {
-  //   id: 'news-1',
-  //   title: 'Launched EasyGoDocs v2.0',
-  //   description: 'Released major update with improved search functionality and new dark mode theme.',
-  //   date: 'Dec 15, 2025',
-  //   type: 'project',
-  //   link: 'https://easygodocs.vercel.app/'
-  // },
+  {
+    id: 'news-1',
+    title: 'Working on Client Projects',
+    description: 'Currently developing custom web applications for multiple clients as a freelance full-stack developer.',
+    date: 'Jan 2026',
+    type: 'project'
+  },
+  {
+    id: 'news-2',
+    title: 'Portfolio Website Redesign Complete',
+    description: 'Completed a major redesign of my portfolio website with improved performance, better mobile experience, and integrated Hashnode blog.',
+    date: 'Jan 5, 2026',
+    type: 'project',
+    link: 'https://iamk.xyz'
+  },
+  {
+    id: 'news-3',
+    title: 'Started Freelancing as Full-Stack Developer',
+    description: 'Transitioned to freelance full-stack development, offering React, Next.js, and Node.js services to clients worldwide.',
+    date: 'Nov 2025',
+    type: 'achievement',
+    link: 'mailto:koustavganguly24@gmail.com'
+  },
+  {
+    id: 'news-4',
+    title: 'Launched sstocode - Screenshot to Code Tool',
+    description: 'Released an open-source tool that converts UI screenshots into React + Tailwind component code using AI.',
+    date: 'Nov 2025',
+    type: 'project',
+    link: 'https://sstocode.vercel.app/'
+  },
+  {
+    id: 'news-5',
+    title: 'Completed Frontend Developer Role at BiswasCompany',
+    description: 'Successfully completed 6-month contract role building internal tools and dashboards for EdTech platform.',
+    date: 'Nov 2025',
+    type: 'achievement'
+  },
+  {
+    id: 'news-6',
+    title: 'EasyGoDocs Featured in Developer Community',
+    description: 'EasyGoDocs documentation template gained traction in the developer community with 500+ subscribers.',
+    date: 'Sep 2025',
+    type: 'achievement',
+    link: 'https://easygodocs.vercel.app/'
+  },
 ];

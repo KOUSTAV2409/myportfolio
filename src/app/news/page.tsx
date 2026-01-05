@@ -15,6 +15,32 @@ export default function NewsPage() {
     { value: 'year', label: 'This Year' },
   ]
 
+  const filterNewsByTime = (news: typeof NEWS_UPDATES, timeFilter: TimeFilter) => {
+    if (timeFilter === 'all') return news
+
+    const now = new Date()
+    const currentYear = now.getFullYear()
+    const currentMonth = now.getMonth()
+    const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+
+    return news.filter(item => {
+      const itemDate = new Date(item.date)
+      
+      switch (timeFilter) {
+        case 'week':
+          return itemDate >= oneWeekAgo
+        case 'month':
+          return itemDate.getFullYear() === currentYear && itemDate.getMonth() === currentMonth
+        case 'year':
+          return itemDate.getFullYear() === currentYear
+        default:
+          return true
+      }
+    })
+  }
+
+  const filteredNews = filterNewsByTime(NEWS_UPDATES, filter)
+
   return (
     <div className="dark:bg-neutral-900">
       <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
@@ -49,7 +75,7 @@ export default function NewsPage() {
           </div>
 
           {/* Empty State */}
-          {NEWS_UPDATES.length === 0 && (
+          {filteredNews.length === 0 && (
             <div className="py-20 text-center space-y-6 mb-8 sm:mb-12">
               <div className="flex justify-center">
                 <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
@@ -57,18 +83,23 @@ export default function NewsPage() {
                 </div>
               </div>
               <div className="space-y-2">
-                <h2 className="text-base sm:text-lg font-medium text-gray-800 dark:text-neutral-200">No updates yet</h2>
+                <h2 className="text-base sm:text-lg font-medium text-gray-800 dark:text-neutral-200">
+                  {filter === 'all' ? 'No updates yet' : `No updates for ${filters.find(f => f.value === filter)?.label.toLowerCase()}`}
+                </h2>
                 <p className="text-sm text-gray-600 dark:text-neutral-400 max-w-md mx-auto">
-                  Check back soon for the latest news, project launches, and professional milestones.
+                  {filter === 'all' 
+                    ? 'Check back soon for the latest news, project launches, and professional milestones.'
+                    : 'Try selecting a different time period to see more updates.'
+                  }
                 </p>
               </div>
             </div>
           )}
 
           {/* News List (when data exists) */}
-          {NEWS_UPDATES.length > 0 && (
+          {filteredNews.length > 0 && (
             <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
-              {NEWS_UPDATES.map((update) => (
+              {filteredNews.map((update) => (
                 <div
                   key={update.id}
                   className="p-4 sm:p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-300 dark:hover:border-gray-700 transition-colors space-y-3"
