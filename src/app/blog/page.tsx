@@ -9,10 +9,10 @@ function BlogProfileSection() {
   return (
     <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
       {/* Profile */}
-      <div className="flex items-center gap-x-3">
+      <div className="flex items-center gap-x-4">
         <div className="shrink-0">
-          <div className="size-16 rounded-full bg-gray-800 dark:bg-white flex items-center justify-center">
-            <span className="text-white dark:text-gray-800 font-bold text-lg">KG</span>
+          <div className="size-14 sm:size-20 rounded-full bg-gray-800 dark:bg-white flex items-center justify-center">
+            <span className="text-white dark:text-gray-800 font-bold text-lg sm:text-xl">KG</span>
           </div>
         </div>
 
