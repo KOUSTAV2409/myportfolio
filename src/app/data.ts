@@ -360,6 +360,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
     link: "https://www.linkedin.com/in/koustav-ganguly-5294151b4/",
   },
   {
+    label: "X",
+    link: "https://x.com/iamk_xyz",
+  },
+  {
     label: "Hashnode Blog",
     link: "https://syntaxandsoul.hashnode.dev/",
   },
