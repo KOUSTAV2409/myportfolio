@@ -11,16 +11,17 @@ export default function ProjectsSection() {
 
       {/* Image Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        {PROJECTS.slice(0, 6).map((project, index) => (
+        {PROJECTS.slice(0, 6).map((project) => (
           <Link 
             key={project.id} 
             className="group block relative overflow-hidden rounded-lg" 
             href={project.link}
+            target='blank'
           >
             <Image 
               className="w-full size-40 object-cover bg-gray-100 rounded-lg dark:bg-neutral-800" 
-              src={`https://images.unsplash.com/photo-${getProjectImageId(index)}?q=80&w=320&auto=format&fit=crop&ixlib=rb-4.0.3`}
-              alt={project.name}
+              src={project.image || `/images/projects/${project.id}.jpg`}
+              alt={`${project.name} project screenshot`}
               width={320}
               height={160}
             />
@@ -38,17 +39,4 @@ export default function ProjectsSection() {
       </div>
     </div>
   )
-}
-
-// Helper function to get different project images
-function getProjectImageId(index: number): string {
-  const imageIds = [
-    '1656618724305-a4257e46e847',
-    '1616427592793-67b858804534',
-    '1516131206008-dd041a9764fd',
-    '1707760696486-2a2cd7e0b6a6',
-    '1585159812596-fac104f2f069',
-    '1654131300276-db70adf4f85d'
-  ]
-  return imageIds[index] || imageIds[0]
 }
