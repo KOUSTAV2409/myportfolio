@@ -11,9 +11,15 @@ function BlogProfileSection() {
       {/* Profile */}
       <div className="flex items-center gap-x-4">
         <div className="shrink-0">
-          <div className="size-14 sm:size-20 rounded-full bg-gray-800 dark:bg-white flex items-center justify-center">
-            <span className="text-white dark:text-gray-800 font-bold text-lg sm:text-xl">KG</span>
-          </div>
+          <Image 
+            className="shrink-0 size-14 sm:size-20 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-700" 
+            src="/profile.png" 
+            alt="Koustav Ganguly Profile Picture"
+            width={80}
+            height={80}
+            priority
+            quality={95}
+          />
         </div>
 
         <div className="grow">
