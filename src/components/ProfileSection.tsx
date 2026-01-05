@@ -5,14 +5,16 @@ export default function ProfileSection() {
   return (
     <div className="w-full max-w-2xl mx-auto pt-6 sm:pt-10 px-4 sm:px-6">
       {/* Profile */}
-      <div className="flex items-center gap-x-3">
+      <div className="flex items-center gap-x-4">
         <div className="shrink-0">
           <Image 
-            className="shrink-0 size-12 sm:size-16 rounded-full" 
-            src="https://images.unsplash.com/photo-1510706019500-d23a509eecd4?q=80&w=2667&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            alt="Avatar"
-            width={64}
-            height={64}
+            className="shrink-0 size-14 sm:size-20 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-700" 
+            src="/profile.png" 
+            alt="Koustav Ganguly Profile Picture"
+            width={80}
+            height={80}
+            priority
+            quality={95}
           />
         </div>
 
