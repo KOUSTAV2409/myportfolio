@@ -9,29 +9,32 @@ export default function ProjectsSection() {
         Projects
       </h2>
 
-      {/* Image Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+      {/* Project Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {PROJECTS.slice(0, 6).map((project) => (
           <Link 
             key={project.id} 
-            className="group block relative overflow-hidden rounded-lg" 
+            className="group block p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-all duration-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600" 
             href={project.link}
             target='blank'
           >
-            <Image 
-              className="w-full size-40 object-cover bg-gray-100 rounded-lg dark:bg-neutral-800" 
-              src={project.image || `/images/projects/${project.id}.jpg`}
-              alt={`${project.name} project screenshot`}
-              width={320}
-              height={160}
-            />
-            <div className="absolute bottom-1 end-1 opacity-0 group-hover:opacity-100 transition">
-              <div className="flex items-center gap-x-1 py-1 px-2 bg-white border border-gray-200 text-gray-800 rounded-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200">
-                <svg className="shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h3 className="font-medium text-sm text-gray-800 dark:text-neutral-200 group-hover:text-gray-900 dark:group-hover:text-neutral-100">
+                  {project.name}
+                </h3>
+                <p className="mt-1 text-xs text-gray-500 dark:text-neutral-500 line-clamp-2">
+                  {project.description}
+                </p>
+                <div className="mt-2 text-xs text-gray-400 dark:text-neutral-600">
+                  {project.year}
+                </div>
+              </div>
+              <div className="ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
                 </svg>
-                <span className="text-xs">View</span>
               </div>
             </div>
           </Link>
