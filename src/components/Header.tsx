@@ -3,10 +3,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Spinner } from "@/components/kibo-ui/spinner"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCalOpen, setIsCalOpen] = useState(false)
+  const [isCalLoading, setIsCalLoading] = useState(true)
   const pathname = usePathname()
 
   return (
@@ -28,7 +30,10 @@ export default function Header() {
           <div className="flex items-center gap-1 md:order-4 md:ms-4">
             <button 
               className="w-full sm:w-auto whitespace-nowrap py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800 dark:hover:bg-neutral-200" 
-              onClick={() => setIsCalOpen(true)}
+              onClick={() => {
+                setIsCalOpen(true)
+                setIsCalLoading(true)
+              }}
             >
               Book a call
             </button>
@@ -82,10 +87,24 @@ export default function Header() {
             >
               ✕
             </button>
+            
+            {/* Loading Spinner */}
+            {isCalLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-neutral-900 rounded-xl">
+                <div className="flex flex-col items-center gap-4">
+                  <Spinner variant="infinite" />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Loading calendar...</span>
+                </div>
+              </div>
+            )}
+            
             <iframe
               src="https://cal.com/iamk-xyz/30min"
               className="w-full h-full rounded-xl"
               frameBorder="0"
+              loading="eager"
+              preload="true"
+              onLoad={() => setIsCalLoading(false)}
             />
           </div>
         </div>
