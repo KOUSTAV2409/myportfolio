@@ -95,7 +95,7 @@ export default function AboutPage() {
             </li>
 
             {SOCIAL_LINKS.map((social, index) => (
-              <li key={index} className="flex items-center gap-x-2.5">
+              <li key={index} className="group flex items-center gap-x-2.5">
                 {social.label === 'Twitter' || social.label === 'X' ? (
                   <svg className="shrink-0 size-3.5 text-gray-800 dark:text-neutral-200" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.1881 10.1624L22.7504 0H20.7214L13.2868 8.82385L7.34878 0H0.5L9.47944 13.3432L0.5 24H2.5291L10.3802 14.6817L16.6512 24H23.5L14.1881 10.1624ZM11.409 13.4608L3.26021 1.55962H6.37679L20.7224 22.5113H17.6058L11.409 13.4613V13.4608Z" fill="currentColor" />
@@ -119,8 +119,12 @@ export default function AboutPage() {
                     <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72" />
                   </svg>
                 )}
-                <a className="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href={social.link}>
+                <a className="inline-flex items-center gap-1 text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href={social.link}>
                   {social.label}
+                  <svg className="size-3 opacity-0 group-hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
                 </a>
               </li>
             ))}
