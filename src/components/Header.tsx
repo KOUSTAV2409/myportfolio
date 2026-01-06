@@ -26,7 +26,9 @@ export default function Header() {
         <div className="flex items-center gap-1 md:order-4 md:ms-4">
           <Link 
             className="w-full sm:w-auto whitespace-nowrap py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800 dark:hover:bg-neutral-200" 
-            href="#contact"
+            href="https://cal.com/iamk-xyz/30min"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Book a call
           </Link>
