@@ -100,11 +100,12 @@ export default function Header() {
             
             <iframe
               src="https://cal.com/iamk-xyz/30min"
-              className="w-full h-full rounded-xl"
+              className="w-full h-full rounded-xl overflow-hidden"
               frameBorder="0"
               loading="eager"
               preload="true"
               onLoad={() => setIsCalLoading(false)}
+              scrolling="no"
             />
           </div>
         </div>
