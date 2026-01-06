@@ -103,7 +103,6 @@ export default function Header() {
               className="w-full h-full rounded-xl overflow-hidden"
               frameBorder="0"
               loading="eager"
-              preload="true"
               onLoad={() => setIsCalLoading(false)}
               scrolling="no"
             />
