@@ -102,8 +102,16 @@ export default function NewsPage() {
               {filteredNews.map((update) => (
                 <div
                   key={update.id}
-                  className="p-4 sm:p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-300 dark:hover:border-gray-700 transition-colors space-y-3"
+                  className="group p-4 sm:p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-300 dark:hover:border-gray-700 transition-colors space-y-3 relative"
                 >
+                  {update.link && (
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg className="size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 7h10v10" />
+                        <path d="M7 17 17 7" />
+                      </svg>
+                    </div>
+                  )}
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center gap-3 flex-wrap">
@@ -120,21 +128,20 @@ export default function NewsPage() {
                       <p className="text-sm text-gray-600 dark:text-neutral-400">
                         {update.description}
                       </p>
-                      {update.link && (
-                        <a
-                          href={update.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
-                        >
-                          Read more →
-                        </a>
-                      )}
                     </div>
                     <div className="text-[13px] text-gray-500 font-medium whitespace-nowrap">
                       {update.date}
                     </div>
                   </div>
+                  {update.link && (
+                    <a
+                      href={update.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute inset-0 rounded-lg"
+                      aria-label={`Read more about ${update.title}`}
+                    />
+                  )}
                 </div>
               ))}
             </div>
