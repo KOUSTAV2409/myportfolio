@@ -69,7 +69,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a href="https://github.com/KOUSTAV2409" target="_blank" rel="noopener noreferrer">
               <TextLoop className="text-xs text-gray-600 dark:text-neutral-400">
-                <span>© 2025 Koustav</span>
+                <span>© 2026 Koustav</span>
                 <span>Built with ❤️ by Koustav</span>
               </TextLoop>
             </a>
