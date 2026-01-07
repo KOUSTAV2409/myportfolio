@@ -208,7 +208,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: "Freelance",
     title: "Full-Stack Developer",
-    start: "Nov 2025",
+    start: "May 2025",
     end: "Present",
     location: "Remote",
     employmentType: "Freelance",
@@ -221,24 +221,6 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       "Building responsive frontends with React and Next.js",
       "Creating backend APIs and database solutions",
       "Delivering end-to-end solutions from design to deployment",
-    ],
-  },
-  {
-    company: "BiswasCompany (EdTech Platform)",
-    title: "Frontend Developer",
-    start: "May 2025",
-    end: "Nov 2025",
-    location: "Remote / Internal Engineering Team",
-    employmentType: "Contract",
-    link: "#",
-    id: "biswas-company",
-    description:
-      "Built internal tools, dashboards, and user interfaces for the EdTech platform using React and modern frontend technologies.",
-    achievements: [
-      "Developed internal tools and dashboards using React and TypeScript",
-      "Collaborated with product and engineering teams to optimize user interfaces",
-      "Implemented responsive designs and improved user experience",
-      "Maintained and refactored existing frontend codebase",
     ],
   },
   {
