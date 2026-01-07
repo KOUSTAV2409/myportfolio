@@ -1,45 +1,58 @@
 # Portfolio Website
 
-A modern, performant portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a blog with MDX support, project showcase, work experience timeline, and more.
+A modern, performant portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a comprehensive personal showcase with projects, work experience, skills, testimonials, and integrated blog functionality.
 
 **Live Demo:** [iamk.xyz](https://iamk.xyz)
 
 ## Features
 
 - ⚡ Built with Next.js 16 and React 19
-- 🎨 Styled with Tailwind CSS 4
-- 📝 MDX blog support with syntax highlighting
-- 📰 **Custom Hashnode Integration** - Fetch and display Hashnode articles with full UI control (no Headless CMS needed!)
-- 🌙 Dark mode support
+- 🎨 Styled with Tailwind CSS 4 (PostCSS)
+- 📝 Dual blog system: MDX posts + Hashnode integration
+- 🌙 Dark mode support with next-themes
 - 📱 Fully responsive design
 - 🚀 Optimized for performance and SEO
 - 📊 Analytics integration (Google Analytics, Vercel Analytics)
 - ♿ Accessibility compliant
+- 🎭 Advanced UI components with animations
+- 🔧 TypeScript for type safety
 
-## 🌟 Unique Features
+## 🌟 Key Features
 
-### Hashnode Blog Integration (No Headless CMS Required!)
+### Comprehensive Portfolio Sections
+- **Profile Section** - Hero area with introduction and current status
+- **Projects Section** - Showcase of work with detailed case studies
+- **Work Experience** - Professional timeline with achievements
+- **Skills Section** - Technical skills and expertise
+- **Testimonials** - Client and colleague feedback
+- **Education** - Academic background
+- **Articles/Blog** - Technical writing and content
 
-This portfolio includes a **custom Hashnode blog integration** that lets you:
-- ✅ Write on Hashnode, display on your portfolio
-- ✅ Full control over blog UI/UX
-- ✅ No Hashnode Pro subscription needed
-- ✅ Direct GraphQL API integration
-- ✅ Custom styling with your design system
-- ✅ Free and simple setup
+### Dual Blog System
+1. **MDX Blog Posts** - Local markdown content with full control
+2. **Hashnode Integration** - Fetch and display Hashnode articles via GraphQL API
+   - ✅ Write on Hashnode, display on your portfolio
+   - ✅ Full control over blog UI/UX
+   - ✅ Direct GraphQL API integration
+   - ✅ Custom styling with your design system
 
-**How it works:** Direct GraphQL API calls to Hashnode → Custom rendering on your site → Full design control
-
-👉 **[See detailed setup guide](./HASHNODE_INTEGRATION.md)**
+### Advanced UI Components
+- Custom animations with Motion library
+- Interactive project cards with video previews
+- Floating CTA components
+- Enhanced testimonials display
+- Responsive navigation with theme switching
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 (with Turbopack)
+- **Framework:** Next.js 16 (with Turbopack support)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS 4
-- **Content:** MDX for blog posts
-- **Animations:** Motion (Framer Motion)
+- **Styling:** Tailwind CSS 4 (PostCSS)
+- **Content:** MDX + Hashnode GraphQL API
+- **Animations:** Motion (Framer Motion successor)
 - **Icons:** Lucide React
+- **Themes:** next-themes
+- **Analytics:** Vercel Analytics + Google Analytics
 - **Deployment:** Vercel
 
 ## Quick Start
@@ -111,6 +124,7 @@ export const PROJECTS: Project[] = [
     description: 'Brief description',
     link: 'https://project-url.com',
     video: '/videos/project-demo.mp4', // Place videos in public/videos/
+    image: '/images/projects/project.png', // Place images in public/images/projects/
     id: 'unique-project-id',
     year: '2025',
     role: 'Your Role',
@@ -239,19 +253,28 @@ export const BLOG_POSTS: BlogPost[] = [
 ]
 ```
 
-### 3. Images & Media
+### 3. Hashnode Integration
+
+Configure Hashnode integration in `src/lib/hashnode.ts`:
+```typescript
+const USERNAME = 'your-hashnode-username'
+const RSS_URL = 'https://your-blog.hashnode.dev/rss.xml'
+```
+
+### 4. Images & Media
 
 - **Profile/Avatar:** Place in `public/images/`
+- **Project Images:** Place in `public/images/projects/`
 - **Project Videos:** Place in `public/videos/`
 - **Blog Images:** Place in `public/blog/`
 - **Favicons:** Replace files in `public/` directory
 
 Update image references in your components and data files accordingly.
 
-### 4. Styling & Theme
+### 5. Styling & Theme
 
 #### Colors
-Edit `tailwind.config.js` or use CSS variables in `src/app/globals.css`:
+Edit CSS variables in `src/app/globals.css`:
 ```css
 :root {
   --primary: your-color;
@@ -260,14 +283,12 @@ Edit `tailwind.config.js` or use CSS variables in `src/app/globals.css`:
 ```
 
 #### Fonts
-Update fonts in `src/app/layout.tsx`:
+Update fonts in `src/app/layout.tsx` and `src/app/fonts.css`:
 ```typescript
-import { YourFont } from 'next/font/google'
-
-const yourFont = YourFont({ subsets: ['latin'] })
+import './fonts.css'
 ```
 
-### 5. SEO & Metadata
+### 6. SEO & Metadata
 
 Update site metadata in `src/app/layout.tsx`:
 ```typescript
@@ -280,7 +301,7 @@ export const metadata: Metadata = {
 }
 ```
 
-### 6. Analytics
+### 7. Analytics
 
 Configure analytics in `.env`:
 ```env
@@ -288,16 +309,7 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your-vercel-id
 ```
 
-Analytics are automatically integrated via `src/components/analytics-wrapper.tsx`.
-
-### 7. Contact Form (Optional)
-
-If you want to add a contact form, configure:
-```env
-NEXT_PUBLIC_CONTACT_EMAIL=your-email@example.com
-```
-
-Then implement your preferred form solution (e.g., Formspree, EmailJS, or custom API).
+Analytics are automatically integrated via Google Analytics and Vercel Analytics.
 
 ## Project Structure
 
@@ -305,31 +317,53 @@ Then implement your preferred form solution (e.g., Formspree, EmailJS, or custom
 myportfolio/
 ├── public/              # Static assets
 │   ├── images/         # Images
-│   ├── videos/         # Project demo videos
-│   └── blog/           # Blog post images
+│   │   └── projects/   # Project screenshots
+│   ├── projects_img/   # Legacy project images
+│   ├── videos/         # Project demo videos (not included)
+│   └── logos/          # Company/brand logos
 ├── src/
 │   ├── app/            # Next.js app directory
 │   │   ├── blog/       # Blog posts (MDX)
+│   │   │   ├── [slug]/ # Dynamic blog routes
+│   │   │   └── page.tsx # Blog listing page
+│   │   ├── about/      # About page
+│   │   ├── news/       # News/updates page
+│   │   ├── projects/   # Projects page
+│   │   ├── portfolio/  # Portfolio page
 │   │   ├── data.ts     # Main data file (EDIT THIS!)
 │   │   ├── layout.tsx  # Root layout
-│   │   └── page.tsx    # Home page
-│   └── components/     # React components
+│   │   ├── page.tsx    # Home page
+│   │   └── globals.css # Global styles
+│   ├── components/     # React components
+│   │   ├── ui/         # Reusable UI components
+│   │   ├── kibo-ui/    # Custom UI library components
+│   │   └── portfolio/  # Portfolio-specific components
+│   ├── lib/            # Utility functions
+│   │   ├── hashnode.ts # Hashnode integration
+│   │   ├── analytics.ts # Analytics utilities
+│   │   └── utils.ts    # General utilities
+│   └── hooks/          # Custom React hooks
 ├── .env                # Environment variables (not in git)
 ├── .env.example        # Example environment variables
+├── next.config.mjs     # Next.js configuration
+├── postcss.config.mjs  # PostCSS configuration
+├── components.json     # shadcn/ui configuration
 └── package.json        # Dependencies
 ```
 
 ## Available Scripts
 
 ```bash
-npm run dev          # Start development server
+npm run dev          # Start development server with Turbopack
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
 npm run lint:fix     # Fix ESLint errors
 npm run type-check   # Check TypeScript types
 npm run format       # Format code with Prettier
+npm run format:check # Check code formatting
 npm run clean        # Clean build cache
+npm run analyze      # Analyze bundle size
 ```
 
 ## Deployment
