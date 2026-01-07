@@ -261,15 +261,21 @@ const USERNAME = 'your-hashnode-username'
 const RSS_URL = 'https://your-blog.hashnode.dev/rss.xml'
 ```
 
+The integration supports both GraphQL API and RSS fallback for maximum reliability.
+
 ### 4. Images & Media
 
 - **Profile/Avatar:** Place in `public/images/`
 - **Project Images:** Place in `public/images/projects/`
-- **Project Videos:** Place in `public/videos/`
+- **Legacy Project Images:** `public/projects_img/` (for backward compatibility)
+- **Project Videos:** Place in `public/videos/` (not included in repo)
 - **Blog Images:** Place in `public/blog/`
+- **Company Logos:** Place in `public/logos/`
 - **Favicons:** Replace files in `public/` directory
 
 Update image references in your components and data files accordingly.
+
+**Note:** Video files are not included in the repository due to size constraints. Add your own demo videos to the `public/videos/` directory.
 
 ### 5. Styling & Theme
 
@@ -364,6 +370,26 @@ npm run format       # Format code with Prettier
 npm run format:check # Check code formatting
 npm run clean        # Clean build cache
 npm run analyze      # Analyze bundle size
+```
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# Analytics
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your-vercel-id
+
+# Contact
+NEXT_PUBLIC_CONTACT_EMAIL=your-email@example.com
+
+# Optional: Additional Analytics
+NEXT_PUBLIC_HOTJAR_ID=your-hotjar-id
+NEXT_PUBLIC_MIXPANEL_TOKEN=your-mixpanel-token
 ```
 
 ## Deployment
