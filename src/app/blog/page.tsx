@@ -1,6 +1,3 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAllPosts, Post } from '@/lib/hashnode'
@@ -60,25 +57,15 @@ function BlogProfileSection() {
   )
 }
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<Post[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default async function BlogPage() {
+  let posts: Post[] = []
+  let error: string | null = null
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await getAllPosts()
-        setPosts(fetchedPosts)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch posts')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPosts()
-  }, [])
+  try {
+    posts = await getAllPosts()
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'Failed to fetch posts'
+  }
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -98,18 +85,7 @@ export default function BlogPage() {
             Latest Articles
           </h2>
 
-          {loading ? (
-            <div className="space-y-6">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="animate-pulse">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16 mb-2"></div>
-                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                </div>
-              ))}
-            </div>
-          ) : error ? (
+          {error ? (
             <p className="text-red-500 text-sm">Error loading articles: {error}</p>
           ) : posts.length === 0 ? (
             <p className="text-gray-500 text-sm">No articles found.</p>

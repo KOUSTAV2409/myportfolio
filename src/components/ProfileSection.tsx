@@ -78,7 +78,13 @@ export default function ProfileSection() {
                   <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72" />
                 </svg>
               )}
-              <a className="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href={social.link}>
+              <a 
+                className="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
+                href={social.link}
+                aria-label={`Visit my ${social.label} profile`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {social.label}
               </a>
             </li>

@@ -84,6 +84,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//res.cloudinary.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* Preload critical resources */}
+        <link rel="preload" as="image" href="/profile.png" />
+        <link rel="preload" as="font" href="/FasthinRegular-9MWOZ.ttf" type="font/ttf" crossOrigin="anonymous" />
+        
         {GA_TRACKING_ID && (
           <>
             <Script

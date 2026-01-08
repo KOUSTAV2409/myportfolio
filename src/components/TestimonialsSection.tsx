@@ -27,6 +27,7 @@ export default function TestimonialsSection() {
                       alt={testimonial.name}
                       width={20}
                       height={20}
+                      loading="lazy"
                     />
                   )}
                   <div className="grow">
