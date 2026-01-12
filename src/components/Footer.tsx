@@ -65,7 +65,7 @@ export default function Footer() {
   return (
     <footer className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-6 border-t border-gray-200 dark:border-neutral-700">
-        <div className="flex flex-wrap justify-between items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div className="flex items-center gap-4">
             <a href="https://github.com/KOUSTAV2409" target="_blank" rel="noopener noreferrer">
               <TextLoop className="text-xs text-gray-600 dark:text-neutral-400">
@@ -75,25 +75,27 @@ export default function Footer() {
             </a>
           </div>
 
-          <ul className="flex flex-wrap items-center">
-            {SOCIAL_LINKS.map((social, index) => (
-              <li key={index} className="group inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600">
-                <Link 
-                  className="relative text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
-                  href={social.link}
-                >
-                  {social.label}
-                  <svg className="absolute -top-1 -right-2 size-2.5 opacity-0 group-hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 7h10v10" />
-                    <path d="M7 17 17 7" />
-                  </svg>
-                </Link>
-              </li>
-            ))}
-            <li className="inline-block">
-              <ThemeSwitch />
-            </li>
-          </ul>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              {SOCIAL_LINKS.map((social, index) => (
+                <li key={index} className="group inline-block relative">
+                  <Link 
+                    className="relative text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" 
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {social.label}
+                    <svg className="absolute -top-1 -right-2 size-2.5 opacity-0 group-hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 7h10v10" />
+                      <path d="M7 17 17 7" />
+                    </svg>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <ThemeSwitch />
+          </div>
         </div>
       </div>
     </footer>

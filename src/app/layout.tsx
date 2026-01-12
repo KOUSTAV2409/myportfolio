@@ -84,6 +84,18 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//res.cloudinary.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* Preload critical resources */}
+        <link rel="preload" as="image" href="/profile.png" />
+        <link rel="preload" as="font" href="/FasthinRegular-9MWOZ.ttf" type="font/ttf" crossOrigin="anonymous" />
+        
+        {/* PWA manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Koustav Portfolio" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        
         {GA_TRACKING_ID && (
           <>
             <Script

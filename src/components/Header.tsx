@@ -78,7 +78,7 @@ export default function Header() {
           onClick={() => setIsCalOpen(false)}
         >
           <div 
-            className="bg-white dark:bg-neutral-900 rounded-xl shadow-2xl w-full max-w-4xl h-[500px] relative"
+            className="bg-white dark:bg-neutral-900 rounded-xl shadow-2xl w-full max-w-4xl h-[500px] sm:h-[600px] relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button

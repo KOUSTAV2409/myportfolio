@@ -36,22 +36,27 @@ const POSTS_QUERY = `
 
 
 
-async function fetchHashnode(query: string, variables: any) {
-  try {
-    const response = await fetch(HASHNODE_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, variables })
-    })
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+async function fetchHashnode(query: string, variables: any, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(HASHNODE_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, variables }),
+        next: { revalidate: 3600 } // Cache for 1 hour
+      })
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      return response.json()
+    } catch (error) {
+      console.error(`Hashnode API fetch error (attempt ${i + 1}):`, error)
+      if (i === retries - 1) throw error
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)))
     }
-    
-    return response.json()
-  } catch (error) {
-    console.error('Hashnode API fetch error:', error)
-    throw error
   }
 }
 
@@ -66,12 +71,20 @@ export async function getAllPosts(): Promise<Post[]> {
     
     if (errors) {
       console.error('GraphQL errors:', errors)
-      return []
+      // Fallback to RSS if GraphQL fails
+      console.log('Falling back to RSS feed...')
+      return await getAllPostsFromRSS()
     }
     
     console.log('API response:', data)
     const posts = data?.user?.posts?.edges?.map((edge: any) => edge.node) || []
     console.log('Processed posts:', posts.length)
+    
+    // If no posts from GraphQL, try RSS fallback
+    if (posts.length === 0) {
+      console.log('No posts from GraphQL, trying RSS fallback...')
+      return await getAllPostsFromRSS()
+    }
     
     // Log the slugs for debugging
     posts.forEach((post: any) => {
@@ -81,7 +94,14 @@ export async function getAllPosts(): Promise<Post[]> {
     return posts
   } catch (error) {
     console.error('Error in getAllPosts:', error)
-    return []
+    // Fallback to RSS if everything fails
+    console.log('Falling back to RSS feed due to error...')
+    try {
+      return await getAllPostsFromRSS()
+    } catch (rssError) {
+      console.error('RSS fallback also failed:', rssError)
+      return []
+    }
   }
 }
 
